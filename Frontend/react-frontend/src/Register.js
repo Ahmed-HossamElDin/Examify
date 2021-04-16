@@ -1,3 +1,4 @@
+import React, {Component} from "react";
 import './App.css';
 import './vendor/bootstrap/css/bootstrap.min.css';
 import './fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -6,14 +7,38 @@ import './vendor/css-hamburgers/hamburgers.min.css';
 import './vendor/select2/select2.min.css';
 import './css/util.css';
 import './css/main.css';
-import logo from './images/examify.png'
+import logo from './images/examify.png';
 
 
-function Register() {
+var loadScript = function(src) {
+    var tag = document.createElement('script');
+    tag.type = 'text/babel';
+    tag.async = false;
+    tag.src = src;
+    document.body.appendChild(tag);
+  }
+
+
+class Register extends Component{
+
+componentDidMount() {
+    const script = document.createElement("script");
+    script.async = false;
+    var scripts = ["./vendor/jquery/jquery-3.2.1.min.js",
+    "./vendor/bootstrap/js/bootstrap.min.js",
+    "./vendor/bootstrap/js/popper.js",
+    "./vendor/select2/select2.min.js",
+    "./vendor/tilt/tilt.jquery.min.js",
+    "./js/main.js"]
+    scripts.forEach(function(item,index){
+        loadScript(item);
+    })
+}
+
+render(){
   return (
     <div className="Register">
       <div>
-          <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
           <div className="limiter">
             <div className="container-login100">
               <div className="wrap-login100">
@@ -69,8 +94,15 @@ function Register() {
             </div>
           </div>
         </div>
+            {/* <script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
+            <script src="./vendor/bootstrap/js/popper.js"></script>
+            <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+            <script src="./vendor/select2/select2.min.js"></script>
+            <script src="./vendor/tilt/tilt.jquery.min.js"></script>
+            <script src="./js/main.js"></script> */}
     </div>
-  );
+   );
+ }
 }
 
 
