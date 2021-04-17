@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import jQuery from "jquery"
 import './App.css';
 import './vendor/bootstrap/css/bootstrap.min.css';
 import './fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -10,32 +11,34 @@ import './css/main.css';
 import logo from './images/examify.png';
 
 
-var loadScript = function(src) {
-    var tag = document.createElement('script');
-    tag.type = 'text/babel';
-    tag.async = false;
-    tag.src = src;
-    document.body.appendChild(tag);
-  }
+// var loadScript = function(src) {
+//     var tag = document.createElement('script');
+//     tag.type = 'text/babel';
+//     tag.async = false;
+//     tag.src = src;
+//     document.body.appendChild(tag);
+//   }
 
 
 class Register extends Component{
 
-componentDidMount() {
-    const script = document.createElement("script");
-    script.async = false;
-    var scripts = ["./vendor/jquery/jquery-3.2.1.min.js",
-    "./vendor/bootstrap/js/bootstrap.min.js",
-    "./vendor/bootstrap/js/popper.js",
-    "./vendor/select2/select2.min.js",
-    "./vendor/tilt/tilt.jquery.min.js",
-    "./js/main.js"]
-    scripts.forEach(function(item,index){
-        loadScript(item);
-    })
-}
+ componentDidMount() {
+//     const script = document.createElement("script");
+//     script.async = false;
+//     var scripts = ["/vendor/jquery/jquery-3.2.1.min.js",
+//     "/vendor/bootstrap/js/bootstrap.min.js",
+//     "/vendor/bootstrap/js/popper.js",
+//     "/vendor/select2/select2.min.js",
+//     "/vendor/tilt/tilt.jquery.min.js",
+//     "/js/main.js"]
+//     scripts.forEach(function(item,index){
+//         loadScript(item);
+//     })
+ test = require('./vendor/tilt/tilt.jquery.min.js');
+ }
 
 render(){
+
   return (
     <div className="Register">
       <div>
@@ -78,7 +81,7 @@ render(){
                     </span>
                   </div>
                   <div className="container-login100-form-btn">
-                    <button className="login100-form-btn">
+                    <button className="login100-form-btn" type="submit">
                       Sign up
                     </button>
                   </div>
@@ -94,12 +97,6 @@ render(){
             </div>
           </div>
         </div>
-            {/* <script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
-            <script src="./vendor/bootstrap/js/popper.js"></script>
-            <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
-            <script src="./vendor/select2/select2.min.js"></script>
-            <script src="./vendor/tilt/tilt.jquery.min.js"></script>
-            <script src="./js/main.js"></script> */}
     </div>
    );
  }
