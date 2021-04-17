@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import TiltPhaseSix from "./TiltPhaseSix";
+import jQuery from 'jquery'
 import $ from 'jquery'; 
 import './App.css';
 import './vendor/bootstrap/css/bootstrap.min.css';
@@ -11,12 +12,64 @@ import './css/util.css';
 import './css/main.css';
 import logo from './images/examify.png';
 
-//options for tilting image
-const options = {
-  max: 10,
-  perspective: 100,
-  scale: 1,
-}
+
+//validation
+(function ($) {
+  "use strict";
+
+  
+  /*==================================================================
+  [ Validate ]*/
+  var input = $('.validate-input .input100');
+
+  $('.validate-form').on('submit',function(){
+      var check = true;
+
+      for(var i=0; i<input.length; i++) {
+          if(validate(input[i]) == false){
+              showValidate(input[i]);
+              check=false;
+          }
+      }
+
+      return check;
+  });
+
+
+  $('.validate-form .input100').each(function(){
+      $(this).focus(function(){
+         hideValidate(this);
+      });
+  });
+
+  function validate (input) {
+      if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
+          if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+              return false;
+          }
+      }
+      else {
+          if($(input).val().trim() == ''){
+              return false;
+          }
+      }
+  }
+
+  function showValidate(input) {
+      var thisAlert = $(input).parent();
+
+      $(thisAlert).addClass('alert-validate');
+  }
+
+  function hideValidate(input) {
+      var thisAlert = $(input).parent();
+
+      $(thisAlert).removeClass('alert-validate');
+  }
+  
+  
+
+})(jQuery);
 
 class Register extends Component{
 
@@ -35,6 +88,12 @@ handleChange = (event) => {
 }
 
 render(){
+  //options for tilting image
+  const options = {
+    max: 10,
+    perspective: 100,
+    scale: 1,
+  }
 
   return (
     <div className="Register">
