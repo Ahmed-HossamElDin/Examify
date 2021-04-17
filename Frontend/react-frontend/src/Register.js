@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import jQuery from "jquery"
+import $ from 'jquery'; 
+//import useForm from "./useForm";
 import './App.css';
 import './vendor/bootstrap/css/bootstrap.min.css';
 import './fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -9,6 +10,12 @@ import './vendor/select2/select2.min.css';
 import './css/util.css';
 import './css/main.css';
 import logo from './images/examify.png';
+import * as jquery from "./vendor/jquery/jquery-3.2.1.min.js";
+import * as bootstrap from "./vendor/bootstrap/js/bootstrap.min.js";
+import * as popper from "./vendor/bootstrap/js/popper.js";
+import * as select2 from "./vendor/select2/select2.min.js";
+import * as tilt from "./vendor/tilt/tilt.jquery.min.js";
+import * as main from "./js/main.js";
 
 
 // var loadScript = function(src) {
@@ -38,6 +45,7 @@ class Register extends Component{
  }
 
 render(){
+  //const{handleChange, values} = useForm(); 
 
   return (
     <div className="Register">
@@ -53,28 +61,28 @@ render(){
                     Examiner sign up
                   </span>
                   <div className="wrap-input100 validate-input" data-validate="Username is required">
-                    <input className="input100" type="text" name="username" placeholder="Username" />
+                    <input className="input100" type="text" id="username" name="username" placeholder="Username"/>
                     <span className="focus-input100" />
                     <span className="symbol-input100">
                       <i className="fa fa-envelope" aria-hidden="true" />
                     </span>
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Password is required">
-                    <input className="input100" type="password" name="password" placeholder="Password" />
+                    <input className="input100" type="password" id="password" name="password" placeholder="Password"/>
                     <span className="focus-input100" />
                     <span className="symbol-input100">
                       <i className="fa fa-lock" aria-hidden="true" />
                     </span>
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Password confirmation is required">
-                    <input className="input100" type="password" name="password-confirm" placeholder="Re-enter password" />
+                    <input className="input100" type="password" id="password2" name="password2" placeholder="Re-enter password"/>
                     <span className="focus-input100" />
                     <span className="symbol-input100">
                       <i className="fa fa-lock" aria-hidden="true" />
                     </span>
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                    <input className="input100" type="text" name="email" placeholder="Email" />
+                    <input className="input100" type="text" id="email" name="email" placeholder="Email"/>
                     <span className="focus-input100" />
                     <span className="symbol-input100">
                       <i className="fa fa-envelope" aria-hidden="true" />
