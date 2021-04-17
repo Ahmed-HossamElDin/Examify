@@ -1,6 +1,6 @@
 import React, {Component} from "react";
+import TiltPhaseSix from "./TiltPhaseSix";
 import $ from 'jquery'; 
-//import useForm from "./useForm";
 import './App.css';
 import './vendor/bootstrap/css/bootstrap.min.css';
 import './fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -10,42 +10,31 @@ import './vendor/select2/select2.min.css';
 import './css/util.css';
 import './css/main.css';
 import logo from './images/examify.png';
-import * as jquery from "./vendor/jquery/jquery-3.2.1.min.js";
-import * as bootstrap from "./vendor/bootstrap/js/bootstrap.min.js";
-import * as popper from "./vendor/bootstrap/js/popper.js";
-import * as select2 from "./vendor/select2/select2.min.js";
-import * as tilt from "./vendor/tilt/tilt.jquery.min.js";
-import * as main from "./js/main.js";
 
-
-// var loadScript = function(src) {
-//     var tag = document.createElement('script');
-//     tag.type = 'text/babel';
-//     tag.async = false;
-//     tag.src = src;
-//     document.body.appendChild(tag);
-//   }
-
+//options for tilting image
+const options = {
+  max: 10,
+  perspective: 100,
+  scale: 1,
+}
 
 class Register extends Component{
 
- componentDidMount() {
-//     const script = document.createElement("script");
-//     script.async = false;
-//     var scripts = ["/vendor/jquery/jquery-3.2.1.min.js",
-//     "/vendor/bootstrap/js/bootstrap.min.js",
-//     "/vendor/bootstrap/js/popper.js",
-//     "/vendor/select2/select2.min.js",
-//     "/vendor/tilt/tilt.jquery.min.js",
-//     "/js/main.js"]
-//     scripts.forEach(function(item,index){
-//         loadScript(item);
-//     })
- test = require('./vendor/tilt/tilt.jquery.min.js');
- }
+constructor(props) {
+  super(props);
+  this.state = { name: '' ,
+                 password: '',
+                 password2:'',
+                 email:''};
+}
+// must be incorrect
+handleChange = (event) => {
+  this.setState({[event.target.name]: event.target.value,
+                 [event.target.password]: event.target.value,
+                 [event.target.password2]: event.target.value});
+}
 
 render(){
-  //const{handleChange, values} = useForm(); 
 
   return (
     <div className="Register">
@@ -53,9 +42,9 @@ render(){
           <div className="limiter">
             <div className="container-login100">
               <div className="wrap-login100">
-                <div className="login100-pic js-tilt" data-tilt>
-                  <img src={logo} alt="Logo" />
-                </div>
+                <TiltPhaseSix options={options}>
+                  <img src={logo} alt="logo"/>
+                </TiltPhaseSix>
                 <form className="login100-form validate-form">
                   <span className="login100-form-title">
                     Examiner sign up
