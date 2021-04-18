@@ -22,7 +22,7 @@ class Register extends Component {
         password1: '',
         password2: '',
         email: '',
-        type:'1'
+        user_type:'1'
       },
       submitted: false
     };
@@ -50,9 +50,8 @@ class Register extends Component {
     const { user } = this.state;
     if (user.username && user.password1 && user.password2 && user.email) {
       //this.props.register(user);
-      console.log("Endpoint: 'http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/registration/'" )
       console.log(this.state.user)
-      axios.post('http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/registration/',this.state.user)
+      axios.post('https://cors-anywhere.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/registration/',this.state.user)
            .then(response => {
              console.log(response)
            })
