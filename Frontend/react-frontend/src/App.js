@@ -1,67 +1,69 @@
-import "./App.css";
-import Register from "./Register";
 import React, { Component } from "react";
 import LoginForm from "./component/LoginForm";
 import axios from "axios";
-
 export default class App extends Component {
   state = {
-    user: { name: "", email: "", res: "" },
+    user: { username: "", res: "", key: "", error: "" },
   };
   login = (details) => {
-    console.log("entered sendRequest");
     axios
       .post(
         `http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/login/`,
-        { username: details.email, password: details.password }
+        { username: details.username, password: details.password }
       )
       .then((res) => {
         this.setState({
           user: {
             res: res,
-            name: this.state.user.name,
-            email: this.state.user.email,
+            username: this.state.user.username,
           },
         });
-        console.log(res);
-        console.log("getting response here", this.state.user);
         this.confirmLogin(details);
       })
       .catch((error) => {
-        console.log("This is the error", error);
+        var n = error.toString().includes("400");
+
+        if (n) {
+          this.setState({
+            user: {
+              error: "Password or username incorrect, please try again.",
+            },
+          });
+        } else {
+          this.setState({
+            user: {
+              error: "You must log in first.",
+            },
+          });
+        }
       });
-    console.log("left sendRequest");
   };
   confirmLogin = (details) => {
-    console.log("before if", this.state.user);
     if (this.state.user.res) {
-      console.log("logged in");
-      console.log("logging in here", this.state.user.res.data.key);
       this.setState({
         user: {
-          name: details.email,
-          email: details.email,
-          res: this.state.res,
+          username: details.username,
+          key: this.state.user.res.data.key,
         },
       });
-      console.log(this.state);
-      this.setState({ error: "" });
     } else {
       console.log("Error");
-      this.setState({ error: "Error" });
     }
   };
   logout = () => {
-    this.setState({ user: { name: "", email: "" } });
+    this.setState({ user: { username: "" } });
   };
   render() {
     return (
       <div>
-        {this.state.user.email !== "" ? (
-          <Register />
+        {this.state.user.key ? (
+          <div>
+            <h1>Welcome {this.state.user.username}</h1>
+            <button onClick={this.logout}>Logout</button>
+          </div>
         ) : (
           <div>
-            <LoginForm login={this.login} error={this.state.error} />
+            <LoginForm login={this.login} error={this.state.user.error} />
           </div>
         )}
       </div>

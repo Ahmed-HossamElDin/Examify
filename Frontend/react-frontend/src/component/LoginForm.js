@@ -9,7 +9,6 @@ import logo from "../images/examify.png";
 import "../css/main.css";
 import "../css/util.css";
 export default class loginForm extends Component {
-  
   state = {
     details: {
       username: "",
