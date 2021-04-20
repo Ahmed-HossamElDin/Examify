@@ -58,10 +58,7 @@ export default class App extends Component {
     return (
       <div>
         {this.state.user.email !== "" ? (
-          <div>
-            <h1>Welcome {this.state.user.name}</h1>
-            <button onClick={this.logout}>Logout</button>
-          </div>
+          <Register />
         ) : (
           <div>
             <LoginForm login={this.login} error={this.state.error} />

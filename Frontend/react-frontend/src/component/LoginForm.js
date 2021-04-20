@@ -11,7 +11,7 @@ import "../css/util.css";
 export default class loginForm extends Component {
   state = {
     details: {
-      email: "",
+      username: "",
       password: "",
     },
   };
@@ -19,10 +19,10 @@ export default class loginForm extends Component {
     e.preventDefault();
     this.props.login(this.state.details);
   };
-  updateemail = (query) => {
+  updateusername = (query) => {
     this.setState(() => ({
       details: {
-        email: query.trim(),
+        username: query.trim(),
         password: this.state.details.password,
       },
     }));
@@ -31,7 +31,7 @@ export default class loginForm extends Component {
     this.setState(() => ({
       details: {
         password: query.trim(),
-        email: this.state.details.email,
+        username: this.state.details.username,
       },
     }));
   };
@@ -55,8 +55,13 @@ export default class loginForm extends Component {
             >
               <span className="login100-form-title">Login</span>
               <div>
-                {this.props.error !== "" ? (
-                  <div>{this.props.error}</div>
+                {this.props.error !== "" && this.props.error !== undefined ? (
+                  <div
+                    className="error"
+                    style={{ textAlign: "center", fontSize: 14 }}
+                  >
+                    {this.props.error}
+                  </div>
                 ) : (
                   <div></div>
                 )}
@@ -64,8 +69,8 @@ export default class loginForm extends Component {
                   <input
                     className="input100"
                     type="text"
-                    id="email"
-                    onChange={(e) => this.updateemail(e.target.value)}
+                    id="username"
+                    onChange={(e) => this.updateusername(e.target.value)}
                   />
                   <span className="focus-input100"></span>
                   <span className="symbol-input100">
