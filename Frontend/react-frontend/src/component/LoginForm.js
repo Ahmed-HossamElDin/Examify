@@ -114,7 +114,7 @@ export default class loginForm extends Component {
                   <a className="txt2" href="localhost:3000">
                     Create your Account
                     <i
-                      className="fa fa-long-arrow-right m-l-5"
+                      classNamey="fa fa-long-arrow-right m-l-5"
                       aria-hidden="true"
                     ></i>
                   </a>
