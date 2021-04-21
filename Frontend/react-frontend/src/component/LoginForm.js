@@ -65,7 +65,7 @@ export default class loginForm extends Component {
                 ) : (
                   <div></div>
                 )}
-                <div class="wrap-input100 validate-input">
+                <div className="wrap-input100 validate-input">
                   <input
                     className="input100"
                     type="text"
@@ -102,9 +102,9 @@ export default class loginForm extends Component {
                   </button>
                 </div>
 
-                <div class="text-center p-t-12">
-                  <span class="txt1"> Forgot</span>
-                  <a class="txt2" href="localhost:3000">
+                <div className="text-center p-t-12">
+                  <span className="txt1"> Forgot</span>
+                  <a className="txt2" href="localhost:3000">
                     {" "}
                     Username / Password?
                   </a>
