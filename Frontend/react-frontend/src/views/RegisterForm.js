@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import axios from "axios";
 import TiltPhaseSix from "../components/TiltPhaseSix";
 import { Link } from 'react-router-dom'
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Radio from '@material-ui/core/Radio';
 import '../css/util.css';
 import '../css/main.css';
+import '../css/register.css';
 import logo from '../images/examify.png';
 
 class Register extends Component {
@@ -16,7 +22,7 @@ class Register extends Component {
         password1: "",
         password2: "",
         email: "",
-        type: "1",
+        user_type: "1",
       },
       submitted: false,
     };
@@ -36,14 +42,22 @@ class Register extends Component {
     });
   }
 
+  updateuserType = (e) => {
+    const { user } = this.state;
+    this.setState({
+      user: {
+        ...user,
+        user_type: e.target.value,
+      },
+    },function () {
+      console.log(this.state) });
+  };
+
   handleSubmit(event) {
     event.preventDefault();
     this.setState({ submitted: true });
     const { user } = this.state;
     if (user.username && user.password1 && user.password2 && user.email) {
-      //this.props.register(user);
-      // console.log("Endpoint: 'http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/registration/'" )
-      // console.log(this.state.user)
       axios
         .post(
           "https://cors-anywhere.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/registration/",
@@ -57,15 +71,6 @@ class Register extends Component {
         });
     }
   }
-  updateuserTyper = (e) => {
-    this.setState({
-      details: {
-        email: this.state.details.email,
-        password: this.state.details.password,
-        userType: e.target.value,
-      },
-    });
-  };
   render() {
     const { registering } = this.props;
     const { user, submitted } = this.state;
@@ -90,7 +95,7 @@ class Register extends Component {
                   className="login100-form validate-form"
                   onSubmit={this.handleSubmit}
                 >
-                  <span className="login100-form-title">Examiner sign up</span>
+                  <span className="login100-form-title">Sign up</span>
                   <div
                     className="wrap-input100 validate-input"
                     data-validate="Username is required"
@@ -163,33 +168,14 @@ class Register extends Component {
                       <i className="fa fa-envelope" aria-hidden="true" />
                     </span>
                   </div>{" "}
-                  <div>
-                    <input
-                      type="radio"
-                      value="examiner"
-                      name="userType"
-                      id="examiner"
-                      onChange={this.updateuserTyper}
-                      required
-                    />{" "}
-                    <label for="examiner">Examiner</label>
-                    <input
-                      type="radio"
-                      value="proctor"
-                      name="userType"
-                      onChange={this.updateuserTyper}
-                      id="proctor"
-                    />{" "}
-                    <label for="proctor"> Proctor</label>
-                    <input
-                      type="radio"
-                      value="student"
-                      name="userType"
-                      onChange={this.updateuserTyper}
-                      id="student"
-                    />{" "}
-                    <label for="student">Student</label>
-                  </div>
+                  <FormControl width="auto" component="fieldset" id="user-selection" value={this.value} onChange={this.updateuserType}>
+                  <FormLabel component="legend">Sign up as</FormLabel>
+                  <RadioGroup row aria-label="user-type" name="user-type">
+                    <FormControlLabel value="1" control={<Radio color = "primary" />} label="Student" />
+                    <FormControlLabel value="2" control={<Radio color = "primary" />} label="Examiner" />
+                    <FormControlLabel value="3" control={<Radio color = "primary" />} label="Proctor" />
+                  </RadioGroup>
+                </FormControl>
                   <div className="container-login100-form-btn">
                     <button className="login100-form-btn" type="submit">
                       Sign up
