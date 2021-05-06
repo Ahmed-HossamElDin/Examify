@@ -12,6 +12,14 @@ export default class App extends Component {
           <Landing/>
         )}
         />
+        <Route path="/register" render={() => (
+          <RegisterForm/>
+        )}
+        />
+        <Route path="/login" render={() => (
+          <LoginForm/>
+        )}
+        />
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TiltPhaseSix from "../components/TiltPhaseSix";
 import logo from "../images/examify.png";
+import { Link } from 'react-router-dom'
 import "../css/main.css";
 import "../css/util.css";
 import axios from "axios";
@@ -169,13 +170,14 @@ export default class loginForm extends Component {
                     </div>
 
                     <div className="text-center p-t-136">
-                      <a className="txt2" href="localhost:3000">
-                        Create your Account
+                    <Link
+                      to='/register'
+                    >Register 
                         <i
                           className="fa fa-long-arrow-right m-l-5"
                           aria-hidden="true"
                         ></i>
-                      </a>
+                    </Link>
                     </div>
                   </div>
                 </form>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import TiltPhaseSix from "../components/TiltPhaseSix";
+import { Link } from 'react-router-dom'
 import '../css/util.css';
 import '../css/main.css';
 import logo from '../images/examify.png';
@@ -114,11 +115,10 @@ class Register extends Component {
                     </button>
                   </div>
                   <div className="text-center p-t-136">
-                    <div>Already have an account?</div>
-                    <a className="txt2" href="#">
-                      Login
-                      <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true" />
-                    </a>
+                  <Link
+                    to='/login'
+                  >Already have an account?
+                  </Link>
                   </div>
                 </form>
               </div>
