@@ -18,6 +18,7 @@ export default class App extends Component {
             username: this.state.user.username,
           },
         });
+        console.log(res);
         this.confirmLogin(details);
       })
       .catch((error) => {
