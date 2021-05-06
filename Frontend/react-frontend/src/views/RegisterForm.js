@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import TiltPhaseSix from "./TiltPhaseSix";
+import TiltPhaseSix from "../TiltPhaseSix";
 import './App.css';
 import './vendor/bootstrap/css/bootstrap.min.css';
 import './fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -9,7 +9,7 @@ import './vendor/css-hamburgers/hamburgers.min.css';
 import './vendor/select2/select2.min.css';
 import './css/util.css';
 import './css/main.css';
-import logo from './images/examify.png';
+import logo from './images/examify-transparent.png';
 
 class Register extends Component {
 
