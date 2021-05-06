@@ -1,10 +1,17 @@
 import React, { Component } from "react";
-import LoginForm from "./component/LoginForm";
+import LoginForm from "./views/LoginForm";
+import RegisterForm from './views/RegisterForm'
+import Landing from './views/Landing'
+import { Route } from 'react-router-dom'
+
 export default class App extends Component {
   render() {
     return (
       <div>
-        <LoginForm />
+        <Route exact path="/" render={() => (
+          <Landing/>
+        )}
+        />
       </div>
     );
   }

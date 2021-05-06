@@ -1,0 +1,111 @@
+{
+    "Header": {
+
+        "title": "Examify",
+        "paragraph": "Exams made easy."
+
+    },
+    "About": {
+        "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Why": [
+            "Lorem ipsum dolor",
+            "Tempor incididunt",
+            "Lorem ipsum dolor",
+            "Incididunt ut labore"
+        ],
+        "Why2": [
+            "Aliquip ex ea commodo",
+            "Lorem ipsum dolor",
+            "Exercitation ullamco",
+            "Lorem ipsum dolor"
+        ]
+    },
+    
+    "Testimonials": [{
+            "img": "img/testimonials/01.jpg",
+            "text": "\"لم اكن اؤمن بالاكتحانات الغير ورقية و لكن بعد تجربة هذا المنج غيرت رأيي\"",
+            "name": "John Doe"
+        },
+        {
+            "img": "img/testimonials/02.jpg",
+            "text": "\"واو انه حقا فعال\"",
+            "name": "Johnathan Doe"
+        },
+        {
+            "img": "img/testimonials/03.jpg",
+            "text": "\"ياللهول ما هذه الروعة\"",
+            "name": "John Doe"
+        },
+        {
+            "img": "img/testimonials/04.jpg",
+            "text": "\"انصح به كل من اقابله يوميا\"",
+            "name": "Johnathan Doe"
+        },
+        {
+            "img": "img/testimonials/05.jpg",
+            "text": "\"لقد غير حياتي\"",
+            "name": "John Doe"
+        },
+        {
+            "img": "img/testimonials/06.jpg",
+            "text": "\"ان لم تجربه بعد فأنت يفوتك الكثير\"",
+            "name": "Johnathan Doe"
+        }
+    ],
+    "Team": [{
+            "img": "img/team/01.png",
+            "name": "Ahmed Hatem",
+            "job": "Leader"
+        },
+        {
+            "img": "img/team/02.png",
+            "name": "Ahmad Ramzy",
+            "job": "Leader"
+        }, {
+            "img": "img/team/03.png",
+            "name": "Ameer Nasser",
+            "job": "Leader"
+        },
+        {
+            "img": "img/team/04.png",
+            "name": "Marwan Moustafa",
+            "job": "Leader"
+        },
+        {
+            "img": "img/team/05.png",
+            "name": "Omar Abdelrazek",
+            "job": "Leader"
+        }
+    ],
+    "Contact": {
+        "address": "El ard el 7ora El Menoufia ",
+        "phone": "+1 111 1111 1111",
+        "email": "Examify@company.com",
+        "facebook": "fb.com",
+        "twitter": "twitter.com",
+        "youtube": "youtube.com"
+    },
+    "Features": [
+        {
+            "icon": "fa fa-edit",
+            "title": "Automatic exam grading",
+            "text": "Examiners are provided with a form to enter questions and answers and the system handles the grading."
+        },
+        {
+            "icon": "fa fa-code",
+            "title": "Coding exams",
+            "text": "Thanks to the nature of our online examination system, coding exams are taken the way they should be, on computer."
+        },
+        {
+            "icon": "fa fa-eye",
+            "title": "Remote proctoring",
+            "text": "Proctors are given access to the system to allow them to supervise students from anywhere."
+        },
+        {
+            "icon": "fa fa-comments-o",
+            "title": "Examinee chat",
+            "text": "Examiners and proctors can easily communicate with examinees to alert them of any malicious actions."
+        }
+        
+    ]
+}
