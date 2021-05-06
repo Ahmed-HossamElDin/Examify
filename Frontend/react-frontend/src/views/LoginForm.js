@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TiltPhaseSix from "../TiltPhaseSix";
+import TiltPhaseSix from "../components/TiltPhaseSix";
 import "../vendor/bootstrap/css/bootstrap.min.css";
 import "../fonts/font-awesome-4.7.0/css/font-awesome.min.css";
 import "../vendor/animate/animate.css";

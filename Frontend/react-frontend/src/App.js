@@ -1,17 +1,8 @@
-<<<<<<< Updated upstream
 import './App.css';
-import Register from './Register'
-
-
-function App() {
-  return (
-    <div className="App">
-      <Register/>
-    </div>
-  );
-=======
+import RegisterForm from './views/RegisterForm'
 import React, { Component } from "react";
 import LoginForm from "./views/LoginForm";
+
 export default class App extends Component {
   render() {
     return (
@@ -20,7 +11,5 @@ export default class App extends Component {
       </div>
     );
   }
->>>>>>> Stashed changes
-}
 
-export default App;
+}
