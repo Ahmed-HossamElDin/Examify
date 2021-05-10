@@ -10,7 +10,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // core components
 import Sidebar from "../components/Sidebar.js";
+
 import routes from "../Routes.js";
+
 import styles from "../js/adminStyle.js";
 
 var ps;
@@ -22,12 +24,12 @@ export default function Dashboard(props) {
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [miniActive, setMiniActive] = React.useState(true);
-  const [image, setImage] = React.useState(false);
+  // const [image, setImage] = React.useState(require("assets/img/sidebar-2.jpg"));
   const [color, setColor] = React.useState("blue");
   const [bgColor, setBgColor] = React.useState("white");
   // const [hasImage, setHasImage] = React.useState(true);
   const [fixedClasses, setFixedClasses] = React.useState("dropdown");
-  const [logo, setLogo] = React.useState(require("../images/examify.png"));
+  const [logo, setLogo] = React.useState(require("../images/examify-logo.png").default);
   // styles
   const classes = useStyles();
   const mainPanelClasses =
@@ -117,7 +119,6 @@ export default function Dashboard(props) {
         routes={routes}
         logoText={"Examify"}
         logo={logo}
-        image={image}
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
         color={color}
