@@ -27,7 +27,7 @@ export default function Dashboard(props) {
   const [bgColor, setBgColor] = React.useState("white");
   // const [hasImage, setHasImage] = React.useState(true);
   const [fixedClasses, setFixedClasses] = React.useState("dropdown");
-  const [logo, setLogo] = React.useState(require("../images/examify-logo.png"));
+  const [logo, setLogo] = React.useState(require("../images/examify.png"));
   // styles
   const classes = useStyles();
   const mainPanelClasses =

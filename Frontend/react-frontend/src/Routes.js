@@ -9,7 +9,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 var dashRoutes = [
   {
     path: "/Placeholder",
-    name: "Placeholder",
+    name: "Dashboard",
     rtlName: "لوحة القيادة",
     icon: DashboardIcon,
     component: Placeholder,
