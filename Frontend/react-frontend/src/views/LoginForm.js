@@ -129,6 +129,7 @@ export default class loginForm extends Component {
                         className="input100"
                         type="text"
                         id="username"
+                        placeholder="Username"
                         onChange={(e) => this.updateusername(e.target.value)}
                       />
                       <span className="focus-input100"></span>
@@ -146,6 +147,7 @@ export default class loginForm extends Component {
                         type="password"
                         name="password"
                         id="password"
+                        placeholder="Password"
                         onChange={(e) => this.updatepassword(e.target.value)}
                         required
                       />

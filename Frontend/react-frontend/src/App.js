@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import LoginForm from "./views/LoginForm";
-import RegisterForm from './views/RegisterForm'
-import Landing from './views/Landing'
-import { Route } from 'react-router-dom'
+import RegisterForm from './views/RegisterForm';
+import Landing from './views/Landing';
+import AdminLayout from './views/Admin';
+import { Route } from 'react-router-dom';
 
 export default class App extends Component {
   render() {
@@ -20,6 +21,7 @@ export default class App extends Component {
           <LoginForm/>
         )}
         />
+        <Route path="/admin" component={AdminLayout} />
       </div>
     );
   }
