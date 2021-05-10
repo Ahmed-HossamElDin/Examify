@@ -35,21 +35,6 @@
             "img": "img/testimonials/03.jpg",
             "text": "\"ياللهول ما هذه الروعة\"",
             "name": "John Doe"
-        },
-        {
-            "img": "img/testimonials/04.jpg",
-            "text": "\"انصح به كل من اقابله يوميا\"",
-            "name": "Johnathan Doe"
-        },
-        {
-            "img": "img/testimonials/05.jpg",
-            "text": "\"لقد غير حياتي\"",
-            "name": "John Doe"
-        },
-        {
-            "img": "img/testimonials/06.jpg",
-            "text": "\"ان لم تجربه بعد فأنت يفوتك الكثير\"",
-            "name": "Johnathan Doe"
         }
     ],
     "Team": [{

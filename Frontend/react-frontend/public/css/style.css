@@ -493,7 +493,7 @@ label {
 	padding: 6px 12px;
 	font-size: 16px;
 	line-height: 1.42857143;
-	color: #444;
+	color: rgb(240, 239, 239);
 	background-color: #fff;
 	background-image: none;
 	border: 1px solid #ddd;
@@ -511,13 +511,13 @@ label {
 	box-shadow: transparent;
 }
 .form-control::-webkit-input-placeholder {
-color: #777;
+color: #fff;
 }
 .form-control:-moz-placeholder {
-color: #777;
+color: #fff;
 }
 .form-control::-moz-placeholder {
-color: #777;
+color: #fff;
 }
 .form-control:-ms-input-placeholder {
 color: #777;
@@ -556,6 +556,9 @@ color: #777;
 #contact .social i.fa:hover {
 	color: #608dfd;
 	background: #fff;
+}
+#contact p {
+	color: #fff;
 }
 /* Footer Section*/
 #footer {

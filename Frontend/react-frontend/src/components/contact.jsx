@@ -116,33 +116,10 @@ export const Contact = (props) => {
             <div className='contact-item'>
               <p>
                 <span>
-                  <i className='fa fa-envelope-o'></i> Email
+                  <i className='fa fa-envelope'></i> Email
                 </span>{' '}
                 {props.data ? props.data.email : 'loading'}
               </p>
-            </div>
-          </div>
-          <div className='col-md-12'>
-            <div className='row'>
-              <div className='social'>
-                <ul>
-                  <li>
-                    <a href={props.data ? props.data.facebook : '/'}>
-                      <i className='fa fa-facebook'></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href={props.data ? props.data.twitter : '/'}>
-                      <i className='fa fa-twitter'></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href={props.data ? props.data.youtube : '/'}>
-                      <i className='fa fa-youtube'></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>
@@ -150,9 +127,9 @@ export const Contact = (props) => {
       <div id='footer'>
         <div className='container text-center'>
           <p>
-            &copy; 2020 Tommy, All rights reserved. Design by{' '}
+            &copy; 2021 Tommy & Ramzy, All rights reserved. Design by{' '}
             <a href='#' rel='nofollow'>
-              Me
+              Us
             </a>
           </p>
         </div>
