@@ -476,7 +476,7 @@ class Sidebar extends React.Component {
           <img src={logo} alt="logo" className={classes.img} />
         </a>
         <a
-          href="https://www.creative-tim.com?ref=mdpr-sidebar"
+          href="#"
           target="_blank"
           className={logoNormal}
         >
