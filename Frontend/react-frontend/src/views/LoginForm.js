@@ -1,16 +1,7 @@
 import React, { Component } from "react";
 import TiltPhaseSix from "../components/TiltPhaseSix";
-<<<<<<< HEAD
-import "../vendor/bootstrap/css/bootstrap.min.css";
-import "../fonts/font-awesome-4.7.0/css/font-awesome.min.css";
-import "../vendor/animate/animate.css";
-import "../vendor/css-hamburgers/hamburgers.min.css";
-import "../vendor/select2/select2.min.css";
-import logo from "../images/examify-transparent.png";
-=======
 import logo from "../images/examify.png";
-import { Link } from 'react-router-dom'
->>>>>>> Frontend
+import { Link } from 'react-router-dom';
 import "../css/main.css";
 import "../css/util.css";
 import axios from "axios";
@@ -177,25 +168,15 @@ export default class loginForm extends Component {
                         Username / Password?
                       </a>
                     </div>
-
                     <div className="text-center p-t-136">
-<<<<<<< HEAD
-                      <a className="txt2" href="localhost:3000">
-                        Create your Account
-=======
                     <Link
                       to='/register'
                     >Register 
->>>>>>> Frontend
                         <i
                           className="fa fa-long-arrow-right m-l-5"
                           aria-hidden="true"
                         ></i>
-<<<<<<< HEAD
-                      </a>
-=======
                     </Link>
->>>>>>> Frontend
                     </div>
                   </div>
                 </form>

@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom'
 import TiltPhaseSix from "../components/TiltPhaseSix";
 import '../App.css';
-import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../fonts/font-awesome-4.7.0/css/font-awesome.min.css';
-import '../vendor/animate/animate.css';
-import '../vendor/css-hamburgers/hamburgers.min.css';
-import '../vendor/select2/select2.min.css';
 import '../css/util.css';
 import '../css/main.css';
 import logo from '../images/examify-transparent.png';
@@ -119,11 +116,10 @@ class Register extends Component {
                     </button>
                   </div>
                   <div className="text-center p-t-136">
-                    <div>Already have an account?</div>
-                    <a className="txt2" href="#">
-                      Login
-                      <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true" />
-                    </a>
+                    <Link
+                      to='/login'
+                    >Already have an account? 
+                    </Link>
                   </div>
                 </form>
               </div>
