@@ -164,11 +164,11 @@ export default class loginForm extends Component {
                     </div>
 
                     <div className="text-center p-t-12">
-                      <span className="txt1"> Forgot</span>
-                      <a className="txt2" href="localhost:3000">
-                        {" "}
-                        Username / Password?
-                      </a>
+                    <Link
+                      to='#'
+                    >Forgot username / password ? 
+
+                    </Link>
                     </div>
 
                     <div className="text-center p-t-136">
