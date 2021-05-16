@@ -32,6 +32,7 @@ var ps;
 class SidebarWrapper extends React.Component {
   sidebarWrapper = React.createRef();
   componentDidMount() {
+    console.log(this.props);
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(this.sidebarWrapper.current, {
         suppressScrollX: true,
@@ -362,7 +363,7 @@ class Sidebar extends React.Component {
               onClick={() => this.openCollapse("openAvatar")}
             >
               <ListItemText
-                primary={rtlActive ? "رمزي" : "Ramzy"}
+                primary={this.props.username}
                 secondary={
                   <b
                     className={

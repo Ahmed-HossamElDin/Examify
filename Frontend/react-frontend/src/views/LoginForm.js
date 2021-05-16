@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import TiltPhaseSix from "../components/TiltPhaseSix";
 import logo from "../images/examify.png";
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import "../css/main.css";
 import "../css/util.css";
 import axios from "axios";
 
 export default class loginForm extends Component {
   state = {
-    user: { username: "", res: "", key: "", error: "" },
+    user: { username: "", res: "", key: "", error: "",type: ""},
     details: {
       username: "",
       password: "",
@@ -31,6 +31,7 @@ export default class loginForm extends Component {
           },
         });
         this.confirmLogin(details);
+        console.log(res);
       })
       .catch((error) => {
         var n = error.toString().includes("400");
@@ -56,6 +57,7 @@ export default class loginForm extends Component {
         user: {
           username: details.username,
           key: this.state.user.res.data.key,
+          type: this.state.user.res.data.type,
         },
       });
     } else {
@@ -96,10 +98,14 @@ export default class loginForm extends Component {
     return (
       <div>
         {this.state.user.key ? (
-          <div>
-            <h1>Welcome {this.state.user.username}</h1>
-            <button onClick={this.logout}>Logout</button>
-          </div>
+          // <div>
+          //   <h1>Welcome {this.state.user.username}</h1>
+          //   <button onClick={this.logout}>Logout</button>
+          // </div>
+          <Redirect to={{
+            pathname: "/admin",
+            state: { username: this.state.user.username, key: this.state.user.key, usertype: this.state.user.type}
+          }} />
         ) : (
           <div className="limiter">
             <div className="container-login100">

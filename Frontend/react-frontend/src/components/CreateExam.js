@@ -66,7 +66,7 @@ export default class CreateExam extends Component {
       });
       axios
         .post(
-          `https://cors-anywhere.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/`,
+          `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/`,
           {
             exam_name: this.state.exam_name,
             exam_startdate: this.state.date_time,

@@ -124,6 +124,9 @@ export default function Dashboard(props) {
         color={color}
         bgColor={bgColor}
         miniActive={miniActive}
+        username = "test"
+        key = "test"
+        usertype = "1"
         {...rest}
       />
       <div className={mainPanelClasses} ref={mainPanel}>
