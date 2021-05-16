@@ -1,5 +1,5 @@
 import Placeholder from "./views/placeholder.js";
-
+import CreateExam from "./components/CreateExam.js"
 // @material-ui/icons
 
 import DashboardIcon from "@material-ui/icons/Dashboard";
@@ -20,7 +20,7 @@ var dashRoutes = [
     name: "Add exam",
     rtlName: "اضف امتحان",
     icon: AddCircleOutlineSharpIcon,
-    component: Placeholder,
+    component: CreateExam,
     layout: "/admin"
   },
   {

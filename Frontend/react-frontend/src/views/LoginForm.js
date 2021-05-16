@@ -17,7 +17,7 @@ export default class loginForm extends Component {
   login = (details) => {
     axios
       .post(
-        `https://cors-anywhere.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/login/`,
+        `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/login/`,
         {
           username: details.username,
           password: details.password,

@@ -60,7 +60,7 @@ class Register extends Component {
     if (user.username && user.password1 && user.password2 && user.email) {
       axios
         .post(
-          "https://cors-anywhere.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/registration/",
+          "https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/registration/",
           this.state.user
         )
         .then((response) => {
