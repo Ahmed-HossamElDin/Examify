@@ -124,7 +124,7 @@ export default function Dashboard(props) {
         color={color}
         bgColor={bgColor}
         miniActive={miniActive}
-        username = "test"
+        username = "ramzyexaminer"
         key = "test"
         usertype = "1"
         {...rest}
