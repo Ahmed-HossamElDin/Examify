@@ -31,7 +31,7 @@ export default class EditExam extends Component {
         .get(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/`,
           {
-            headers: { Authorization: "Token " + this.props.token },
+            headers: { Authorization: "Token " + "b9bb864dbd489d8b714a2211cc32aa78697a6adb" },
           }
         )
         .then((res) => {
@@ -45,7 +45,7 @@ export default class EditExam extends Component {
         .delete(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/`,
           {
-            headers: { Authorization: "Token " + this.props.token },
+            headers: { Authorization: "Token " + "b9bb864dbd489d8b714a2211cc32aa78697a6adb" },
           }
         )
         .then((updated = true), this.forceUpdate());
@@ -53,7 +53,7 @@ export default class EditExam extends Component {
 
     return (
       <div className="examiner-component">
-        <ViewExams token={this.props.token} view={false} />{" "}
+        <ViewExams token="b9bb864dbd489d8b714a2211cc32aa78697a6adb" view={false} />{" "}
         {updated && (
           <Alert severity="success">
             Exam with ID :{this.state.id} Deleted successfully!
@@ -88,7 +88,7 @@ export default class EditExam extends Component {
         {this.state.mountComponent === true ? (
           <div style={{ float: "left" }}>
             {" "}
-            <Exam exam={this.state.exam} token={this.props.token} />
+            <Exam exam={this.state.exam} token = "b9bb864dbd489d8b714a2211cc32aa78697a6adb" />
             {console.log(this.state.exam)}
           </div>
         ) : (

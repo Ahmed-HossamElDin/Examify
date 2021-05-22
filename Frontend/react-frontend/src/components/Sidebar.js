@@ -32,7 +32,7 @@ var ps;
 class SidebarWrapper extends React.Component {
   sidebarWrapper = React.createRef();
   componentDidMount() {
-    console.log(this.props);
+    //console.log(this.props);
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(this.sidebarWrapper.current, {
         suppressScrollX: true,

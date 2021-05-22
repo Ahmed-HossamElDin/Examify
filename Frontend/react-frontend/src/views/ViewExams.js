@@ -36,13 +36,13 @@ const columns = [
 
 export default class ListExams extends Component {
   componentDidMount() {
-    console.log("Key is : ");
-    console.log(this.state);
+    //console.log("Key is : ");
+    //console.log(this.state);
     axios
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/`,
         {
-          headers: { Authorization: "Token " + this.state.token },
+          headers: { Authorization: "Token " + "b9bb864dbd489d8b714a2211cc32aa78697a6adb" },
         }
       )
       .then((res) => {
@@ -51,7 +51,7 @@ export default class ListExams extends Component {
   }
   constructor(props) {
     super(props);
-    this.state = { ...this.state, token: props.token };
+    this.state = { ...this.state, token: "b9bb864dbd489d8b714a2211cc32aa78697a6adb" };
   }
   state = {
     exams: [],
@@ -70,7 +70,7 @@ export default class ListExams extends Component {
             <DataGrid rows={rows} columns={columns} pageSize={10} />
             {console.log(rows, "rows")}
             {this.props.view === true ? (
-              <ViewAllowed token={this.props.token} />
+              <ViewAllowed token="b9bb864dbd489d8b714a2211cc32aa78697a6adb" />
             ) : (
               <div></div>
             )}
