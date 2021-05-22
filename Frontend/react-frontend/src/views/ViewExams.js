@@ -69,7 +69,7 @@ export default class ListExams extends Component {
           <div style={{ height: 630, width: 700 }}>
             <DataGrid rows={rows} columns={columns} pageSize={10} />
             {console.log(rows, "rows")}
-            {this.props.view === true ? (
+            {true ? (
               <ViewAllowed token="b9bb864dbd489d8b714a2211cc32aa78697a6adb" />
             ) : (
               <div></div>
