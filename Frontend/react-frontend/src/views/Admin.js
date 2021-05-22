@@ -20,6 +20,7 @@ var ps;
 const useStyles = makeStyles(styles);
 
 export default function Dashboard(props) {
+  console.log(props.state);
   const { ...rest } = props;
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -92,11 +93,14 @@ export default function Dashboard(props) {
         return getRoutes(prop.views);
       }
       if (prop.layout === "/admin") {
+        //console.log("path is " + prop.path);
         return (
           <Route
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
+            token="b9bb864dbd489d8b714a2211cc32aa78697a6adb"
+            view = {true}
           />
         );
       } else {
@@ -130,8 +134,7 @@ export default function Dashboard(props) {
         {...rest}
       />
       <div className={mainPanelClasses} ref={mainPanel}>
-        
-        {/* On the /maps/full-screen-maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
+
         {getRoute() ? (
           <div className={classes.content}>
             <div className={classes.container}>

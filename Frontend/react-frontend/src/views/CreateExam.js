@@ -15,6 +15,7 @@ import AddIcon from "@material-ui/icons/Add";
 import AddStudents from "../components/AddStudent.js";
 import AddSupervisors from "../components/AddSupervisors.js";
 import DoneIcon from "@material-ui/icons/Done";
+import "../css/examiner-component.css";
 var loading = false;
 
 export default class CreateExam extends Component {
@@ -139,7 +140,7 @@ export default class CreateExam extends Component {
     };
 
     return (
-      <div style={{ textAlign: "center" }}>
+      <div  className="examiner-component" style={{ textAlign: "center" }}>
         <TextField
           size="small"
           required

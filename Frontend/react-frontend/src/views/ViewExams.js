@@ -3,6 +3,7 @@ import axios from "axios";
 import { DataGrid } from "@material-ui/data-grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import ViewAllowed from "../components/ViewAllowed.js";
+import "../css/examiner-component.css";
 
 const columns = [
   {
@@ -35,6 +36,8 @@ const columns = [
 
 export default class ListExams extends Component {
   componentDidMount() {
+    console.log("Key is : ");
+    console.log(this.state);
     axios
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/`,

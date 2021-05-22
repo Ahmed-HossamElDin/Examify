@@ -9,6 +9,7 @@ import axios from "axios";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Exam from "../components/Exam.js";
+import "../css/examiner-component.css";
 
 var updated = false;
 export default class EditExam extends Component {
@@ -51,7 +52,7 @@ export default class EditExam extends Component {
     };
 
     return (
-      <div>
+      <div className="examiner-component">
         <ViewExams token={this.props.token} view={false} />{" "}
         {updated && (
           <Alert severity="success">
