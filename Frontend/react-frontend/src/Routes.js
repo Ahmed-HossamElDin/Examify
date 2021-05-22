@@ -1,10 +1,13 @@
 import Placeholder from "./views/placeholder.js";
-import CreateExam from "./components/CreateExam.js"
+import CreateExam from "./views/CreateExam.js";
+import EditExam from "./views/EditExam.js";
+import ViewExam from "./views/ViewExams.js"
 // @material-ui/icons
 
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import AddCircleOutlineSharpIcon from '@material-ui/icons/AddCircleOutlineSharp';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import ViewHeadlineOutlinedIcon from '@material-ui/icons/ViewHeadlineOutlined';
 
 var dashRoutes = [
   {
@@ -28,7 +31,15 @@ var dashRoutes = [
     name: "Edit exam",
     rtlName: "عدل امتحان",
     icon: EditOutlinedIcon,
-    component: Placeholder,
+    component: EditExam,
+    layout: "/admin"
+  },
+  {
+    path: "/view-exam",
+    name: "View exam",
+    rtlName: "عرض امتحان",
+    icon: ViewHeadlineOutlinedIcon,
+    component: ViewExam,
     layout: "/admin"
   },
 ];

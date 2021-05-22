@@ -7,9 +7,9 @@ export default class loginForm extends Component {
     render() {
         return(
             <div>
-            <h1>
-                placeholder
-            </h1>
+                <h1>
+                    Previous exam stats
+                </h1>
             </div>)
     }
 }

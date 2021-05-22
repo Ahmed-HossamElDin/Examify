@@ -9,9 +9,10 @@ import CardContent from "@material-ui/core/CardContent";
 import axios from "axios";
 import CardActions from "@material-ui/core/CardActions";
 import { Alert } from "@material-ui/lab";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import SaveIcon from "@material-ui/icons/Save";
-
+import AddIcon from "@material-ui/icons/Add";
+import DoneIcon from "@material-ui/icons/Done";
+var updated = false;
 export default class CreateQuestion extends Component {
   state = {
     exam_id: "",
@@ -34,10 +35,10 @@ export default class CreateQuestion extends Component {
     },
     token: "",
     question_id: "question_id",
-    mark: 0,
-    flag: 0,
+    mark: 1,
     counter: 1,
     loading: false,
+    flag: "0",
   };
   constructor(props) {
     super(props);
@@ -51,20 +52,17 @@ export default class CreateQuestion extends Component {
   render() {
     const handleQuestionChange = (e) => {
       this.setState({
-        ...this.state,
         question: e.target.value,
         token: this.state.token,
       });
     };
     const handleQuestionMark = (e) => {
       this.setState({
-        ...this.state,
         mark: e.target.value,
       });
     };
     const handleOptionOneChange = (e) => {
       this.setState({
-        ...this.state,
         option1: { ...this.state.option1, text: e.target.value },
       });
     };
@@ -76,19 +74,16 @@ export default class CreateQuestion extends Component {
     };
     const handleOptionThreeChange = (e) => {
       this.setState({
-        ...this.state,
         option3: { ...this.state.option3, text: e.target.value },
       });
     };
     const handleOptionFourChange = (e) => {
       this.setState({
-        ...this.state,
         option4: { ...this.state.option4, text: e.target.value },
       });
     };
     const handleAnswer1 = () => {
       this.setState({
-        ...this.state,
         option1: { ...this.state.option1, is_correct: true },
         option2: { ...this.state.option2, is_correct: false },
         option3: { ...this.state.option3, is_correct: false },
@@ -97,7 +92,6 @@ export default class CreateQuestion extends Component {
     };
     const handleAnswer2 = () => {
       this.setState({
-        ...this.state,
         option2: { ...this.state.option2, is_correct: true },
         option1: { ...this.state.option1, is_correct: false },
         option3: { ...this.state.option3, is_correct: false },
@@ -106,7 +100,6 @@ export default class CreateQuestion extends Component {
     };
     const handleAnswer3 = () => {
       this.setState({
-        ...this.state,
         option3: { ...this.state.option3, is_correct: true },
         option1: { ...this.state.option1, is_correct: false },
         option2: { ...this.state.option2, is_correct: false },
@@ -115,7 +108,6 @@ export default class CreateQuestion extends Component {
     };
     const handleAnswer4 = () => {
       this.setState({
-        ...this.state,
         option4: { ...this.state.option4, is_correct: true },
         option1: { ...this.state.option1, is_correct: false },
         option2: { ...this.state.option2, is_correct: false },
@@ -124,32 +116,29 @@ export default class CreateQuestion extends Component {
     };
 
     const resetchoices = () => {
+      console.log(updated);
       Object.keys(this.state)
         .filter((key) => key.includes("option"))
         .forEach((key) => {
-          this.setState(
-            {
-              [key]: { is_correct: false, text: "" },
-            },
-            resetQuestion()
-          );
+          this.setState({
+            [key]: { is_correct: false, text: "" },
+          });
         });
+      resetQuestion();
     };
     const resetQuestion = () => {
       this.setState({
-        ...this.state,
         question: "",
-        mark: 0,
-        flag: 2,
+        mark: 1,
         counter: this.state.counter + 1,
+        flag: 0,
       });
     };
     const handleSubmit = () => {
+      updated = false;
       this.setState({
-        ...this.state,
         loading: true,
       });
-      var done = 1;
 
       axios
         .post(
@@ -164,13 +153,14 @@ export default class CreateQuestion extends Component {
         )
         .then((res) => {
           this.setState({
-            ...this.state,
             question_id: res.data.id,
           });
           Object.keys(this.state)
             .filter((key) => key.includes("option"))
             .forEach((key) => {
-              if (this.state[key].text !== "")
+              console.log("outside if");
+              if (this.state[key].text !== "") {
+                console.log("inside if");
                 axios
                   .post(
                     `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/question/${this.state.question_id}/answer/`,
@@ -182,42 +172,38 @@ export default class CreateQuestion extends Component {
                       headers: { Authorization: "Token " + this.state.token },
                     }
                   )
-                  .catch(() => {
-                    this.setState({
-                      ...this.state,
-                      flag: 1,
-                    });
-                    done = 0;
-                  });
+                  .then(this.setState({ ...this.state, flag: "success" }))
+                  .catch((res) => this.setState({ flag: "error" }));
+              }
             });
         })
-        .catch((res) => {
-          this.setState({
-            ...this.state,
-            flag: 1,
-          });
-        });
-      if (done === 1) {
-        resetchoices();
-      }
+        .catch((res) => this.setState({ flag: "error" }));
       this.setState({
-        ...this.state,
         loading: false,
       });
     };
+    let answered =
+      this.state.option1.is_correct ||
+      this.state.option2.is_correct ||
+      this.state.option4.is_correct ||
+      this.state.option3.is_correct;
     return (
       <div style={{ padding: "1% 10%" }}>
         <Card variant="outlined">
           <CardContent>
-            {this.state.flag === 1 ? (
+            {this.state.flag === "success" ? (
+              <div>
+                <Alert severity="success">Question added successfully!</Alert>
+              </div>
+            ) : (
+              <div></div>
+            )}
+            {this.state.flag === "error" ? (
               <Alert severity="error">
-                {" "}
-                All fields must be filled (except the options 1 option at least
-                required)!
-              </Alert>
-            ) : this.state.flag === 2 ? (
-              <Alert severity="success">
-                Question {this.state.counter - 1} added successfully!
+                {this.state.loading
+                  ? "loading plz wait"
+                  : `Error occured while creating the question, please make sure you
+                filled all the required fields (at least 1 option is required)`}
               </Alert>
             ) : (
               <div></div>
@@ -248,7 +234,13 @@ export default class CreateQuestion extends Component {
                 <CardActions>
                   <FormControlLabel
                     value="1"
-                    control={<Radio size="small" onChange={handleAnswer1} />}
+                    control={
+                      <Radio
+                        size="small"
+                        onClick={handleAnswer1}
+                        selected={this.state.option1.is_correct}
+                      />
+                    }
                   />
                   <TextField
                     fullWidth
@@ -260,7 +252,13 @@ export default class CreateQuestion extends Component {
                 <CardActions>
                   <FormControlLabel
                     value="b"
-                    control={<Radio size="small" onChange={handleAnswer2} />}
+                    control={
+                      <Radio
+                        size="small"
+                        onClick={handleAnswer2}
+                        selected={this.state.option2.is_correct}
+                      />
+                    }
                   />
                   <TextField
                     fullWidth
@@ -272,7 +270,13 @@ export default class CreateQuestion extends Component {
                 <CardActions>
                   <FormControlLabel
                     value="3"
-                    control={<Radio size="small" onChange={handleAnswer3} />}
+                    control={
+                      <Radio
+                        size="small"
+                        onClick={handleAnswer3}
+                        selected={this.state.option3.is_correct}
+                      />
+                    }
                   />
                   <TextField
                     fullWidth
@@ -284,7 +288,13 @@ export default class CreateQuestion extends Component {
                 <CardActions>
                   <FormControlLabel
                     value="4"
-                    control={<Radio size="small" onChange={handleAnswer4} />}
+                    control={
+                      <Radio
+                        size="small"
+                        onClick={handleAnswer4}
+                        selected={this.state.option4.is_correct}
+                      />
+                    }
                   />
                   <TextField
                     fullWidth
@@ -300,18 +310,34 @@ export default class CreateQuestion extends Component {
                 color="primary"
                 size="small"
                 startIcon={
-                  this.state.loading ? (
-                    <CircularProgress size={20} color="secondary" />
+                  this.state.flag === "success" ? (
+                    <DoneIcon size={20} color="secondary" />
                   ) : (
                     <SaveIcon />
                   )
                 }
-                disabled={this.state.loading}
+                disabled={
+                  this.state.loading ||
+                  !answered ||
+                  this.state.flag === "success"
+                    ? true
+                    : false
+                }
                 onClick={handleSubmit}
               >
-                {this.state.loading
-                  ? "Adding question..."
-                  : "Add a new question"}
+                {this.state.flag === "success"
+                  ? "Question saved"
+                  : "Save question"}
+              </Button>{" "}
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                startIcon={<AddIcon />}
+                onClick={resetchoices}
+                disabled={this.state.flag === "success" ? false : true}
+              >
+                Add a new question
               </Button>
             </div>
           </CardContent>
