@@ -168,7 +168,7 @@ class Register extends Component {
                       <i className="fa fa-envelope" aria-hidden="true" />
                     </span>
                   </div>{" "}
-                  <FormControl width="auto" component="fieldset" id="user-selection" value={this.value} onChange={this.updateuserType}>
+                  <FormControl className = "form" width="auto" component="fieldset" id="user-selection" value={this.value} onChange={this.updateuserType}>
                   <FormLabel component="legend">Sign up as</FormLabel>
                   <RadioGroup row aria-label="user-type" name="user-type">
                     <FormControlLabel value="1" control={<Radio color = "primary" />} label="Student" />
