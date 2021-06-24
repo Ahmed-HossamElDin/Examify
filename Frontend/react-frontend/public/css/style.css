@@ -435,7 +435,7 @@ header .intro-text {
 #contact {
 	padding: 100px 0 60px 0;
 	background: linear-gradient(to right, #010280 0%, #4c96e6 100%);
-	color: rgba(255,255,255,.75);
+	color: rgba(85, 111, 182, 0.75);
 }
 #contact .section-title {
 	margin-bottom: 40px;
@@ -493,7 +493,7 @@ label {
 	padding: 6px 12px;
 	font-size: 16px;
 	line-height: 1.42857143;
-	color: rgb(240, 239, 239);
+	color: rgb(0, 0, 0);
 	background-color: #fff;
 	background-image: none;
 	border: 1px solid #ddd;
@@ -511,16 +511,16 @@ label {
 	box-shadow: transparent;
 }
 .form-control::-webkit-input-placeholder {
-color: #fff;
+color: rgb(68, 36, 148);
 }
 .form-control:-moz-placeholder {
-color: #fff;
+color: rgb(68, 36, 148);
 }
 .form-control::-moz-placeholder {
-color: #fff;
+color: rgb(68, 36, 148);
 }
 .form-control:-ms-input-placeholder {
-color: #777;
+color: rgb(68, 36, 148);
 }
 #contact .contact-item {
 	margin: 20px 0;
