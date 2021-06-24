@@ -99,7 +99,7 @@ export default class loginForm extends Component {
       <div>
         {this.state.user.key ? (
           <Redirect to={{
-            pathname: "/admin",
+            pathname: "/dashboard",
             state: { username: this.state.user.username, key: this.state.user.key, usertype: this.state.user.type}
           }} />
         ) : (
