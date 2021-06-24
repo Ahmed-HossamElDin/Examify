@@ -5,6 +5,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import ViewAllowed from "../components/ViewAllowed";
 import Card from "@material-ui/core/Card";
 
+
 const columns = [
   {
     field: "id",

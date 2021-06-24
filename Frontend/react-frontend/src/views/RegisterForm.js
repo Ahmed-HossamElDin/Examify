@@ -11,6 +11,9 @@ import "../css/util.css";
 import "../css/main.css";
 import "../css/register.css";
 import logo from "../images/examify.png";
+import SimpleBar from 'simplebar-react';
+
+import 'simplebar/dist/simplebar.min.css';
 
 class Register extends Component {
   constructor(props) {
@@ -51,7 +54,7 @@ class Register extends Component {
           user_type: e.target.value,
         },
       },
-      function() {
+      function () {
         console.log(this.state);
       }
     );
@@ -88,130 +91,132 @@ class Register extends Component {
 
     return (
       <div className="Register">
-        <div>
-          <div className="limiter">
-            <div className="container-login100">
-              <div className="wrap-login100">
-                <TiltPhaseSix options={options}>
-                  <img src={logo} alt="logo" />
-                </TiltPhaseSix>
-                <form
-                  className="login100-form validate-form"
-                  onSubmit={this.handleSubmit}
-                >
-                  <span className="login100-form-title">Sign up</span>
-                  <div
-                    className="wrap-input100 validate-input"
-                    data-validate="Username is required"
+        <SimpleBar>
+          <div>
+            <div className="limiter">
+              <div className="container-login100">
+                <div className="wrap-login100">
+                  <TiltPhaseSix options={options}>
+                    <img src={logo} alt="logo" />
+                  </TiltPhaseSix>
+                  <form
+                    className="login100-form validate-form"
+                    onSubmit={this.handleSubmit}
                   >
-                    <input
-                      className="input100"
-                      type="text"
-                      id="username"
-                      name="username"
-                      placeholder="Username"
-                      value={user.username}
-                      onChange={this.handleChange}
-                    />
-                    <span className="focus-input100" />
-                    <span className="symbol-input100">
-                      <i className="fa fa-envelope" aria-hidden="true" />
-                    </span>
-                  </div>
-                  <div
-                    className="wrap-input100 validate-input"
-                    data-validate="Password is required"
-                  >
-                    <input
-                      className="input100"
-                      type="password"
-                      id="password1"
-                      name="password1"
-                      placeholder="Password"
-                      value={user.password1}
-                      onChange={this.handleChange}
-                    />
-                    <span className="focus-input100" />
-                    <span className="symbol-input100">
-                      <i className="fa fa-lock" aria-hidden="true" />
-                    </span>
-                  </div>
-                  <div
-                    className="wrap-input100 validate-input"
-                    data-validate="Password confirmation is required"
-                  >
-                    <input
-                      className="input100"
-                      type="password"
-                      id="password2"
-                      name="password2"
-                      placeholder="Re-enter password"
-                      value={user.password2}
-                      onChange={this.handleChange}
-                    />
-                    <span className="focus-input100" />
-                    <span className="symbol-input100">
-                      <i className="fa fa-lock" aria-hidden="true" />
-                    </span>
-                  </div>
-                  <div
-                    className="wrap-input100 validate-input"
-                    data-validate="Valid email is required: ex@abc.xyz"
-                  >
-                    <input
-                      className="input100"
-                      type="text"
-                      id="email"
-                      name="email"
-                      placeholder="Email"
-                      value={user.email}
-                      onChange={this.handleChange}
-                    />
-                    <span className="focus-input100" />
-                    <span className="symbol-input100">
-                      <i className="fa fa-envelope" aria-hidden="true" />
-                    </span>
-                  </div>{" "}
-                  <FormControl
-                    className="form"
-                    width="auto"
-                    component="fieldset"
-                    id="user-selection"
-                    value={this.value}
-                    onChange={this.updateuserType}
-                  >
-                    <FormLabel component="legend">Sign up as</FormLabel>
-                    <RadioGroup row aria-label="user-type" name="user-type">
-                      <FormControlLabel
-                        value="1"
-                        control={<Radio color="primary" />}
-                        label="Student"
+                    <span className="login100-form-title">Sign up</span>
+                    <div
+                      className="wrap-input100 validate-input"
+                      data-validate="Username is required"
+                    >
+                      <input
+                        className="input100"
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Username"
+                        value={user.username}
+                        onChange={this.handleChange}
                       />
-                      <FormControlLabel
-                        value="2"
-                        control={<Radio color="primary" />}
-                        label="Examiner"
+                      <span className="focus-input100" />
+                      <span className="symbol-input100">
+                        <i className="fa fa-envelope" aria-hidden="true" />
+                      </span>
+                    </div>
+                    <div
+                      className="wrap-input100 validate-input"
+                      data-validate="Password is required"
+                    >
+                      <input
+                        className="input100"
+                        type="password"
+                        id="password1"
+                        name="password1"
+                        placeholder="Password"
+                        value={user.password1}
+                        onChange={this.handleChange}
                       />
-                      <FormControlLabel
-                        value="3"
-                        control={<Radio color="primary" />}
-                        label="Proctor"
+                      <span className="focus-input100" />
+                      <span className="symbol-input100">
+                        <i className="fa fa-lock" aria-hidden="true" />
+                      </span>
+                    </div>
+                    <div
+                      className="wrap-input100 validate-input"
+                      data-validate="Password confirmation is required"
+                    >
+                      <input
+                        className="input100"
+                        type="password"
+                        id="password2"
+                        name="password2"
+                        placeholder="Re-enter password"
+                        value={user.password2}
+                        onChange={this.handleChange}
                       />
-                    </RadioGroup>
-                  </FormControl>
-                  <div className="container-login100-form-btn">
-                    <button className="login100-form-btn" type="submit">
-                      Sign up
-                    </button>
-                  </div>
-                  <div className="text-center p-t-136">
-                    Already have an account? <Link to="/login">Sign In</Link>
-                  </div>
-                </form>
+                      <span className="focus-input100" />
+                      <span className="symbol-input100">
+                        <i className="fa fa-lock" aria-hidden="true" />
+                      </span>
+                    </div>
+                    <div
+                      className="wrap-input100 validate-input"
+                      data-validate="Valid email is required: ex@abc.xyz"
+                    >
+                      <input
+                        className="input100"
+                        type="text"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                        value={user.email}
+                        onChange={this.handleChange}
+                      />
+                      <span className="focus-input100" />
+                      <span className="symbol-input100">
+                        <i className="fa fa-envelope" aria-hidden="true" />
+                      </span>
+                    </div>{" "}
+                    <FormControl
+                      className="form"
+                      width="auto"
+                      component="fieldset"
+                      id="user-selection"
+                      value={this.value}
+                      onChange={this.updateuserType}
+                    >
+                      <FormLabel component="legend">Sign up as</FormLabel>
+                      <RadioGroup row aria-label="user-type" name="user-type">
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio color="primary" />}
+                          label="Student"
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio color="primary" />}
+                          label="Examiner"
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio color="primary" />}
+                          label="Proctor"
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                    <div className="container-login100-form-btn">
+                      <button className="login100-form-btn" type="submit">
+                        Sign up
+                      </button>
+                    </div>
+                    <div className="text-center p-t-136">
+                      Already have an account? <Link to="/login">Sign In</Link>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </SimpleBar>
       </div>
     );
   }

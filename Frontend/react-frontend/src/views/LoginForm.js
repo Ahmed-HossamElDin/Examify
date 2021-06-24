@@ -5,6 +5,9 @@ import { Link, Redirect } from "react-router-dom";
 import "../css/main.css";
 import "../css/util.css";
 import axios from "axios";
+import SimpleBar from 'simplebar-react';
+
+import 'simplebar/dist/simplebar.min.css';
 
 export default class loginForm extends Component {
   state = {
@@ -99,101 +102,103 @@ export default class loginForm extends Component {
     };
     return (
       <div>
-        {this.state.user.key ? (
-          <Redirect
-            to={{
-              pathname: "/dashboard",
-              state: {
-                username: this.state.user.username,
-                key: this.state.user.key,
-                usertype: this.state.user.type,
-              },
-            }}
-          />
-        ) : (
-          <div className="limiter">
-            <div className="container-login100">
-              <div className="wrap-login100">
-                <TiltPhaseSix options={options}>
-                  <img src={logo} alt="logo" />
-                </TiltPhaseSix>
-                <form
-                  onSubmit={this.submitHandler}
-                  className="login100-form validate-form"
-                >
-                  <span className="login100-form-title">Login</span>
-                  <div>
-                    {this.state.user.error !== "" &&
-                    this.state.user.error !== undefined ? (
-                      <div
-                        className="error"
-                        style={{ textAlign: "center", fontSize: 14 }}
-                      >
-                        {this.state.user.error}
+        <SimpleBar>
+          {this.state.user.key ? (
+            <Redirect
+              to={{
+                pathname: "/dashboard",
+                state: {
+                  username: this.state.user.username,
+                  key: this.state.user.key,
+                  usertype: this.state.user.type,
+                },
+              }}
+            />
+          ) : (
+            <div className="limiter">
+              <div className="container-login100">
+                <div className="wrap-login100">
+                  <TiltPhaseSix options={options}>
+                    <img src={logo} alt="logo" />
+                  </TiltPhaseSix>
+                  <form
+                    onSubmit={this.submitHandler}
+                    className="login100-form validate-form"
+                  >
+                    <span className="login100-form-title">Login</span>
+                    <div>
+                      {this.state.user.error !== "" &&
+                        this.state.user.error !== undefined ? (
+                        <div
+                          className="error"
+                          style={{ textAlign: "center", fontSize: 14 }}
+                        >
+                          {this.state.user.error}
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
+                      <div className="wrap-input100 validate-input">
+                        <input
+                          className="input100"
+                          type="text"
+                          id="username"
+                          placeholder="Username"
+                          onChange={(e) => this.updateusername(e.target.value)}
+                        />
+                        <span className="focus-input100"></span>
+                        <span className="symbol-input100">
+                          <i className="fa fa-user" aria-hidden="true"></i>
+                        </span>
                       </div>
-                    ) : (
-                      <div></div>
-                    )}
-                    <div className="wrap-input100 validate-input">
-                      <input
-                        className="input100"
-                        type="text"
-                        id="username"
-                        placeholder="Username"
-                        onChange={(e) => this.updateusername(e.target.value)}
-                      />
-                      <span className="focus-input100"></span>
-                      <span className="symbol-input100">
-                        <i className="fa fa-user" aria-hidden="true"></i>
-                      </span>
-                    </div>
 
-                    <div
-                      className="wrap-input100 validate-input"
-                      data-validate="Password is required"
-                    >
-                      <input
-                        className="input100"
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Password"
-                        onChange={(e) => this.updatepassword(e.target.value)}
-                        required
-                      />
-                      <span className="focus-input100"></span>
-                      <span className="symbol-input100">
-                        <i className="fa fa-lock" aria-hidden="true" />
-                      </span>
-                    </div>
+                      <div
+                        className="wrap-input100 validate-input"
+                        data-validate="Password is required"
+                      >
+                        <input
+                          className="input100"
+                          type="password"
+                          name="password"
+                          id="password"
+                          placeholder="Password"
+                          onChange={(e) => this.updatepassword(e.target.value)}
+                          required
+                        />
+                        <span className="focus-input100"></span>
+                        <span className="symbol-input100">
+                          <i className="fa fa-lock" aria-hidden="true" />
+                        </span>
+                      </div>
 
-                    <div className="container-login100-form-btn">
-                      <button className="login100-form-btn" type="submit">
-                        Login
-                      </button>
-                    </div>
+                      <div className="container-login100-form-btn">
+                        <button className="login100-form-btn" type="submit">
+                          Login
+                        </button>
+                      </div>
 
-                    <div className="text-center p-t-12">
-                      <Link to="#">Forgot username / password ?</Link>
-                    </div>
+                      <div className="text-center p-t-12">
+                        <Link to="#">Forgot username / password ?</Link>
+                      </div>
 
-                    <div className="text-center p-t-136">
-                      Don't have an account yet?
-                      <Link to="/register">
-                        {" "}
-                        Sign up
-                        <i
-                          className="fa fa-long-arrow-right m-l-5"
-                          aria-hidden="true"
-                        ></i>
-                      </Link>
+                      <div className="text-center p-t-136">
+                        Don't have an account yet?
+                        <Link to="/register">
+                          {" "}
+                          Sign up
+                          <i
+                            className="fa fa-long-arrow-right m-l-5"
+                            aria-hidden="true"
+                          ></i>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </SimpleBar>
       </div>
     );
   }
