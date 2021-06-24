@@ -234,6 +234,7 @@ export default class Exam extends Component {
         {this.state.questions.length > 0 ? (
           this.state.questions.map((question) => {
             counter = counter + 1;
+            console.log(question, "THE QUESTION");
             return (
               <Question
                 key={counter}
@@ -247,6 +248,10 @@ export default class Exam extends Component {
           })
         ) : clicked === true ? (
           <div>
+            <br />
+            <Alert severity="info">
+              This Exam Doesn't have any questions!{" "}
+            </Alert>
             <CreateQuestion
               exam_id={this.props.exam.id}
               token={this.props.token}

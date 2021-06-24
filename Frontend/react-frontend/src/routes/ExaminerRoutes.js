@@ -1,12 +1,12 @@
 import Placeholder from "../views/placeholder.js";
 import CreateExam from "../views/CreateExam.js";
 import EditExam from "../views/EditExam.js";
-import ViewExam from "../views/ViewExams.js"
+import ListExams from "../views/ListExams.js";
 
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import AddCircleOutlineSharpIcon from '@material-ui/icons/AddCircleOutlineSharp';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import ViewHeadlineOutlinedIcon from '@material-ui/icons/ViewHeadlineOutlined';
+import AddCircleOutlineSharpIcon from "@material-ui/icons/AddCircleOutlineSharp";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import ViewHeadlineOutlinedIcon from "@material-ui/icons/ViewHeadlineOutlined";
 
 var ExaminerRoutes = [
   {
@@ -15,31 +15,31 @@ var ExaminerRoutes = [
     rtlName: "لوحة القيادة",
     icon: DashboardIcon,
     component: Placeholder,
-    layout: "/dashboard"
+    layout: "/dashboard",
   },
   {
     path: "/create-exam",
-    name: "Add exam",
+    name: "Create a new exam",
     rtlName: "اضف امتحان",
     icon: AddCircleOutlineSharpIcon,
     component: CreateExam,
-    layout: "/dashboard"
+    layout: "/dashboard",
   },
   {
     path: "/edit-exam",
-    name: "Edit exam",
+    name: "Edit an exam",
     rtlName: "عدل امتحان",
     icon: EditOutlinedIcon,
     component: EditExam,
-    layout: "/dashboard"
+    layout: "/dashboard",
   },
   {
     path: "/view-exam",
-    name: "View exam",
+    name: "View exams",
     rtlName: "عرض امتحان",
     icon: ViewHeadlineOutlinedIcon,
-    component: ViewExam,
-    layout: "/dashboard"
+    component: ListExams,
+    layout: "/dashboard",
   },
 ];
 export default ExaminerRoutes;

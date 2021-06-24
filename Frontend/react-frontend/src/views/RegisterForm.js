@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
 import TiltPhaseSix from "../components/TiltPhaseSix";
-import { Link } from 'react-router-dom'
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Radio from '@material-ui/core/Radio';
-import '../css/util.css';
-import '../css/main.css';
-import '../css/register.css';
-import logo from '../images/examify.png';
+import { Link } from "react-router-dom";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import "../css/util.css";
+import "../css/main.css";
+import "../css/register.css";
+import logo from "../images/examify.png";
 
 class Register extends Component {
   constructor(props) {
@@ -44,13 +44,17 @@ class Register extends Component {
 
   updateuserType = (e) => {
     const { user } = this.state;
-    this.setState({
-      user: {
-        ...user,
-        user_type: e.target.value,
+    this.setState(
+      {
+        user: {
+          ...user,
+          user_type: e.target.value,
+        },
       },
-    },function () {
-      console.log(this.state) });
+      function() {
+        console.log(this.state);
+      }
+    );
   };
 
   handleSubmit(event) {
@@ -168,21 +172,40 @@ class Register extends Component {
                       <i className="fa fa-envelope" aria-hidden="true" />
                     </span>
                   </div>{" "}
-                  <FormControl className = "form" width="auto" component="fieldset" id="user-selection" value={this.value} onChange={this.updateuserType}>
-                  <FormLabel component="legend">Sign up as</FormLabel>
-                  <RadioGroup row aria-label="user-type" name="user-type">
-                    <FormControlLabel value="1" control={<Radio color = "primary" />} label="Student" />
-                    <FormControlLabel value="2" control={<Radio color = "primary" />} label="Examiner" />
-                    <FormControlLabel value="3" control={<Radio color = "primary" />} label="Proctor" />
-                  </RadioGroup>
-                </FormControl>
+                  <FormControl
+                    className="form"
+                    width="auto"
+                    component="fieldset"
+                    id="user-selection"
+                    value={this.value}
+                    onChange={this.updateuserType}
+                  >
+                    <FormLabel component="legend">Sign up as</FormLabel>
+                    <RadioGroup row aria-label="user-type" name="user-type">
+                      <FormControlLabel
+                        value="1"
+                        control={<Radio color="primary" />}
+                        label="Student"
+                      />
+                      <FormControlLabel
+                        value="2"
+                        control={<Radio color="primary" />}
+                        label="Examiner"
+                      />
+                      <FormControlLabel
+                        value="3"
+                        control={<Radio color="primary" />}
+                        label="Proctor"
+                      />
+                    </RadioGroup>
+                  </FormControl>
                   <div className="container-login100-form-btn">
                     <button className="login100-form-btn" type="submit">
                       Sign up
                     </button>
                   </div>
                   <div className="text-center p-t-136">
-                    <Link to="/login">Already have an account?</Link>
+                    Already have an account? <Link to="/login">Sign In</Link>
                   </div>
                 </form>
               </div>

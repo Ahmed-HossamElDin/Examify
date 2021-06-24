@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import TiltPhaseSix from "../components/TiltPhaseSix";
 import logo from "../images/examify.png";
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect } from "react-router-dom";
 import "../css/main.css";
 import "../css/util.css";
 import axios from "axios";
 
 export default class loginForm extends Component {
   state = {
-    user: { username: "", res: "", key: "", error: "",type: ""},
+    user: { username: "", res: "", key: "", error: "", type: "" },
     details: {
       username: "",
       password: "",
@@ -31,7 +31,9 @@ export default class loginForm extends Component {
           },
         });
         this.confirmLogin(details);
-        console.log(res);
+        localStorage.setItem("ExamifyToken", res.data.key);
+        localStorage.setItem("ExamifyUserType", res.data.user_type);
+        localStorage.setItem("ExamifyUsername", details.username);
       })
       .catch((error) => {
         var n = error.toString().includes("400");
@@ -98,10 +100,16 @@ export default class loginForm extends Component {
     return (
       <div>
         {this.state.user.key ? (
-          <Redirect to={{
-            pathname: "/dashboard",
-            state: { username: this.state.user.username, key: this.state.user.key, usertype: this.state.user.type}
-          }} />
+          <Redirect
+            to={{
+              pathname: "/dashboard",
+              state: {
+                username: this.state.user.username,
+                key: this.state.user.key,
+                usertype: this.state.user.type,
+              },
+            }}
+          />
         ) : (
           <div className="limiter">
             <div className="container-login100">
@@ -166,22 +174,19 @@ export default class loginForm extends Component {
                     </div>
 
                     <div className="text-center p-t-12">
-                    <Link
-                      to='#'
-                    >Forgot username / password ? 
-
-                    </Link>
+                      <Link to="#">Forgot username / password ?</Link>
                     </div>
 
                     <div className="text-center p-t-136">
-                    <Link
-                      to='/register'
-                    >Register 
+                      Don't have an account yet?
+                      <Link to="/register">
+                        {" "}
+                        Sign up
                         <i
                           className="fa fa-long-arrow-right m-l-5"
                           aria-hidden="true"
                         ></i>
-                    </Link>
+                      </Link>
                     </div>
                   </div>
                 </form>

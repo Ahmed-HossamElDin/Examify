@@ -15,7 +15,7 @@ import ExaminerRoutes from "../routes/ExaminerRoutes.js";
 
 import StudentRoutes from "../routes/StudentRoutes.js";
 
-import ProctorRoutes from "../routes/ProctorRoutes.js";
+import SupervisorRoutes from "../routes/SupervisorRoutes.js";
 
 import styles from "../js/adminStyle.js";
 
@@ -23,8 +23,8 @@ var ps;
 
 var routes;
 
-var userType = 2;
-
+var userType = localStorage.getItem("ExamifyUserType");
+var username = localStorage.getItem("ExamifyUsername");
 const useStyles = makeStyles(styles);
 
 export default function Dashboard(props) {
@@ -38,7 +38,9 @@ export default function Dashboard(props) {
   const [bgColor, setBgColor] = React.useState("white");
   // const [hasImage, setHasImage] = React.useState(true);
   const [fixedClasses, setFixedClasses] = React.useState("dropdown");
-  const [logo, setLogo] = React.useState(require("../images/examify-logo.png").default);
+  const [logo, setLogo] = React.useState(
+    require("../images/examify-logo.png").default
+  );
   // styles
   const classes = useStyles();
   const mainPanelClasses =
@@ -47,18 +49,18 @@ export default function Dashboard(props) {
     cx({
       [classes.mainPanelSidebarMini]: miniActive,
       [classes.mainPanelWithPerfectScrollbar]:
-        navigator.platform.indexOf("Win") > -1
+        navigator.platform.indexOf("Win") > -1,
     });
   //routes
-  switch(userType) {
+  switch (userType) {
     case 1:
       routes = ExaminerRoutes;
       break;
     case 2:
       routes = StudentRoutes;
       break;
-      case 3:
-      routes = ProctorRoutes;
+    case 3:
+      routes = SupervisorRoutes;
       break;
     default:
       routes = ExaminerRoutes;
@@ -70,7 +72,7 @@ export default function Dashboard(props) {
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
-        suppressScrollY: false
+        suppressScrollY: false,
       });
       document.body.style.overflow = "hidden";
     }
@@ -91,7 +93,7 @@ export default function Dashboard(props) {
   const getRoute = () => {
     return window.location.pathname !== "/dashboard/full-screen-maps";
   };
-  const getActiveRoute = routes => {
+  const getActiveRoute = (routes) => {
     let activeRoute = "Examify";
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
@@ -109,7 +111,7 @@ export default function Dashboard(props) {
     }
     return activeRoute;
   };
-  const getRoutes = routes => {
+  const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
@@ -122,7 +124,7 @@ export default function Dashboard(props) {
             component={prop.component}
             key={key}
             token="b9bb864dbd489d8b714a2211cc32aa78697a6adb"
-            view = {true}
+            view={true}
           />
         );
       } else {
@@ -150,13 +152,12 @@ export default function Dashboard(props) {
         color={color}
         bgColor={bgColor}
         miniActive={miniActive}
-        username = "ramzyexaminer"
-        key = "test"
-        usertype = "1"
+        username={username}
+        key="test"
+        usertype="1"
         {...rest}
       />
       <div className={mainPanelClasses} ref={mainPanel}>
-
         {getRoute() ? (
           <div className={classes.content}>
             <div className={classes.container}>
@@ -174,7 +175,6 @@ export default function Dashboard(props) {
             </Switch>
           </div>
         )}
-        
       </div>
     </div>
   );

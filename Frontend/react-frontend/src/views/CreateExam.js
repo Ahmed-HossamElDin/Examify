@@ -9,13 +9,12 @@ import {
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import axios from "axios";
-import CreateQuestion from "../components/CreateQuestion.js";
+import CreateQuestion from "../components/CreateQuestion";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import AddIcon from "@material-ui/icons/Add";
-import AddStudents from "../components/AddStudent.js";
-import AddSupervisors from "../components/AddSupervisors.js";
+import AddStudents from "../components/AddStudent";
+import AddSupervisors from "../components/AddSupervisors";
 import DoneIcon from "@material-ui/icons/Done";
-import "../css/examiner-component.css";
 var loading = false;
 
 export default class CreateExam extends Component {
@@ -25,6 +24,7 @@ export default class CreateExam extends Component {
         .concat("T")
         .substr(0, 11)
         .concat(this.state.time.toISOString().split("T")[1]),
+      token: localStorage.getItem("ExamifyToken"),
     });
   }
   state = {
@@ -41,13 +41,7 @@ export default class CreateExam extends Component {
     loading: false,
     token: "",
   };
-  constructor(props) {
-    super(props);
-    this.state = {
-      ...this.state,
-      token: props.token,
-    };
-  }
+
   render() {
     const handleDateChange = (date) => {
       if (
@@ -140,7 +134,7 @@ export default class CreateExam extends Component {
     };
 
     return (
-      <div  className="examiner-component" style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center" }}>
         <TextField
           size="small"
           required

@@ -4,19 +4,22 @@ import { Alert } from "@material-ui/lab";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
-import ViewExams from "./ViewExams.js";
+import ListExams from "./ListExams";
 import axios from "axios";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Exam from "../components/Exam.js";
-import "../css/examiner-component.css";
+import Exam from "../components/Exam";
 
 var updated = false;
 export default class EditExam extends Component {
+  componentDidMount() {
+    this.setState({ token: localStorage.getItem("ExamifyToken") });
+  }
   state = {
     id: 0,
     exam: [],
     mountComponent: false,
+    token: "",
   };
   render() {
     const handleID = (e) => {
@@ -31,12 +34,11 @@ export default class EditExam extends Component {
         .get(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/`,
           {
-            headers: { Authorization: "Token " + "b9bb864dbd489d8b714a2211cc32aa78697a6adb" },
+            headers: { Authorization: "Token " + this.state.token },
           }
         )
         .then((res) => {
           this.setState({ exam: res.data, mountComponent: true });
-          console.log(res, "REEEEES");
           this.forceUpdate();
         });
     };
@@ -45,20 +47,36 @@ export default class EditExam extends Component {
         .delete(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/`,
           {
-            headers: { Authorization: "Token " + "b9bb864dbd489d8b714a2211cc32aa78697a6adb" },
+            headers: { Authorization: "Token " + this.state.token },
           }
         )
         .then((updated = true), this.forceUpdate());
     };
 
     return (
-      <div className="examiner-component">
-        <ViewExams token="b9bb864dbd489d8b714a2211cc32aa78697a6adb" view={false} />{" "}
+      <div>
+        <ListExams token={this.state.token} view={false} />{" "}
         {updated && (
           <Alert severity="success">
             Exam with ID :{this.state.id} Deleted successfully!
           </Alert>
         )}
+        {this.state.mountComponent === true ? (
+          <div style={{ textAlign: "center" }}>
+            {" "}
+            <Exam exam={this.state.exam} token={this.state.token} />
+          </div>
+        ) : (
+          <div></div>
+        )}{" "}
+        {this.state.mountComponent === true ? (
+          <div style={{ textAlign: "center" }}>
+            {" "}
+            <Exam exam={this.state.exam} token={this.state.token} />
+          </div>
+        ) : (
+          <div></div>
+        )}{" "}
         <CardContent>
           <CardActions>
             <TextField
@@ -81,19 +99,10 @@ export default class EditExam extends Component {
               startIcon={<DeleteIcon />}
               onClick={deleteExam}
             >
-              Delete
+              Delete Exam
             </Button>
           </CardActions>
-        </CardContent>{" "}
-        {this.state.mountComponent === true ? (
-          <div style={{ float: "left" }}>
-            {" "}
-            <Exam exam={this.state.exam} token = "b9bb864dbd489d8b714a2211cc32aa78697a6adb" />
-            {console.log(this.state.exam)}
-          </div>
-        ) : (
-          <div></div>
-        )}
+        </CardContent>
       </div>
     );
   }

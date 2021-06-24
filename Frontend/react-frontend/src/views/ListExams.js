@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { DataGrid } from "@material-ui/data-grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import ViewAllowed from "../components/ViewAllowed.js";
-import "../css/examiner-component.css";
+import ViewAllowed from "../components/ViewAllowed";
+import Card from "@material-ui/core/Card";
 
 const columns = [
   {
@@ -22,27 +22,25 @@ const columns = [
 
   {
     field: "exam_duration",
-    headerName: "Exam Duration",
-    width: 160,
+    headerName: "Exam Duration (hours)",
+    width: 230,
     type: "number",
   },
   {
     field: "exam_startdate",
     headerName: "Exam start date and time",
-    width: 230,
+    width: 260,
     type: "dateTime",
   },
 ];
 
 export default class ListExams extends Component {
   componentDidMount() {
-    //console.log("Key is : ");
-    //console.log(this.state);
     axios
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/`,
         {
-          headers: { Authorization: "Token " + "b9bb864dbd489d8b714a2211cc32aa78697a6adb" },
+          headers: { Authorization: "Token " + this.state.token },
         }
       )
       .then((res) => {
@@ -51,7 +49,7 @@ export default class ListExams extends Component {
   }
   constructor(props) {
     super(props);
-    this.state = { ...this.state, token: "b9bb864dbd489d8b714a2211cc32aa78697a6adb" };
+    this.state = { ...this.state, token: localStorage.getItem("ExamifyToken") };
   }
   state = {
     exams: [],
@@ -64,13 +62,23 @@ export default class ListExams extends Component {
     }
 
     return (
-      <div>
+      <div
+        style={{
+          margin: "auto",
+          top: "0",
+          bottom: "0",
+          left: "0",
+          right: "0",
+        }}
+      >
         {rows.length > 0 ? (
-          <div style={{ height: 630, width: 700 }}>
+          <div style={{ height: 630, width: 830 }}>
             <DataGrid rows={rows} columns={columns} pageSize={10} />
             {console.log(rows, "rows")}
-            {true ? (
-              <ViewAllowed token="b9bb864dbd489d8b714a2211cc32aa78697a6adb" />
+            {this.props.view === true ? (
+              <Card>
+                <ViewAllowed token={this.state.token} />{" "}
+              </Card>
             ) : (
               <div></div>
             )}

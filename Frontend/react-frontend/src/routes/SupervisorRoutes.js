@@ -2,7 +2,7 @@ import Placeholder from "../views/placeholder.js";
 
 import DashboardIcon from "@material-ui/icons/Dashboard";
 
-var StudentRoutes = [
+var SupervisorRoutes = [
   {
     path: "/home",
     name: "Home",
@@ -12,4 +12,4 @@ var StudentRoutes = [
     layout: "/dashboard",
   },
 ];
-export default StudentRoutes;
+export default SupervisorRoutes;
