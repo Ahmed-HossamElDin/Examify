@@ -20,7 +20,7 @@ export default class StudentExamList extends Component {
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/student/dashboard/`,
         {
           headers: {
-            Authorization: "Token " + this.props.token,
+            Authorization: "Token " + localStorage.getItem("ExamifyToken"),
           },
         }
       )

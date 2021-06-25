@@ -57,17 +57,18 @@ export default function Dashboard(props) {
         navigator.platform.indexOf("Win") > -1,
     });
   //routes
-  switch (userType) {
-    case 1:
+  switch (parseInt(userType)) {
+    case 2:
       routes = ExaminerRoutes;
       break;
-    case 2:
+    case 1:
       routes = StudentRoutes;
       break;
     case 3:
       routes = SupervisorRoutes;
       break;
     default:
+      console.log(typeof parseInt(userType), "sadasdsad");
       routes = ExaminerRoutes;
   }
   // ref for main panel div
@@ -128,8 +129,6 @@ export default function Dashboard(props) {
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
-            token="b9bb864dbd489d8b714a2211cc32aa78697a6adb"
-            view={true}
           />
         );
       } else {
