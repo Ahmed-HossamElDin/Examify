@@ -28,8 +28,8 @@ const useStyles = makeStyles(styles);
 export default function Dashboard(props) {
   //console.log(props.state);
   const { ...rest } = props;
-  const [username, setUsername] = React.useState(0);
-  const [userType, setUserType] = React.useState(1);
+  const [username, setUsername] = React.useState("");
+  const [userType, setUserType] = React.useState(0);
 
   React.useEffect(() => {
     setUsername(localStorage.getItem("ExamifyUsername"));
