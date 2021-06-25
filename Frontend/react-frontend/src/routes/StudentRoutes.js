@@ -1,6 +1,5 @@
-import Placeholder from "../views/placeholder.js";
-
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import StudentExamList from "../views/StudentExamList.js";
 
 var StudentRoutes = [
   {
@@ -8,7 +7,7 @@ var StudentRoutes = [
     name: "Home",
     rtlName: "لوحة القيادة",
     icon: DashboardIcon,
-    component: Placeholder,
+    component: StudentExamList,
     layout: "/dashboard",
   },
 ];

@@ -23,13 +23,18 @@ var ps;
 
 var routes;
 
-var userType = localStorage.getItem("ExamifyUserType");
-var username = localStorage.getItem("ExamifyUsername");
 const useStyles = makeStyles(styles);
 
 export default function Dashboard(props) {
   //console.log(props.state);
   const { ...rest } = props;
+  const [username, setUsername] = React.useState(0);
+  const [userType, setUserType] = React.useState(1);
+
+  React.useEffect(() => {
+    setUsername(localStorage.getItem("ExamifyUsername"));
+    setUserType(localStorage.getItem("ExamifyUserType"));
+  });
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [miniActive, setMiniActive] = React.useState(true);
@@ -153,8 +158,6 @@ export default function Dashboard(props) {
         bgColor={bgColor}
         miniActive={miniActive}
         username={username}
-        key="test"
-        usertype="1"
         {...rest}
       />
       <div className={mainPanelClasses} ref={mainPanel}>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import Button from "@material-ui/core/Button";
-import TakeExam from "./TakeExam";
+import TakeExam from "../components/TakeExam";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 export default class StudentExamList extends Component {
