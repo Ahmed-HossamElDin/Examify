@@ -146,6 +146,7 @@ export default class TakeExam extends Component {
                 >
                   Start Exam
                 </Button>
+                <br />
               </p>
             </Jumbotron>{" "}
             {}

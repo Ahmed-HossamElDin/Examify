@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 import Button from "@material-ui/core/Button";
 import TakeExam from "../components/TakeExam";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class StudentExamList extends Component {
   state = {
@@ -121,6 +122,7 @@ export default class StudentExamList extends Component {
           exam_startdate={this.state.exam_startdate}
           exam_duration={this.state.exam_duration}
           goBack={this.goBack}
+          token={localStorage.getItem("ExamifyToken")}
         />
       </div>
     );

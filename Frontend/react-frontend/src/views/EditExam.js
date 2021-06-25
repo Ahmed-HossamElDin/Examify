@@ -10,8 +10,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Exam from "../components/Exam";
 
-
-
 var updated = false;
 export default class EditExam extends Component {
   componentDidMount() {
@@ -56,7 +54,7 @@ export default class EditExam extends Component {
     };
 
     return (
-      <div>
+      <div style={{ marginLeft: 150, marginRight: 20 }}>
         <ListExams token={this.state.token} view={false} />{" "}
         {updated && (
           <Alert severity="success">

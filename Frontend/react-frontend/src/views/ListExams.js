@@ -5,7 +5,6 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import ViewAllowed from "../components/ViewAllowed";
 import Card from "@material-ui/core/Card";
 
-
 const columns = [
   {
     field: "id",
@@ -63,15 +62,7 @@ export default class ListExams extends Component {
     }
 
     return (
-      <div
-        style={{
-          margin: "auto",
-          top: "0",
-          bottom: "0",
-          left: "0",
-          right: "0",
-        }}
-      >
+      <div style={{ marginLeft: 150, marginRight: 20 }}>
         {rows.length > 0 ? (
           <div style={{ height: 630, width: 830 }}>
             <DataGrid rows={rows} columns={columns} pageSize={10} />
