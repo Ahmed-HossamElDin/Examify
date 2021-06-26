@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TiltPhaseSix from "../components/TiltPhaseSix";
+import TiltPhaseSix from "../components/TiltImage";
 import logo from "../images/examify.png";
 import { Link, Redirect } from "react-router-dom";
 import "../css/main.css";

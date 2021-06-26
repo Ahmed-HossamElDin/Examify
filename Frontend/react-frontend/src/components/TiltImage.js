@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { findDOMNode } from "react-dom";
-class TiltPhaseSix extends Component {
+class TiltImage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -159,4 +159,4 @@ class TiltPhaseSix extends Component {
     );
   }
 }
-export default TiltPhaseSix;
+export default TiltImage;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import TiltPhaseSix from "../components/TiltPhaseSix";
+import TiltPhaseSix from "../components/TiltImage";
 import { Link } from "react-router-dom";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
