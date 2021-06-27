@@ -146,9 +146,9 @@ export default class TakeExam extends Component {
                 >
                   Start Exam
                 </Button>
-                <br />
               </p>
             </Jumbotron>{" "}
+            <br />
             {Object.keys(this.state.questions).length > 0 ? (
               ((counter = 0),
               (
