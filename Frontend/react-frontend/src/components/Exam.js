@@ -33,6 +33,9 @@ export default class Exam extends Component {
       exam_id: props.exam.id,
     };
   }
+  componentDidMount() {
+    counter = 0;
+  }
   state = {
     date: new Date().toISOString().slice(0, 10),
     time: new Date(),
@@ -90,6 +93,7 @@ export default class Exam extends Component {
       return deleted;
     };
     const getQuestions = () => {
+      counter = 0;
       axios
         .get(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam.id}/`,
@@ -121,6 +125,7 @@ export default class Exam extends Component {
     };
     const ShowAddStudent = () => {
       editAllowedStudents = true;
+      counter = 0;
       this.forceUpdate();
     };
     return (
