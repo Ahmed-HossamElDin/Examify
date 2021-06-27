@@ -96,7 +96,6 @@ export default class ViewAllowed extends Component {
         )
         .then((res) => {
           this.setState({ attendance: res.data });
-          console.log(this.state.attendance, "REEEEES");
         });
     };
     const handleViewStudent = () => {
@@ -108,10 +107,7 @@ export default class ViewAllowed extends Component {
           }
         )
         .then((res) => {
-          this.setState(
-            { students: res.data.student.sort() },
-            console.log(res)
-          );
+          this.setState({ students: res.data.student.sort() });
         });
     };
     const handleViewSupervisors = () => {
@@ -123,10 +119,7 @@ export default class ViewAllowed extends Component {
           }
         )
         .then((res) => {
-          this.setState(
-            { supervisors: res.data },
-            console.log(this.state.supervisors)
-          );
+          this.setState({ supervisors: res.data });
         });
     };
     const handleGetMarks = () => {
@@ -139,16 +132,12 @@ export default class ViewAllowed extends Component {
         )
         .then((res) => {
           this.setState({ marks: res.data });
-          console.log(
-            res.data,
-            "SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
-          );
+
           finalMarks = res.data;
           finalMarks = finalMarks.map((key) => {
             delete key.id;
             exportex.push(key);
           });
-          console.log(exportex);
         });
     };
     const ShowExamInfo = () => {
@@ -266,7 +255,6 @@ export default class ViewAllowed extends Component {
                     columns={marks}
                     pageSize={10}
                   />
-                  {console.log(this.state.marks)}
                   <br />
                 </div>
               ) : (
