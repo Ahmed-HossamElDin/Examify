@@ -466,3 +466,7 @@ iframe {
 .form {
   font-size: 10px;
 }
+
+.text-size-reset {
+  font-size: 20px;
+}

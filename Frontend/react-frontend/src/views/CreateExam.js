@@ -187,7 +187,7 @@ export default class CreateExam extends Component {
     };
 
     return (
-      <div style={{ textAlign: "center" }}>
+      <div className='text-size-reset' style={{ textAlign: "center" }}>
         <TextField
           size="small"
           required
