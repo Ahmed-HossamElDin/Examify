@@ -149,6 +149,7 @@ class TiltImage extends Component {
     };
     return (
       <div
+        className='login100-pic'
         style={style}
         onMouseEnter={this.handleMouseEnter}
         onMouseMove={this.handleMouseMove}
