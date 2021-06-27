@@ -149,49 +149,51 @@ export default class TakeExam extends Component {
                 <br />
               </p>
             </Jumbotron>{" "}
-            {}
+            {Object.keys(this.state.questions).length > 0 ? (
+              ((counter = 0),
+              (
+                <div>
+                  {Object.entries(this.state.questions).map((question) => {
+                    counter = counter + 1;
+                    return (
+                      <StudentExam
+                        key={question[0]}
+                        question={question}
+                        counter={counter}
+                        exam_id={163}
+                        handleAnswer={this.handleAnswer}
+                      />
+                    );
+                  })}{" "}
+                  <Button
+                    style={{ marginBottom: 20 }}
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    onClick={this.handleSubmit}
+                    startIcon={
+                      this.state.submit ? (
+                        <CircularProgress size={20} color="secondary" />
+                      ) : (
+                        <div></div>
+                      )
+                    }
+                    disabled={this.state.submit || submitted}
+                  >
+                    {this.state.submit === false && success !== true
+                      ? "Submit"
+                      : success === true
+                      ? "Submitted Successfully"
+                      : "Submitting..."}
+                  </Button>
+                </div>
+              ))
+            ) : (
+              <div></div>
+            )}{" "}
             {this.state.checked ? (
               <div style={{ position: "sticky", top: 0 }}>
                 <CountdownTimer duration={this.state.exam_duration * 60 * 60} />
-              </div>
-            ) : (
-              <div></div>
-            )}
-            {Object.keys(this.state.questions).length > 0 ? (
-              <div>
-                {Object.entries(this.state.questions).map((question) => {
-                  counter = counter + 1;
-                  return (
-                    <StudentExam
-                      key={question[0]}
-                      question={question}
-                      counter={counter}
-                      exam_id={163}
-                      handleAnswer={this.handleAnswer}
-                    />
-                  );
-                })}{" "}
-                <Button
-                  style={{ marginBottom: 20 }}
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  onClick={this.handleSubmit}
-                  startIcon={
-                    this.state.submit ? (
-                      <CircularProgress size={20} color="secondary" />
-                    ) : (
-                      <div></div>
-                    )
-                  }
-                  disabled={this.state.submit || submitted}
-                >
-                  {this.state.submit === false && success !== true
-                    ? "Submit"
-                    : success === true
-                    ? "Submitted Successfully"
-                    : "Submitting..."}
-                </Button>
               </div>
             ) : (
               <div></div>
