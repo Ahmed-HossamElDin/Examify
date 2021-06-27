@@ -34,6 +34,7 @@ export default class Exam extends Component {
     };
   }
   componentDidMount() {
+    clicked = false;
     counter = 0;
   }
   state = {

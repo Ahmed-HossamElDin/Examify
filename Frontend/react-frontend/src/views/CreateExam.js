@@ -15,7 +15,8 @@ import AddIcon from "@material-ui/icons/Add";
 import AddStudents from "../components/AddStudent";
 import AddSupervisors from "../components/AddSupervisors";
 import DoneIcon from "@material-ui/icons/Done";
-
+import Tooltip from "@material-ui/core/Tooltip";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 var loading = false;
 var dateError = false;
 var timeError = false;
@@ -82,7 +83,7 @@ export default class CreateExam extends Component {
     date: new Date().toISOString().slice(0, 10),
     time: new Date(),
     date_time: "",
-    exam_duration: 0,
+    exam_duration: "",
     exam_name: "exam_name",
     exam_id: null,
     disable: false,
@@ -151,9 +152,15 @@ export default class CreateExam extends Component {
       this.setState({ loading: true }, handlePromise);
     };
     const handleDurationChange = (e) => {
-      this.setState({
-        exam_duration: e.target.value,
-      });
+      if (e.target.value > 5) {
+        this.setState({
+          exam_duration: 5,
+        });
+      } else {
+        this.setState({
+          exam_duration: e.target.value,
+        });
+      }
     };
     const handlePromise = () => {
       axios
@@ -187,7 +194,7 @@ export default class CreateExam extends Component {
     };
 
     return (
-      <div className='text-size-reset' style={{ textAlign: "center" }}>
+      <div className="text-size-reset" style={{ textAlign: "center" }}>
         <TextField
           size="small"
           required
@@ -232,8 +239,16 @@ export default class CreateExam extends Component {
           id="standard-required"
           label="Duration in hours"
           onChange={handleDurationChange}
+          value={this.state.exam_duration}
           error={isNaN(this.state.exam_duration)}
-        />
+        />{" "}
+        <Tooltip
+          style={{ float: "bottom" }}
+          title="Max duration for an Exam is 5 hours"
+          interactive
+        >
+          <InfoOutlinedIcon />
+        </Tooltip>
         <br /> <br />
         <Button
           variant="contained"
