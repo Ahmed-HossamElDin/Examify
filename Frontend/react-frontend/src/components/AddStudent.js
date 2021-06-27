@@ -10,7 +10,7 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { ExcelRenderer } from "react-excel-renderer";
 
 var success = false;
-
+var loading = false;
 export default class AddStudents extends Component {
   componentDidMount() {
     if (this.props.edit) {
@@ -54,7 +54,7 @@ export default class AddStudents extends Component {
       });
     };
     const handleAllowedStudentsArray = () => {
-      console.log(this.state.allowedStudents);
+      this.setState({ ...this.state, loading: true });
       if (this.state.allowedStudents.includes(",")) {
         console.log("sadsadsadsa3");
 
@@ -69,8 +69,6 @@ export default class AddStudents extends Component {
           handleSubmit
         );
       } else if (this.state.allowedStudents.includes(" ")) {
-        console.log("sadsadsadsa2");
-
         this.setState(
           {
             ...this.state,
@@ -84,7 +82,10 @@ export default class AddStudents extends Component {
       } else if (this.state.allowedStudents.includes("\n")) {
         console.log(
           "sadsadsadsa",
-          this.state.allowedStudents.replace(/\n/g, " ").trim().split(" ")
+          this.state.allowedStudents
+            .replace(/\n/g, " ")
+            .trim()
+            .split(" ")
         );
         this.setState(
           {
@@ -111,7 +112,8 @@ export default class AddStudents extends Component {
           }
         )
         .then((res) => {
-          this.forceUpdate()((success = true));
+          success = true;
+          this.setState({ ...this.state, loading: false });
         })
         .catch(() => {
           this.setState({
@@ -235,11 +237,19 @@ export default class AddStudents extends Component {
             <Button
               variant="contained"
               color="primary"
-              startIcon={<AddIcon />}
+              startIcon={
+                this.state.loading ? (
+                  <CircularProgress size={20} color="secondary" />
+                ) : (
+                  <AddIcon />
+                )
+              }
               onClick={handleSubmit}
               disabled={this.state.allowedStudents.length === 0 ? true : false}
             >
-              Upload and add students
+              {this.state.loading
+                ? "Uploading and Adding students..."
+                : "  Upload and add students"}
             </Button>{" "}
           </div>
         ) : (
