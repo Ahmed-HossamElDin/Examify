@@ -73,7 +73,7 @@ export default class ListExams extends Component {
               </Card>
             ) : (
               <div></div>
-            )}
+            )}{" "}
           </div>
         ) : (
           <div>

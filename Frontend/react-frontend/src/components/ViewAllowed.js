@@ -7,7 +7,9 @@ import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
 import { DataGrid } from "@material-ui/data-grid";
 import Alert from "react-bootstrap/Alert";
-
+import { ExportToExcel } from "../components/Download";
+var finalMarks = [];
+var exportex = [];
 const columns = [
   {
     field: "student_name",
@@ -136,7 +138,17 @@ export default class ViewAllowed extends Component {
           }
         )
         .then((res) => {
-          this.setState({ marks: res.data }, console.log(this.state.marks));
+          this.setState({ marks: res.data });
+          console.log(
+            res.data,
+            "SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
+          );
+          finalMarks = res.data;
+          finalMarks = finalMarks.map((key) => {
+            delete key.id;
+            exportex.push(key);
+          });
+          console.log(exportex);
         });
     };
     const ShowExamInfo = () => {
@@ -171,6 +183,10 @@ export default class ViewAllowed extends Component {
             >
               View exam Details{" "}
             </Button>{" "}
+            <ExportToExcel
+              apiData={exportex}
+              fileName={this.state.id + "_Marks"}
+            />
           </CardActions>
         </CardContent>
         <CardContent>

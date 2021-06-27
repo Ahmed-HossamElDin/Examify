@@ -95,7 +95,7 @@ export default class EditExam extends Component {
               Delete Exam
             </Button>
           </CardActions>
-        </CardContent>
+        </CardContent>{" "}
       </div>
     );
   }
