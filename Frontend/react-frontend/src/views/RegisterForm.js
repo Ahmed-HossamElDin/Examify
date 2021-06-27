@@ -208,7 +208,7 @@ class Register extends Component {
                         Sign up
                       </button>
                     </div>
-                    <div className="text-center p-t-136">
+                    <div className="text-center p-t-60">
                       Already have an account? <Link to="/login">Sign In</Link>
                     </div>
                   </form>
