@@ -17,7 +17,57 @@ import AddSupervisors from "../components/AddSupervisors";
 import DoneIcon from "@material-ui/icons/Done";
 
 var loading = false;
+var dateError = false;
+var timeError = false;
+var timeToday = false;
+var timeIf = false;
+function validateDate(date) {
+  let today = new Date();
+  var year = today.getFullYear();
+  var month = today.getMonth() + 1;
+  var day = today.getDate();
+  let examStartDate = new Date(date);
+  var selectedYear = examStartDate.getFullYear();
+  var selectedMonth = examStartDate.getMonth() + 1;
+  var selectedDay = examStartDate.getDate();
+  if (selectedYear === year && selectedMonth === month && selectedDay === day) {
+    timeToday = true;
+    timeIf = true;
+  } else {
+    timeToday = false;
+    timeIf = false;
+    timeError = false;
+  }
 
+  if (selectedYear >= year) {
+    if (selectedMonth >= month) {
+      if (selectedDay >= day) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+function validateTime(time) {
+  let Time = new Date();
+  var hour = Time.getHours();
+  var minutes = Time.getMinutes();
+  var selectedHour = time.getHours();
+  var selectedMinutes = time.getMinutes();
+  if (timeIf) {
+    if (selectedHour >= hour) {
+      if (selectedMinutes >= minutes) {
+        timeToday = false;
+        return false;
+      }
+    }
+  } else {
+    timeToday = false;
+    return false;
+  }
+  timeToday = false;
+  return true;
+}
 export default class CreateExam extends Component {
   componentDidMount() {
     this.setState({
@@ -45,6 +95,7 @@ export default class CreateExam extends Component {
 
   render() {
     const handleDateChange = (date) => {
+      dateError = validateDate(date);
       if (
         this.state.date_time.includes("Z") &&
         this.state.date_time.includes("T")
@@ -65,6 +116,7 @@ export default class CreateExam extends Component {
       }
     };
     const handleTimeChange = (time) => {
+      timeError = validateTime(time);
       time = new Date(time);
       if (this.state.date_time.includes("Z")) {
         this.setState({
@@ -159,17 +211,19 @@ export default class CreateExam extends Component {
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
+            error={dateError}
           />{" "}
           <KeyboardTimePicker
             margin="normal"
             id="time-picker"
             label="Pick the time"
-            value={this.state.time}
+            value={timeToday ? new Date() : this.state.time}
             onChange={handleTimeChange}
             required
             KeyboardButtonProps={{
               "aria-label": "change time",
             }}
+            error={timeError}
           />
         </MuiPickersUtilsProvider>{" "}
         <br />
@@ -201,7 +255,9 @@ export default class CreateExam extends Component {
             this.state.exam_duration === 0 ||
             this.state.exam_name === "exam_name" ||
             this.state.exam_name === "" ||
-            this.state.exam_duration === ""
+            this.state.exam_duration === "" ||
+            dateError ||
+            timeError
           }
           onClick={handleSubmit}
         >
