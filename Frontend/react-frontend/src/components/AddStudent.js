@@ -119,6 +119,7 @@ export default class AddStudents extends Component {
           this.setState({
             ...this.state,
             error: `Error adding students!`,
+            loading: false,
           });
         });
     };

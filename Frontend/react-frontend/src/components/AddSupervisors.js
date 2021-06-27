@@ -38,10 +38,12 @@ export default class AddSupervisors extends Component {
       });
     };
     const handleAllowedSupervisorsArray = () => {
-      console.log(this.state.allowedSupervisors);
-      if (this.state.allowedSupervisors.includes(",")) {
-        console.log("sadsadsadsa3");
+      this.setState({
+        ...this.state,
+        loading: true,
+      });
 
+      if (this.state.allowedSupervisors.includes(",")) {
         this.setState(
           {
             ...this.state,
@@ -53,8 +55,6 @@ export default class AddSupervisors extends Component {
           handleSubmit
         );
       } else if (this.state.allowedSupervisors.includes(" ")) {
-        console.log("sadsadsadsa2");
-
         this.setState(
           {
             ...this.state,
@@ -66,10 +66,6 @@ export default class AddSupervisors extends Component {
           handleSubmit
         );
       } else if (this.state.allowedSupervisors.includes("\n")) {
-        console.log(
-          "sadsadsadsa",
-          this.state.allowedSupervisors.replace(/\n/g, " ").trim().split(" ")
-        );
         this.setState(
           {
             ...this.state,
@@ -83,9 +79,12 @@ export default class AddSupervisors extends Component {
       }
     };
     const handleSubmit = () => {
-      this.setState({ loading: true }, handleAllowedSupervisorsArray);
+      this.setState(
+        { ...this.state, loading: true },
+        handleAllowedSupervisorsArray
+      );
       axios
-        .patch(
+        .post(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.exam_id}/supervisors/`,
           {
             supervisor: this.state.allowedSupervisors,
@@ -95,12 +94,14 @@ export default class AddSupervisors extends Component {
           }
         )
         .then((res) => {
-          this.forceUpdate()((success = true));
+          success = true;
+          this.setState({ ...this.state, loading: false });
         })
         .catch(() => {
           this.setState({
             ...this.state,
             error: `Error adding supervisors!`,
+            loading: false,
           });
         });
       this.setState({ loading: false });
@@ -120,7 +121,6 @@ export default class AddSupervisors extends Component {
     const getData = () => {
       let result = [];
       ExcelRenderer(this.state.selectedFile, (err, resp) => {
-        console.log(this.state.allowedSupervisors);
         if (err) {
           console.log(err);
         } else {
@@ -142,7 +142,6 @@ export default class AddSupervisors extends Component {
 
     return (
       <div>
-        {console.log(this.state.allowedSupervisors)}
         {success === true ? (
           <div>
             {" "}
@@ -224,13 +223,21 @@ export default class AddSupervisors extends Component {
             <Button
               variant="contained"
               color="primary"
-              startIcon={<AddIcon />}
+              startIcon={
+                this.state.loading ? (
+                  <CircularProgress size={20} color="secondary" />
+                ) : (
+                  <AddIcon />
+                )
+              }
               onClick={handleSubmit}
               disabled={
                 this.state.allowedSupervisors.length === 0 ? true : false
               }
             >
-              Upload and add Supervisors
+              {this.state.loading
+                ? "Uploading and Adding supervisors..."
+                : "  Upload and add supervisors"}
             </Button>{" "}
           </div>
         ) : (

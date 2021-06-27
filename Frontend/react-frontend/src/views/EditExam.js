@@ -13,6 +13,7 @@ import Exam from "../components/Exam";
 var updated = false;
 export default class EditExam extends Component {
   componentDidMount() {
+    updated = false;
     this.setState({ token: localStorage.getItem("ExamifyToken") });
   }
   state = {
@@ -61,14 +62,6 @@ export default class EditExam extends Component {
             Exam with ID :{this.state.id} Deleted successfully!
           </Alert>
         )}
-        {this.state.mountComponent === true ? (
-          <div style={{ textAlign: "center" }}>
-            {" "}
-            <Exam exam={this.state.exam} token={this.state.token} />
-          </div>
-        ) : (
-          <div></div>
-        )}{" "}
         {this.state.mountComponent === true ? (
           <div style={{ textAlign: "center" }}>
             {" "}
