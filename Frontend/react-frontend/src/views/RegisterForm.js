@@ -184,19 +184,22 @@ class Register extends Component {
                       value={this.value}
                       onChange={this.updateuserType}
                     >
-                      <FormLabel component="legend">Sign up as</FormLabel>
-                      <RadioGroup row aria-label="user-type" name="user-type">
-                        <FormControlLabel
+                      <FormLabel className="form" component="legend">Sign up as</FormLabel>
+                      <RadioGroup className="form" row aria-label="user-type" name="user-type">
+                        <FormControlLabel 
+                          className="form"
                           value="1"
                           control={<Radio color="primary" />}
                           label="Student"
                         />
-                        <FormControlLabel
+                        <FormControlLabel  
+                          className="form"
                           value="2"
                           control={<Radio color="primary" />}
                           label="Examiner"
                         />
                         <FormControlLabel
+                          className="form"
                           value="3"
                           control={<Radio color="primary" />}
                           label="Proctor"
