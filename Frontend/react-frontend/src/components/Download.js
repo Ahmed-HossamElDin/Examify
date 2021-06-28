@@ -19,6 +19,7 @@ export const ExportToExcel = ({ apiData, fileName }) => {
 
   return (
     <Button
+      disabled={apiData.length !== 0 ? false : true}
       variant="contained"
       color="primary"
       startIcon={<CloudDownloadIcon />}
