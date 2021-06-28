@@ -6,7 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
 import { DataGrid } from "@material-ui/data-grid";
-import Alert from "react-bootstrap/Alert";
+import Alert from "@material-ui/lab/Alert";
 import { ExportToExcel } from "../components/Download";
 var finalMarks = [];
 var exportex = [];
@@ -95,6 +95,11 @@ export default class ViewAllowed extends Component {
           }
         )
         .then((res) => {
+          console.log(
+            res,
+            "attendance sheet REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES"
+          );
+
           this.setState({ attendance: res.data });
         });
     };
@@ -149,8 +154,14 @@ export default class ViewAllowed extends Component {
     };
     let rows = this.state.attendance;
     for (let i = 0; i < rows.length; i++) {
-      rows[i].enter_time = new Date(rows[i].enter_time.toString());
-      rows[i].submit_time = new Date(rows[i].submit_time.toString());
+      if (rows[i.enter_time !== null] && rows[i].submit_time === null) {
+        rows[i].enter_time = new Date(rows[i].enter_time.toString());
+      } else if (rows[i.enter_time === null] && rows[i].submit_time !== null) {
+        rows[i].submit_time = new Date(rows[i].submit_time.toString());
+      } else if (rows[i.enter_time !== null] && rows[i].submit_time !== null) {
+        rows[i].enter_time = new Date(rows[i].enter_time.toString());
+        rows[i].submit_time = new Date(rows[i].submit_time.toString());
+      }
     }
     return (
       <div>
@@ -185,11 +196,8 @@ export default class ViewAllowed extends Component {
               {" "}
               {this.state.students.length > 0 ? (
                 <div>
-                  <Alert variant="secondary">
-                    <Alert.Heading>
-                      Allowed Students: {this.state.students.length}
-                    </Alert.Heading>{" "}
-                    <hr />
+                  <Alert severity="info">
+                    Allowed Students: {this.state.students.length} <hr />
                     <TextField
                       id="outlined-multiline-static"
                       label="Allowed Students"
@@ -206,15 +214,15 @@ export default class ViewAllowed extends Component {
               ) : (
                 <div>
                   {" "}
-                  <Alert variant="info">
+                  <Alert severity="info">
                     This Exam Doesn't have any students!{" "}
                   </Alert>
                 </div>
               )}
               {this.state.attendance.length > 0 ? (
-                <Alert style={{ height: 396, width: 760 }} variant="secondary">
+                <div>
                   {" "}
-                  <Alert.Heading>Attendance Sheet</Alert.Heading> <hr />
+                  Attendance Sheet <hr />
                   <div style={{ height: 300, width: 735 }}>
                     {" "}
                     <DataGrid
@@ -224,11 +232,11 @@ export default class ViewAllowed extends Component {
                     />
                     <hr /> <br />
                   </div>{" "}
-                </Alert>
+                </div>
               ) : (
                 <div>
                   {" "}
-                  <Alert variant="info">This Exam Doesn't come yet! </Alert>
+                  <Alert severity="info">This Exam Doesn't come yet! </Alert>
                 </div>
               )}{" "}
               {this.state.supervisors.length > 0 ? (
@@ -243,7 +251,7 @@ export default class ViewAllowed extends Component {
               ) : (
                 <div>
                   {" "}
-                  <Alert variant="info">
+                  <Alert severity="info">
                     This Exam Doesn't have any supervisors!{" "}
                   </Alert>
                 </div>
@@ -260,7 +268,7 @@ export default class ViewAllowed extends Component {
               ) : (
                 <div>
                   {" "}
-                  <Alert variant="info">
+                  <Alert severity="info">
                     This Exam Doesn't have any marks!{" "}
                   </Alert>
                 </div>
