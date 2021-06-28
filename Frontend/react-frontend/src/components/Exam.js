@@ -103,6 +103,8 @@ export default class Exam extends Component {
           }
         )
         .then((res) => {
+          console.log(res.data.questions, "sdsdsdsdsdsdsd");
+
           this.setState({ questions: res.data.questions });
         });
       clicked = true;

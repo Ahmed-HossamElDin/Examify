@@ -8,9 +8,11 @@ import { Alert } from "@material-ui/lab";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { ExcelRenderer } from "react-excel-renderer";
-
+import Tooltip from "@material-ui/core/Tooltip";
+import HelpOutlineOutlinedIcon from "@material-ui/icons/HelpOutlineOutlined";
 var success = false;
-
+var help =
+  "Correct format is : supervisor1,supervisor2,supervisor3 or supervisor1 supervisor2 supervisor3 or by sperating them by new lines";
 export default class AddSupervisors extends Component {
   state = {
     allowedSupervisors: [],
@@ -76,6 +78,13 @@ export default class AddSupervisors extends Component {
           },
           handleSubmit
         );
+      } else {
+        success = false;
+        this.setState({
+          ...this.state,
+          error: `Incorrect format, plz follow the required format`,
+          loading: false,
+        });
       }
     };
     const handleSubmit = () => {
@@ -142,17 +151,6 @@ export default class AddSupervisors extends Component {
 
     return (
       <div>
-        {success === true ? (
-          <div>
-            {" "}
-            <br />
-            <Alert severity="success">Supervisors added successfully! </Alert>
-          </div>
-        ) : this.state.error !== "" ? (
-          <Alert severity="error"> {this.state.error}</Alert>
-        ) : (
-          <div></div>
-        )}
         <br />
         <h3
           style={{ fontSize: "20px", fontFamily: "Century Gothic,Lucida Sans" }}
@@ -162,7 +160,28 @@ export default class AddSupervisors extends Component {
         <ButtonGroup disableElevation variant="contained" color="primary">
           <Button onClick={enterManually}>Enter Supervisors manually</Button>
           <Button onClick={uploadFile}>Upload an excel file</Button>
-        </ButtonGroup>
+        </ButtonGroup>{" "}
+        {success === true ? (
+          <div>
+            {" "}
+            <br />
+            <Alert severity="success">Supervisors added successfully! </Alert>
+          </div>
+        ) : this.state.error !== "" ? (
+          <div>
+            {" "}
+            <br />
+            <Alert severity="error">
+              {" "}
+              {this.state.error}{" "}
+              <Tooltip title={help} interactive>
+                <HelpOutlineOutlinedIcon />
+              </Tooltip>
+            </Alert>
+          </div>
+        ) : (
+          <div></div>
+        )}
         {this.state.manually === 1 ? (
           <div>
             <br />

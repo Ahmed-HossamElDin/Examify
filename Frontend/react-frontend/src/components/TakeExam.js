@@ -67,7 +67,7 @@ export default class TakeExam extends Component {
   getTimeLeft = () => {
     axios
       .get(
-        `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/time/`,
+        `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/time-left/`,
         {
           headers: { Authorization: "Token " + this.props.token },
         }

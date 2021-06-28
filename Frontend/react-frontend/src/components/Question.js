@@ -22,7 +22,6 @@ export default class Question extends Component {
     option1: {
       text: "",
       is_correct: false,
-      id: this.props.question.answers[0],
     },
     option2: {
       text: "",
@@ -32,7 +31,7 @@ export default class Question extends Component {
       text: "",
       is_correct: false,
     },
-    option4: {},
+    option4: { text: "", is_correct: false },
     token: "",
     question_id: "question_id",
     mark: 0,
@@ -111,53 +110,113 @@ export default class Question extends Component {
       });
     };
     const handleSubmit = () => {
-      axios
-        .patch(
-          `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/question/${this.state.question_id}/`,
-          {
-            id: this.state.question_id,
-            text: this.state.question,
-            mark: this.state.mark,
-          },
-          {
-            headers: { Authorization: "Token " + this.props.token },
-          }
-        )
-        .then(
-          Object.keys(this.state)
-            .filter((key) => key.includes("option"))
-            .forEach((key) => {
+      if (
+        this.state.question_id !== this.props.question.id ||
+        this.state.mark !== this.props.question.mark
+      ) {
+        axios
+          .patch(
+            `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/question/${this.state.question_id}/`,
+            {
+              id: this.state.question_id,
+              text: this.state.question,
+              mark: this.state.mark,
+            },
+            {
+              headers: {
+                Authorization: "Token " + this.props.token,
+              },
+            }
+          )
+          .then()
+          .catch(() => {
+            this.setState({
+              ...this.state,
+              error: true,
+            });
+          });
+      } else {
+        console.log(
+          this.state.question_id,
+          this.props.question.id,
+          this.state.mark,
+          this.props.question.mark
+        );
+      }
+      Object.keys(this.state)
+        .filter((key) => key.includes("option"))
+        .forEach((key) => {
+          if (this.state[key].id !== undefined && this.state[key].text !== "") {
+            axios
+              .patch(
+                `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/question/${this.state.question_id}/answer/${this.state[key].id}/`,
+                {
+                  text: this.state[key].text,
+                  is_correct: this.state[key].is_correct,
+                },
+                {
+                  headers: {
+                    Authorization: "Token " + this.state.token,
+                  },
+                }
+              )
+              .then(() => {
+                this.setState({
+                  ...this.state,
+                  updated: true,
+                });
+              })
+              .catch(() => {
+                this.setState({
+                  ...this.state,
+                  error: true,
+                });
+              });
+          } else {
+            if (this.state[key].is_correct) {
               axios
-                .patch(
-                  `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/question/${this.state.question_id}/answer/${this.state[key].id}/`,
+                .post(
+                  `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/question/${this.state.question_id}/answer/`,
                   {
                     text: this.state[key].text,
                     is_correct: this.state[key].is_correct,
                   },
                   {
-                    headers: { Authorization: "Token " + this.state.token },
+                    headers: {
+                      Authorization: "Token " + this.state.token,
+                    },
                   }
                 )
                 .then(() => {
-                  console.log("yes");
+                  console.log("done", this.state[key]);
                   this.setState({
                     ...this.state,
                     updated: true,
                   });
-                })
-                .catch(() => {
+                });
+            } else {
+              axios
+                .post(
+                  `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/question/${this.state.question_id}/answer/`,
+                  {
+                    text: this.state[key].text,
+                    is_correct: false,
+                  },
+                  {
+                    headers: {
+                      Authorization: "Token " + this.state.token,
+                    },
+                  }
+                )
+                .then(() => {
+                  console.log("done", this.state[key]);
                   this.setState({
                     ...this.state,
-                    error: true,
+                    updated: true,
                   });
                 });
-            })
-        )
-        .catch(() => {
-          this.setState({
-            ...this.state,
-            error: true,
-          });
+            }
+          }
         });
     };
 
@@ -175,7 +234,10 @@ export default class Question extends Component {
             .forEach((key) => {
               if (key !== e.target.value) {
                 this.setState({
-                  [key]: { ...this.state[key], is_correct: false },
+                  [key]: {
+                    ...this.state[key],
+                    is_correct: false,
+                  },
                 });
               }
             });
@@ -184,7 +246,6 @@ export default class Question extends Component {
     };
     const deleteQuestion = () => {
       deleted = this.props.deleteQuestion(this.state.question_id);
-      console.log(deleted);
       this.forceUpdate();
     };
     const addNewQuestion = () => {

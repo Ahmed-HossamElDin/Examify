@@ -8,9 +8,11 @@ import { Alert } from "@material-ui/lab";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { ExcelRenderer } from "react-excel-renderer";
-
+import Tooltip from "@material-ui/core/Tooltip";
+import HelpOutlineOutlinedIcon from "@material-ui/icons/HelpOutlineOutlined";
 var success = false;
-var loading = false;
+var help =
+  "Correct format is : student1,student2,student3 or student1 student2 student3 or by sperating them by new lines";
 export default class AddStudents extends Component {
   componentDidMount() {
     if (this.props.edit) {
@@ -95,6 +97,13 @@ export default class AddStudents extends Component {
           },
           handleSubmit
         );
+      } else {
+        success = false;
+        this.setState({
+          ...this.state,
+          error: `Incorrect format, plz follow the required format`,
+          loading: false,
+        });
       }
     };
     const handleSubmit = () => {
@@ -157,17 +166,6 @@ export default class AddStudents extends Component {
 
     return (
       <div>
-        {success === true ? (
-          <div>
-            {" "}
-            <br />
-            <Alert severity="success">Students added successfully! </Alert>
-          </div>
-        ) : this.state.error !== "" ? (
-          <Alert severity="error"> {this.state.error}</Alert>
-        ) : (
-          <div></div>
-        )}{" "}
         <br />
         <h3
           style={{ fontSize: "20px", fontFamily: "Century Gothic,Lucida Sans" }}
@@ -177,7 +175,28 @@ export default class AddStudents extends Component {
         <ButtonGroup disableElevation variant="contained" color="primary">
           <Button onClick={enterManually}>Enter students manually</Button>
           <Button onClick={uploadFile}>Upload an excel file</Button>
-        </ButtonGroup>
+        </ButtonGroup>{" "}
+        {success === true ? (
+          <div>
+            {" "}
+            <br />
+            <Alert severity="success">Students added successfully! </Alert>
+          </div>
+        ) : this.state.error !== "" ? (
+          <div>
+            {" "}
+            <br />
+            <Alert severity="error">
+              {" "}
+              {this.state.error}{" "}
+              <Tooltip title={help} interactive>
+                <HelpOutlineOutlinedIcon />
+              </Tooltip>
+            </Alert>
+          </div>
+        ) : (
+          <div></div>
+        )}{" "}
         {this.state.manually === 1 ? (
           <div>
             <br />
