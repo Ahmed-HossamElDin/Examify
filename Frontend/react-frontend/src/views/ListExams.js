@@ -4,6 +4,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import ViewAllowed from "../components/ViewAllowed";
 import Card from "@material-ui/core/Card";
+import NewTable from "../components/newTable";
 
 const columns = [
   {
@@ -66,10 +67,11 @@ export default class ListExams extends Component {
         {rows.length > 0 ? (
           <div style={{ height: 630, width: 830 }}>
             <DataGrid rows={rows} columns={columns} pageSize={10} />
-            {console.log(rows, "rows")}
+            {/* {console.log(rows, "rows")} */}
             <Card>
               <ViewAllowed token={this.state.token} />{" "}
             </Card>
+            <NewTable></NewTable>
           </div>
         ) : (
           <div>
