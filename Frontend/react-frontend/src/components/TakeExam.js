@@ -189,14 +189,15 @@ export default class TakeExam extends Component {
             ) : (
               <div></div>
             )}
-            {this.state.checked &&
-            this.state.time_left !== 0 &&
-            localStorage.getItem("ExamfiyTimeLeft") !== "" ? (
-              <div style={{ position: "sticky", top: 0 }}>
-                <CountdownTimer
-                  duration={parseInt(localStorage.getItem("ExamfiyTimeLeft"))}
-                />
-              </div>
+            {this.state.checked ? (
+              this.state.time_left !== 0 && this.state.time_left !== "" ? (
+                <div style={{ position: "sticky", top: 0 }}>
+                  {console.log(this.state.time_left, "SSSSSSSSSSSSS")}
+                  <CountdownTimer duration={parseInt(this.state.time_left)} />
+                </div>
+              ) : (
+                <div></div>
+              )
             ) : (
               <div></div>
             )}
