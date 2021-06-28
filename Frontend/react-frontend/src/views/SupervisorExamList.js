@@ -26,7 +26,7 @@ export default class SupervisorExamList extends Component {
         }
       )
       .then((res) => {
-        console.log(res);
+        console.log(res, "sdsd");
         this.setState({ ...this.state, exams: res.data });
       });
   }

@@ -5,9 +5,9 @@ import { Link, Redirect } from "react-router-dom";
 import "../css/main.css";
 import "../css/util.css";
 import axios from "axios";
-import SimpleBar from 'simplebar-react';
+import SimpleBar from "simplebar-react";
 
-import 'simplebar/dist/simplebar.min.css';
+import "simplebar/dist/simplebar.min.css";
 
 export default class loginForm extends Component {
   state = {
@@ -33,10 +33,10 @@ export default class loginForm extends Component {
             username: this.state.user.username,
           },
         });
-        this.confirmLogin(details);
         localStorage.setItem("ExamifyToken", res.data.key);
         localStorage.setItem("ExamifyUserType", res.data.user_type);
         localStorage.setItem("ExamifyUsername", details.username);
+        this.confirmLogin(details);
       })
       .catch((error) => {
         var n = error.toString().includes("400");
@@ -128,7 +128,7 @@ export default class loginForm extends Component {
                     <span className="login100-form-title">Login</span>
                     <div>
                       {this.state.user.error !== "" &&
-                        this.state.user.error !== undefined ? (
+                      this.state.user.error !== undefined ? (
                         <div
                           className="error"
                           style={{ textAlign: "center", fontSize: 14 }}
