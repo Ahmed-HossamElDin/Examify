@@ -79,7 +79,7 @@ export default class StudentExamList extends Component {
                           ...this.state,
                           exam_name: key.exam_name,
                           exam_id: key.exam_id,
-                          exam_duration: "2",
+                          exam_duration: key.exam_duration,
                           exam_startdate: key.exam_startdate,
                           clicked: true,
                         })

@@ -28,20 +28,13 @@ export default class TakeExam extends Component {
   };
 
   handleStartExam = () => {
-    localStorage.setItem(
-      "ExamifyToken",
-      "bd3e907d14538ba241743820efb221164ae9fcdd"
-    );
-    console.log("sdsds", localStorage.getItem("ExamifyToken"));
     start = true;
     this.setState({ ...this.state, loading: true }, () => {
       axios
         .get(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/start/`,
           {
-            headers: {
-              Authorization: "Token bd3e907d14538ba241743820efb221164ae9fcdd",
-            },
+            headers: { Authorization: "Token " + this.props.token },
           }
         )
         .then((res) => {
@@ -62,9 +55,7 @@ export default class TakeExam extends Component {
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/submit/`,
           { student_answers: Answer },
           {
-            headers: {
-              Authorization: "Token bd3e907d14538ba241743820efb221164ae9fcdd",
-            },
+            headers: { Authorization: "Token " + this.props.token },
           }
         )
         .then(() => {
@@ -73,6 +64,18 @@ export default class TakeExam extends Component {
           this.setState({ ...this.state, submit: false });
         });
     });
+  };
+  getTimeLeft = () => {
+    axios
+      .get(
+        `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/time/`,
+        {
+          headers: { Authorization: "Token " + this.props.token },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      });
   };
   handleAnswer = (idQ, idA) => {
     Object.assign(Answer, { [idQ]: idA });
@@ -155,9 +158,9 @@ export default class TakeExam extends Component {
                 </Button>
               </p>
             </Jumbotron>{" "}
-            {}
             {this.state.checked ? (
               <div style={{ position: "sticky", top: 0 }}>
+                {this.getTimeLeft()}
                 <CountdownTimer duration={this.state.exam_duration * 60 * 60} />
               </div>
             ) : (
