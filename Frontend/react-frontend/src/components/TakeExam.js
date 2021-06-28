@@ -7,7 +7,6 @@ import CountdownTimer from "./CountdownTimer";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import StudentExam from "./StudentExam";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 var counter = 0;
