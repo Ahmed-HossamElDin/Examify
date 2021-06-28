@@ -1,4 +1,5 @@
 import Placeholder from "../views/placeholder.js";
+import SupervisorExamList from "../views/SupervisorExamList.js";
 
 import DashboardIcon from "@material-ui/icons/Dashboard";
 
@@ -8,7 +9,7 @@ var SupervisorRoutes = [
     name: "Home",
     rtlName: "لوحة القيادة",
     icon: DashboardIcon,
-    component: Placeholder,
+    component: SupervisorExamList,
     layout: "/dashboard",
   },
 ];
