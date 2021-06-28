@@ -7,6 +7,8 @@ import CountdownTimer from "./CountdownTimer";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import StudentExam from "./StudentExam";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 var counter = 0;
 var Answer = {};
@@ -26,6 +28,11 @@ export default class TakeExam extends Component {
   };
 
   handleStartExam = () => {
+    localStorage.setItem(
+      "ExamifyToken",
+      "bd3e907d14538ba241743820efb221164ae9fcdd"
+    );
+    console.log("sdsds", localStorage.getItem("ExamifyToken"));
     start = true;
     this.setState({ ...this.state, loading: true }, () => {
       axios
@@ -33,7 +40,7 @@ export default class TakeExam extends Component {
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/start/`,
           {
             headers: {
-              Authorization: "Token " + this.props.token,
+              Authorization: "Token bd3e907d14538ba241743820efb221164ae9fcdd",
             },
           }
         )
@@ -56,7 +63,7 @@ export default class TakeExam extends Component {
           { student_answers: Answer },
           {
             headers: {
-              Authorization: "Token " + this.props.token,
+              Authorization: "Token bd3e907d14538ba241743820efb221164ae9fcdd",
             },
           }
         )
@@ -148,7 +155,14 @@ export default class TakeExam extends Component {
                 </Button>
               </p>
             </Jumbotron>{" "}
-            <br />
+            {}
+            {this.state.checked ? (
+              <div style={{ position: "sticky", top: 0 }}>
+                <CountdownTimer duration={this.state.exam_duration * 60 * 60} />
+              </div>
+            ) : (
+              <div></div>
+            )}
             {Object.keys(this.state.questions).length > 0 ? (
               ((counter = 0),
               (
@@ -188,13 +202,6 @@ export default class TakeExam extends Component {
                   </Button>
                 </div>
               ))
-            ) : (
-              <div></div>
-            )}{" "}
-            {this.state.checked ? (
-              <div style={{ position: "sticky", top: 0 }}>
-                <CountdownTimer duration={this.state.exam_duration * 60 * 60} />
-              </div>
             ) : (
               <div></div>
             )}

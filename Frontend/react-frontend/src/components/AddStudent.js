@@ -56,8 +56,6 @@ export default class AddStudents extends Component {
     const handleAllowedStudentsArray = () => {
       this.setState({ ...this.state, loading: true });
       if (this.state.allowedStudents.includes(",")) {
-        console.log("sadsadsadsa3");
-
         this.setState(
           {
             ...this.state,
