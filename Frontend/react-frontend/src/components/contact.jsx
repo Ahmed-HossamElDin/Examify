@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import emailjs from 'emailjs-com'
+import{ init } from 'emailjs-com';
+init("user_leAU4dQMICHNawDEdGCnH");
 
 const initialState = {
   name: '',
@@ -18,17 +20,18 @@ export const Contact = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(name, email, message)
-    emailjs
-      .sendForm(
-        'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID'
+    emailjs.sendForm(
+        "service_ekw9hwi","template_ss1gish", e.target
       )
       .then(
         (result) => {
           console.log(result.text)
           clearState()
+          alert("Email sent!")
         },
         (error) => {
           console.log(error.text)
+          alert("Error!")
         }
       )
   }
@@ -52,7 +55,7 @@ export const Contact = (props) => {
                       <input
                         type='text'
                         id='name'
-                        name='name'
+                        name='user_name'
                         className='form-control'
                         placeholder='Name'
                         required
@@ -66,7 +69,7 @@ export const Contact = (props) => {
                       <input
                         type='email'
                         id='email'
-                        name='email'
+                        name='user_email'
                         className='form-control'
                         placeholder='Email'
                         required
@@ -127,10 +130,7 @@ export const Contact = (props) => {
       <div id='footer'>
         <div className='container text-center'>
           <p>
-            &copy; 2021 Tommy & Ramzy, All rights reserved. Design by{' '}
-            <a href='#' rel='nofollow'>
-              Us
-            </a>
+            &copy; 2021 Tommy & Ramzy, All rights reserved.
           </p>
         </div>
       </div>
