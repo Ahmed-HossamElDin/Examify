@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Alert from "react-bootstrap/Alert";
 import TimerIcon from "@material-ui/icons/Timer";
 import TimerOffIcon from "@material-ui/icons/TimerOff";
+import Alert from "@material-ui/lab/Alert";
 
 export default class CountdownTimer extends Component {
   state = {
@@ -38,23 +38,19 @@ export default class CountdownTimer extends Component {
       <div>
         {this.state.counter > 0 ? (
           <div style={{ width: "20%", marginLeft: "40%" }}>
-            <Alert variant="info">
-              <Alert.Heading>
-                {" "}
-                <TimerIcon /> Time Left: {Math.floor(
-                  this.state.counter / 60
-                )}{" "}
-                minute
-              </Alert.Heading>
+            <Alert severity="info">
+              {" "}
+              <TimerIcon /> Time Left: {Math.floor(
+                this.state.counter / 60
+              )}{" "}
+              minute
             </Alert>
           </div>
         ) : (
           <div style={{ width: "20%", marginLeft: "40%" }}>
-            <Alert variant="danger">
-              <Alert.Heading>
-                {" "}
-                <TimerOffIcon /> Exam Ended, Good Luck!
-              </Alert.Heading>
+            <Alert severity="error">
+              {" "}
+              <TimerOffIcon /> Exam Ended, Good Luck!
             </Alert>{" "}
             {/*window.location.reload()*/}
           </div>

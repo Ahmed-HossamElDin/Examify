@@ -7,7 +7,7 @@ import CountdownTimer from "./CountdownTimer";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import StudentExam from "./StudentExam";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import Alert from "react-bootstrap/Alert";
+import { Alert } from "@material-ui/lab";
 import CircularProgress from "@material-ui/core/CircularProgress";
 var counter = 0;
 var Answer = {};
@@ -183,7 +183,9 @@ export default class TakeExam extends Component {
               </p>
             </Jumbotron>{" "}
             {this.state.error !== "" ? (
-              <Alert severity="info"> {this.state.error}</Alert>
+              <div>
+                <br /> <Alert severity="error">{this.state.error}</Alert>
+              </div>
             ) : (
               <div></div>
             )}
