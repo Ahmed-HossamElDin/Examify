@@ -428,9 +428,9 @@ class Sidebar extends React.Component {
                       {rtlActive ? "و" : "S"}
                     </span>
                     <ListItemText
-                      primary={rtlActive ? "إعدادات" : "Settings"}
+                      primary={rtlActive ? "الخروج" : "Sign Out"}
                       disableTypography={true}
-                      className={collapseItemText}
+                      className={collapseItemText}س
                     />
                   </NavLink>
                 </ListItem>
