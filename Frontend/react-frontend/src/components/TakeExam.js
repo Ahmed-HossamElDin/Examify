@@ -7,13 +7,18 @@ import CountdownTimer from "./CountdownTimer";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import StudentExam from "./StudentExam";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-
+import Alert from "react-bootstrap/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
 var counter = 0;
 var Answer = {};
 var submitted = false;
 var success = false;
+var timer = "";
 export default class TakeExam extends Component {
+  componentDidMount() {
+    this.setState({ ...this.state, error: "", time_left: 0 });
+    localStorage.setItem("ExamfiyTimeLeft", "");
+  }
   state = {
     exam_name: "",
     exam_starttime: "",
@@ -24,6 +29,8 @@ export default class TakeExam extends Component {
     loading: false,
     submit: false,
     start: false,
+    time_left: 0,
+    error: "",
   };
 
   handleStartExam = () => {
@@ -43,6 +50,9 @@ export default class TakeExam extends Component {
             questions: res.data.questions,
             loading: false,
           });
+        })
+        .catch(() => {
+          this.setState({ error: this.props.status, loading: false });
         });
     });
   };
@@ -63,7 +73,8 @@ export default class TakeExam extends Component {
         });
     });
   };
-  getTimeLeft = () => {
+  getTimeLeft = (e) => {
+    var time = 0;
     axios
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/time-left/`,
@@ -72,18 +83,30 @@ export default class TakeExam extends Component {
         }
       )
       .then((res) => {
-        console.log(res);
-      });
+        time =
+          parseInt(res.data.time_left.split(":")[0]) * 60 * 60 +
+          parseInt(res.data.time_left.split(":")[1]) * 60;
+        localStorage.setItem("ExamfiyTimeLeft", time.toString());
+        timer = time;
+        console.log("timeeer", timer);
+      })
+      .catch((err) => {});
+
+    this.handleTimerChange(e);
   };
   handleAnswer = (idQ, idA) => {
     Object.assign(Answer, { [idQ]: idA });
   };
-  render() {
-    const handleTimerChange = (e) => {
-      this.setState({
+  handleTimerChange = (e) => {
+    this.setState(
+      {
         checked: e.target.checked,
-      });
-    };
+        time_left: localStorage.getItem("ExamfiyTimeLeft"),
+      },
+      console.log(this.state)
+    );
+  };
+  render() {
     let examStartTime = new Date(this.props.exam_startdate);
     var date =
       examStartTime.getFullYear() +
@@ -129,9 +152,12 @@ export default class TakeExam extends Component {
               <p>
                 Show exam countdown timer{" "}
                 <Switch
-                  disabled={!this.state.start}
+                  disabled={
+                    !this.state.start ||
+                    (this.state.start && this.state.error !== "" ? true : false)
+                  }
                   checked={this.state.checked}
-                  onChange={handleTimerChange}
+                  onChange={this.getTimeLeft}
                   color="primary"
                   name="checkedB"
                   inputProps={{ "aria-label": "primary checkbox" }}
@@ -152,15 +178,22 @@ export default class TakeExam extends Component {
                   }
                   disabled={this.state.loading || this.state.start}
                 >
-                  {console.log(this.state.loading, this.state.start)}
                   Start Exam
                 </Button>
               </p>
             </Jumbotron>{" "}
-            {this.state.checked ? (
+            {this.state.error !== "" ? (
+              <Alert severity="info"> {this.state.error}</Alert>
+            ) : (
+              <div></div>
+            )}
+            {this.state.checked &&
+            this.state.time_left !== 0 &&
+            localStorage.getItem("ExamfiyTimeLeft") !== "" ? (
               <div style={{ position: "sticky", top: 0 }}>
-                {this.getTimeLeft()}
-                <CountdownTimer duration={this.state.exam_duration * 60 * 60} />
+                <CountdownTimer
+                  duration={parseInt(localStorage.getItem("ExamfiyTimeLeft"))}
+                />
               </div>
             ) : (
               <div></div>

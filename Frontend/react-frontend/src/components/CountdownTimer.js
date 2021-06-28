@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Alert from "react-bootstrap/Alert";
 import TimerIcon from "@material-ui/icons/Timer";
 import TimerOffIcon from "@material-ui/icons/TimerOff";
-import { Redirect } from "react-router-dom";
 
 export default class CountdownTimer extends Component {
   state = {
@@ -57,7 +56,7 @@ export default class CountdownTimer extends Component {
                 <TimerOffIcon /> Exam Ended, Good Luck!
               </Alert.Heading>
             </Alert>{" "}
-            {window.location.reload()}
+            {/*window.location.reload()*/}
           </div>
         )}
       </div>

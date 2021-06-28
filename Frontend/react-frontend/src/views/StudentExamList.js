@@ -13,6 +13,7 @@ export default class StudentExamList extends Component {
     exam_duration: 0,
     exam_startdate: "",
     clicked: false,
+    status: "",
   };
   componentDidMount() {
     axios
@@ -82,6 +83,7 @@ export default class StudentExamList extends Component {
                           exam_duration: key.exam_duration,
                           exam_startdate: key.exam_startdate,
                           clicked: true,
+                          status: key.is_started,
                         })
                       }
                     >
@@ -114,7 +116,6 @@ export default class StudentExamList extends Component {
       )
     ) : (
       <div>
-        {console.log("here")}
         <TakeExam
           exam_id={this.state.exam_id}
           exam_name={this.state.exam_name}
@@ -122,6 +123,7 @@ export default class StudentExamList extends Component {
           exam_duration={this.state.exam_duration}
           goBack={this.goBack}
           token={localStorage.getItem("ExamifyToken")}
+          status={this.state.status}
         />
       </div>
     );
