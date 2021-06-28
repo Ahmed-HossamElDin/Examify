@@ -12,7 +12,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CircularProgress from "@material-ui/core/CircularProgress";
 var counter = 0;
 var Answer = {};
-var start = false;
 var submitted = false;
 var success = false;
 export default class TakeExam extends Component {
@@ -25,11 +24,11 @@ export default class TakeExam extends Component {
     Answer: {},
     loading: false,
     submit: false,
+    start: false,
   };
 
   handleStartExam = () => {
-    start = true;
-    this.setState({ ...this.state, loading: true }, () => {
+    this.setState({ ...this.state, loading: true, start: true }, () => {
       axios
         .get(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/start/`,
@@ -131,7 +130,7 @@ export default class TakeExam extends Component {
               <p>
                 Show exam countdown timer{" "}
                 <Switch
-                  disabled={!start}
+                  disabled={!this.state.start}
                   checked={this.state.checked}
                   onChange={handleTimerChange}
                   color="primary"
@@ -152,8 +151,9 @@ export default class TakeExam extends Component {
                       <div></div>
                     )
                   }
-                  disabled={this.state.loading || start}
+                  disabled={this.state.loading || this.state.start}
                 >
+                  {console.log(this.state.loading, this.state.start)}
                   Start Exam
                 </Button>
               </p>
