@@ -67,9 +67,6 @@ export default class ListExams extends Component {
           <div style={{ height: 630, width: 830 }}>
             <DataGrid rows={rows} columns={columns} pageSize={10} />
             {console.log(rows, "rows")}
-              <Card>
-                <ViewAllowed token={this.state.token} />{" "}
-              </Card>
           </div>
         ) : (
           <div>

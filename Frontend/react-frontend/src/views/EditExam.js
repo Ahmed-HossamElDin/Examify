@@ -4,7 +4,7 @@ import { Alert } from "@material-ui/lab";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
-import ListExams from "./ListExams";
+import ListExamsEdit from "./ListExamsEdit";
 import axios from "axios";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
@@ -56,7 +56,7 @@ export default class EditExam extends Component {
 
     return (
       <div style={{ marginLeft: 150, marginRight: 20 }}>
-        <ListExams token={this.state.token} view={false} />{" "}
+        <ListExamsEdit token={this.state.token} />{" "}
         {updated && (
           <Alert severity="success">
             Exam with ID :{this.state.id} Deleted successfully!
