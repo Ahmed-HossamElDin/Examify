@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import TiltPhaseSix from "../components/TiltImage";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -11,11 +11,23 @@ import "../css/util.css";
 import "../css/main.css";
 import "../css/register.css";
 import logo from "../images/examify.png";
-import SimpleBar from 'simplebar-react';
+import SimpleBar from "simplebar-react";
 
-import 'simplebar/dist/simplebar.min.css';
+import "simplebar/dist/simplebar.min.css";
 
 class Register extends Component {
+  componentDidMount() {
+    this.setState({ goToDashboard: false }, () => {
+      if (
+        localStorage.getItem("ExamifyToken") !== "" &&
+        localStorage.getItem("ExamifyToken") !== null
+      ) {
+        this.setState({
+          goToDashboard: true,
+        });
+      }
+    });
+  }
   constructor(props) {
     super(props);
 
@@ -28,6 +40,7 @@ class Register extends Component {
         user_type: "1",
       },
       submitted: false,
+      goToDashboard: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -54,7 +67,7 @@ class Register extends Component {
           user_type: e.target.value,
         },
       },
-      function () {
+      function() {
         console.log(this.state);
       }
     );
@@ -91,6 +104,7 @@ class Register extends Component {
 
     return (
       <div className="Register">
+        {this.state.goToDashboard && <Redirect to="/dashboard/home" />}
         <SimpleBar>
           <div>
             <div className="limiter">
@@ -184,15 +198,22 @@ class Register extends Component {
                       value={this.value}
                       onChange={this.updateuserType}
                     >
-                      <FormLabel className="form" component="legend">Sign up as</FormLabel>
-                      <RadioGroup className="form" row aria-label="user-type" name="user-type">
-                        <FormControlLabel 
+                      <FormLabel className="form" component="legend">
+                        Sign up as
+                      </FormLabel>
+                      <RadioGroup
+                        className="form"
+                        row
+                        aria-label="user-type"
+                        name="user-type"
+                      >
+                        <FormControlLabel
                           className="form"
                           value="1"
                           control={<Radio color="primary" />}
                           label="Student"
                         />
-                        <FormControlLabel  
+                        <FormControlLabel
                           className="form"
                           value="2"
                           control={<Radio color="primary" />}
