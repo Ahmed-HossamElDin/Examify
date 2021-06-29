@@ -8,6 +8,8 @@ import axios from "axios";
 import SimpleBar from "simplebar-react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import "simplebar/dist/simplebar.min.css";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 export default class loginForm extends Component {
   componentDidMount() {
@@ -23,7 +25,13 @@ export default class loginForm extends Component {
     });
   }
   state = {
-    user: { username: "", res: "", key: "", error: "", type: "" },
+    user: {
+      username: "",
+      res: "",
+      key: "",
+      error: "",
+      type: "",
+    },
     details: {
       username: "",
       password: "",
@@ -99,6 +107,14 @@ export default class loginForm extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     this.login(this.state.details);
+    if (localStorage.getItem("ExamifyRememberMe") === "false") {
+      window.addEventListener("beforeunload", () => {
+        localStorage.removeItem("ExamifyUserType");
+        localStorage.removeItem("ExamifyUsername");
+        localStorage.removeItem("ExamifyToken");
+        localStorage.removeItem("ExamfiyTimeLeft");
+      });
+    }
   };
   updateusername = (query) => {
     this.setState(() => ({
@@ -116,7 +132,15 @@ export default class loginForm extends Component {
       },
     }));
   };
-
+  handleRememberMe = () => {
+    var toggle = localStorage.getItem("ExamifyRememberMe");
+    if (localStorage.getItem("ExamifyRememberMe") === null) {
+      localStorage.setItem("ExamifyRememberMe", true);
+    } else {
+      if (toggle === "true") localStorage.setItem("ExamifyRememberMe", false);
+      else localStorage.setItem("ExamifyRememberMe", true);
+    }
+  };
   render() {
     const options = {
       max: 10,
@@ -155,7 +179,10 @@ export default class loginForm extends Component {
                       this.state.user.error !== undefined ? (
                         <div
                           className="error"
-                          style={{ textAlign: "center", fontSize: 14 }}
+                          style={{
+                            textAlign: "center",
+                            fontSize: 14,
+                          }}
                         >
                           {this.state.user.error}
                         </div>
@@ -212,7 +239,15 @@ export default class loginForm extends Component {
                           </button>
                         )}
                       </div>
-
+                      <div className="text-center p-t-12">
+                        <FormControlLabel
+                          control={
+                            <Checkbox onChange={this.handleRememberMe} />
+                          }
+                          label="Remember me"
+                        />
+                      </div>
+                      <br />
                       <div className="text-center p-t-12">
                         <Link to="#">Forgot username / password ?</Link>
                       </div>
