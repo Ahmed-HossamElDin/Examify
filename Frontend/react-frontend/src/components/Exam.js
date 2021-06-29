@@ -17,11 +17,13 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 import CreateQuestion from "./CreateQuestion";
 import AddStudent from "./AddStudent";
+import EditSupervisors from "./EditSupervisors";
 var loading = false;
 var counter = 0;
 var updated = false;
 var clicked = false;
 var editAllowedStudents = false;
+var editSupervisors = false;
 export default class Exam extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +38,8 @@ export default class Exam extends Component {
   componentDidMount() {
     clicked = false;
     counter = 0;
+    editSupervisors = false;
+    editAllowedStudents = false;
   }
   state = {
     date: new Date().toISOString().slice(0, 10),
@@ -129,6 +133,10 @@ export default class Exam extends Component {
     const ShowAddStudent = () => {
       editAllowedStudents = true;
       counter = 0;
+      this.forceUpdate();
+    };
+    const ShowEditSupervisor = () => {
+      editSupervisors = true;
       this.forceUpdate();
     };
     return (
@@ -236,6 +244,7 @@ export default class Exam extends Component {
           color="primary"
           size="small"
           startIcon={<EditIcon />}
+          onClick={ShowEditSupervisor}
         >
           Edit supervisors
         </Button>
@@ -271,6 +280,12 @@ export default class Exam extends Component {
         {editAllowedStudents && (
           <AddStudent
             edit={true}
+            exam_id={this.props.exam.id}
+            token={this.props.token}
+          />
+        )}{" "}
+        {editSupervisors && (
+          <EditSupervisors
             exam_id={this.props.exam.id}
             token={this.props.token}
           />

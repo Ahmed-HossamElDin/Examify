@@ -242,16 +242,14 @@ export default class AddStudents extends Component {
               onChange={fileHandler.bind(this)}
               accept=".xlsx, .xls, .csv"
             />
-            <label htmlFor="contained-button-file">
-              <Button
-                variant="contained"
-                color="default"
-                component="span"
-                startIcon={<CloudUploadIcon />}
-              >
-                Choose an excel file
-              </Button>
-            </label>{" "}
+            <Button
+              variant="contained"
+              color="default"
+              component="span"
+              startIcon={<CloudUploadIcon />}
+            >
+              Choose an excel file
+            </Button>
             <Button
               variant="contained"
               color="primary"

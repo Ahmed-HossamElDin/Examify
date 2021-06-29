@@ -34,6 +34,9 @@ export default class loginForm extends Component {
   startLoading = () => {
     this.setState({ loading: true });
   };
+  endLoading = () => {
+    this.setState({ loading: false });
+  };
   login = (details) => {
     this.startLoading();
     axios
@@ -61,12 +64,14 @@ export default class loginForm extends Component {
 
         if (n) {
           this.setState({
+            loading: false,
             user: {
               error: "Password or username incorrect, please try again.",
             },
           });
         } else {
           this.setState({
+            loading: false,
             user: {
               error: "You must log in first.",
             },
