@@ -63,10 +63,10 @@ export default class StudentExamList extends Component {
             <thead>
               <tr>
                 <th>Exam name</th>
-                <th>Start date</th> <th>Start Time</th>
+                <th>Start date</th>
+                <th>Start Time</th>
                 <th>Duration</th>
                 <th>Exam status</th>
-                <th>Mark</th>
                 <th>Full Mark</th>
               </tr>
             </thead>
@@ -97,11 +97,6 @@ export default class StudentExamList extends Component {
                         ? "Exam ended"
                         : "Exam didn't start yet"}
                     </td>
-                    <td>
-                      {key.is_started === "The Exam is Closed"
-                        ? key.student_mark
-                        : "-"}
-                    </td>{" "}
                     <td>{key.full_mark}</td>
                   </tr>
                 );

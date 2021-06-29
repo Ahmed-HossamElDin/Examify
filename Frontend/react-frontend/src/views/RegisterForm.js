@@ -12,7 +12,6 @@ import "../css/main.css";
 import "../css/register.css";
 import logo from "../images/examify.png";
 import SimpleBar from "simplebar-react";
-
 import "simplebar/dist/simplebar.min.css";
 
 class Register extends Component {
