@@ -7,13 +7,13 @@ export default class SupervisorChip extends Component {
     const handleDelete = () => {
       axios
         .delete(
-          `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/supervisor/${this.props.info.supervisor}`,
+          `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/supervisor/${this.props.info.supervisor_id}/`,
           {
             headers: { Authorization: "Token " + this.props.token },
           }
         )
         .then((res) => {
-          console.log(res);
+          console.log(this.props.info);
           this.props.callBack();
         });
     };
@@ -25,11 +25,9 @@ export default class SupervisorChip extends Component {
           onDelete={handleDelete}
         />{" "}
         Supervising:{" "}
-        <Chip
-          label={this.props.info.student_name}
-          variant="primary"
-          clickable
-        />
+        {this.props.info.students.map((key) => (
+          <Chip label={key} variant="primary" clickable />
+        ))}
       </div>
     );
   }

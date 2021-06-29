@@ -44,7 +44,7 @@ export default class EditSupervisors extends Component {
         ) : (
           <div></div>
         )}
-        <AddSupervisors exam_id={this.state.exam_id} token={this.state.token} />
+        <AddSupervisors exam_id={this.props.exam_id} token={this.props.token} />
       </div>
     );
   }

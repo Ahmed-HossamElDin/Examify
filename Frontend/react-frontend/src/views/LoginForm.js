@@ -248,9 +248,9 @@ export default class loginForm extends Component {
                         />
                       </div>
                       <br />
-                      <div className="text-center p-t-12">
+                      {/*<div className="text-center p-t-12">
                         <Link to="#">Forgot username / password ?</Link>
-                      </div>
+                      </div>*/}
 
                       <div className="text-center p-t-136">
                         Don't have an account yet?
