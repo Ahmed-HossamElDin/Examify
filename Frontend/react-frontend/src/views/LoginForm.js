@@ -10,6 +10,11 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import "simplebar/dist/simplebar.min.css";
 
 export default class loginForm extends Component {
+  componentDidMount() {
+    if (localStorage.getItem("ExamifyToken") !== "") {
+      this.setState({ goToDashboard: true });
+    }
+  }
   state = {
     user: { username: "", res: "", key: "", error: "", type: "" },
     details: {
@@ -17,6 +22,7 @@ export default class loginForm extends Component {
       password: "",
     },
     loading: false,
+    goToDashboard: false,
   };
   startLoading = () => {
     this.setState({ loading: true });
@@ -107,6 +113,7 @@ export default class loginForm extends Component {
     };
     return (
       <div>
+        {this.state.goToDashboard && <Redirect to="/dashboard/home" />}
         <SimpleBar>
           {this.state.user.key ? (
             <Redirect
