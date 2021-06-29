@@ -12,7 +12,6 @@ import "simplebar/dist/simplebar.min.css";
 export default class loginForm extends Component {
   componentDidMount() {
     this.setState({ goToDashboard: false }, () => {
-      console.log(localStorage.getItem("ExamifyToken"), "SSSSSSSSs");
       if (
         localStorage.getItem("ExamifyToken") !== "" &&
         localStorage.getItem("ExamifyToken") !== null

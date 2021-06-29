@@ -26,7 +26,6 @@ var routes;
 const useStyles = makeStyles(styles);
 
 export default function Dashboard(props) {
-  //console.log(props.state);
   const { ...rest } = props;
   const [username, setUsername] = React.useState("");
   const [userType, setUserType] = React.useState(0);
@@ -68,7 +67,6 @@ export default function Dashboard(props) {
       routes = SupervisorRoutes;
       break;
     default:
-      console.log(typeof parseInt(userType), "sadasdsad");
       routes = ExaminerRoutes;
   }
   // ref for main panel div
@@ -123,7 +121,6 @@ export default function Dashboard(props) {
         return getRoutes(prop.views);
       }
       if (prop.layout === "/dashboard") {
-        //console.log("path is " + prop.path);
         return (
           <Route
             path={prop.layout + prop.path}
