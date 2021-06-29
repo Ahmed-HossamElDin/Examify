@@ -71,7 +71,7 @@ export default class ListExams extends Component {
             <Card>
               <ViewAllowed token={this.state.token} />{" "}
             </Card>
-            <NewTable></NewTable>
+            {/* <NewTable></NewTable> */}
           </div>
         ) : (
           <div>
