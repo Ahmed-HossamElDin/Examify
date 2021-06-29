@@ -6,7 +6,7 @@ import "../css/main.css";
 import "../css/util.css";
 import axios from "axios";
 import SimpleBar from "simplebar-react";
-
+import CircularProgress from "@material-ui/core/CircularProgress";
 import "simplebar/dist/simplebar.min.css";
 
 export default class loginForm extends Component {
@@ -16,8 +16,13 @@ export default class loginForm extends Component {
       username: "",
       password: "",
     },
+    loading: false,
+  };
+  startLoading = () => {
+    this.setState({ loading: true });
   };
   login = (details) => {
+    this.startLoading();
     axios
       .post(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/login/`,
@@ -172,9 +177,21 @@ export default class loginForm extends Component {
                       </div>
 
                       <div className="container-login100-form-btn">
-                        <button className="login100-form-btn" type="submit">
-                          Login
-                        </button>
+                        {this.state.loading ? (
+                          <button
+                            disabled
+                            style={{ backgroundColor: "gray" }}
+                            className="login100-form-btn"
+                            type="submit"
+                          >
+                            {this.state.loading && <CircularProgress />}{" "}
+                            {"   Logging in"}
+                          </button>
+                        ) : (
+                          <button className="login100-form-btn" type="submit">
+                            Login
+                          </button>
+                        )}
                       </div>
 
                       <div className="text-center p-t-12">
