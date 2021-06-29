@@ -69,7 +69,8 @@ export default class SupervisorExamList extends Component {
             <thead>
               <tr>
                 <th>Exam name</th>
-                <th>Start date</th> <th>Start Time</th>
+                <th>Start date</th>
+                <th>Start Time</th>
                 <th>Duration</th>
                 <th>Exam status</th>
               </tr>
