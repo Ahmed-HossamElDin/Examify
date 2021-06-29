@@ -105,6 +105,8 @@ export default class AddSupervisors extends Component {
         .then((res) => {
           success = true;
           this.setState({ ...this.state, loading: false });
+
+          if (this.props.callBack !== null) this.props.callBack();
         })
         .catch(() => {
           this.setState({

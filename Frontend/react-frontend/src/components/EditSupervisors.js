@@ -20,6 +20,17 @@ export default class EditSupervisors extends Component {
   render() {
     const refreshComponent = () => {
       this.forceUpdate();
+      axios
+        .get(
+          `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/supervisors/`,
+          {
+            headers: { Authorization: "Token " + this.props.token },
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+          this.setState({ supervisors: res.data });
+        });
     };
     return (
       <div>
@@ -44,7 +55,11 @@ export default class EditSupervisors extends Component {
         ) : (
           <div></div>
         )}
-        <AddSupervisors exam_id={this.props.exam_id} token={this.props.token} />
+        <AddSupervisors
+          callBack={refreshComponent}
+          exam_id={this.props.exam_id}
+          token={this.props.token}
+        />
       </div>
     );
   }
