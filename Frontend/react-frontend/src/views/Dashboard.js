@@ -7,6 +7,7 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 // core components
 import Sidebar from "../components/Sidebar.js";
@@ -143,38 +144,47 @@ export default function Dashboard(props) {
   };
 
   return (
-    <div className={classes.wrapper}>
-      <Sidebar
-        routes={routes}
-        logoText={"Examify"}
-        logo={logo}
-        handleDrawerToggle={handleDrawerToggle}
-        open={mobileOpen}
-        color={color}
-        bgColor={bgColor}
-        miniActive={miniActive}
-        username={username}
-        {...rest}
-      />
-      <div className={mainPanelClasses} ref={mainPanel}>
-        {getRoute() ? (
-          <div className={classes.content}>
-            <div className={classes.container}>
-              <Switch>
-                {getRoutes(routes)}
-                <Redirect from="/dashboard" to="/dashboard/home" />
-              </Switch>
-            </div>
+    <div>
+      {localStorage.getItem("ExamifyToken") !== null ? (
+        <div className={classes.wrapper}>
+          <Sidebar
+            routes={routes}
+            logoText={"Examify"}
+            logo={logo}
+            handleDrawerToggle={handleDrawerToggle}
+            open={mobileOpen}
+            color={color}
+            bgColor={bgColor}
+            miniActive={miniActive}
+            username={username}
+            {...rest}
+          />
+          <div className={mainPanelClasses} ref={mainPanel}>
+            {getRoute() ? (
+              <div className={classes.content}>
+                <div className={classes.container}>
+                  <Switch>
+                    {getRoutes(routes)}
+                    <Redirect from="/dashboard" to="/dashboard/home" />
+                  </Switch>
+                </div>
+              </div>
+            ) : (
+              <div className={classes.map}>
+                <Switch>
+                  {getRoutes(routes)}
+                  <Redirect from="/dashboard" to="/dashboard/home" />
+                </Switch>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className={classes.map}>
-            <Switch>
-              {getRoutes(routes)}
-              <Redirect from="/dashboard" to="/dashboard/home" />
-            </Switch>
-          </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div>
+          <LinearProgress />
+          <Redirect to="/login" />
+        </div>
+      )}
     </div>
   );
 }
