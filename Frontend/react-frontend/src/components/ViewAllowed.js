@@ -40,13 +40,13 @@ const supervisors = [
   {
     field: "supervisor_name",
     headerName: "Supervisor name",
-    width: 170,
+    width: 200,
     backgroundColor: "#376331",
   },
   {
-    field: "student_name",
+    field: "students",
     headerName: "Assigned Student",
-    width: 200,
+    width: 400,
   },
 ];
 const marks = [
@@ -95,11 +95,6 @@ export default class ViewAllowed extends Component {
           }
         )
         .then((res) => {
-          console.log(
-            res,
-            "attendance sheet REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES"
-          );
-
           this.setState({ attendance: res.data });
         });
     };
@@ -240,7 +235,8 @@ export default class ViewAllowed extends Component {
                 </div>
               )}{" "}
               {this.state.supervisors.length > 0 ? (
-                <div style={{ height: 500, width: 400 }}>
+                <div style={{ height: 500, width: 700 }}>
+                  {console.log(this.state.supervisors)}
                   <DataGrid
                     rows={this.state.supervisors}
                     columns={supervisors}
