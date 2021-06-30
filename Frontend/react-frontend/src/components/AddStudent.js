@@ -56,7 +56,6 @@ export default class AddStudents extends Component {
       });
     };
     const handleAllowedStudentsArray = () => {
-      this.setState({ ...this.state, loading: true });
       if (this.state.allowedStudents.includes(",")) {
         this.setState(
           {
@@ -107,7 +106,14 @@ export default class AddStudents extends Component {
       }
     };
     const handleSubmit = () => {
-      handleAllowedStudentsArray();
+      this.setState(
+        {
+          ...this.state,
+          loading: true,
+        },
+        handleAllowedStudentsArray()
+      );
+
       axios
         .post(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.exam_id}/allowed-students/`,
@@ -176,7 +182,7 @@ export default class AddStudents extends Component {
           <Button onClick={enterManually}>Enter students manually</Button>
           <Button onClick={uploadFile}>Upload an excel file</Button>
         </ButtonGroup>{" "}
-        {success === true ? (
+        {success === true && this.state.loading === false ? (
           <div>
             {" "}
             <br />

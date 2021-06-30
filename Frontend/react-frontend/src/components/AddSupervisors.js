@@ -40,11 +40,6 @@ export default class AddSupervisors extends Component {
       });
     };
     const handleAllowedSupervisorsArray = () => {
-      this.setState({
-        ...this.state,
-        loading: true,
-      });
-
       if (this.state.allowedSupervisors.includes(",")) {
         this.setState(
           {
@@ -90,8 +85,9 @@ export default class AddSupervisors extends Component {
     const handleSubmit = () => {
       this.setState(
         { ...this.state, loading: true },
-        handleAllowedSupervisorsArray
+        handleAllowedSupervisorsArray()
       );
+      console.log(this.state);
       axios
         .post(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.exam_id}/supervisors/`,
@@ -115,7 +111,6 @@ export default class AddSupervisors extends Component {
             loading: false,
           });
         });
-      this.setState({ loading: false });
     };
     const enterManually = () => {
       this.setState({
@@ -135,10 +130,14 @@ export default class AddSupervisors extends Component {
         if (err) {
           console.log(err);
         } else {
+          console.log(resp.rows);
           resp.rows.map((supervisor) => result.push(supervisor[0]));
-          this.setState({
-            allowedSupervisors: result,
-          });
+          this.setState(
+            {
+              allowedSupervisors: result,
+            },
+            console.log(this.state)
+          );
         }
       });
     };
@@ -163,13 +162,13 @@ export default class AddSupervisors extends Component {
           <Button onClick={enterManually}>Enter Supervisors manually</Button>
           <Button onClick={uploadFile}>Upload an excel file</Button>
         </ButtonGroup>{" "}
-        {success === true ? (
+        {success === true && this.state.loading === false ? (
           <div>
             {" "}
             <br />
             <Alert severity="success">Supervisors added successfully! </Alert>
           </div>
-        ) : this.state.error !== "" ? (
+        ) : this.state.error !== "" && this.state.loading === false ? (
           <div>
             {" "}
             <br />
