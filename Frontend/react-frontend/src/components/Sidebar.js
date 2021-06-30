@@ -305,6 +305,7 @@ class Sidebar extends React.Component {
       localStorage.removeItem("ExamifyUsername");
       localStorage.removeItem("ExamifyToken");
       localStorage.removeItem("ExamfiyTimeLeft");
+      localStorage.removeItem("ExamifyRememberMe");
       this.setState({ ...this.state, redirect: true });
     };
     const {
@@ -423,7 +424,6 @@ class Sidebar extends React.Component {
                       }
                       disableTypography={true}
                       className={collapseItemText}
-                      
                     />
                   </NavLink>
                 </ListItem>

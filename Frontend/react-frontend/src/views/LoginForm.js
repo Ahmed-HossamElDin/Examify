@@ -107,12 +107,17 @@ export default class loginForm extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     this.login(this.state.details);
-    if (localStorage.getItem("ExamifyRememberMe") === "false") {
-      window.addEventListener("beforeunload", () => {
+    if (
+      localStorage.getItem("ExamifyRememberMe") === false ||
+      localStorage.getItem("ExamifyRememberMe") === "false" ||
+      localStorage.getItem("ExamifyRememberMe") === null
+    ) {
+      window.addEventListener("onbeforeunload", (e) => {
         localStorage.removeItem("ExamifyUserType");
         localStorage.removeItem("ExamifyUsername");
         localStorage.removeItem("ExamifyToken");
         localStorage.removeItem("ExamfiyTimeLeft");
+        localStorage.removeItem("ExamifyRememberMe");
       });
     }
   };
