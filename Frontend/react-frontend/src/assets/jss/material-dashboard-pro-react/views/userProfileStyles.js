@@ -1,7 +1,7 @@
 import {
   cardTitle,
   grayColor,
-} from "assets/jss/material-dashboard-pro-react.js";
+} from "../../material-dashboard-pro-react.js";
 
 const userProfileStyles = {
   cardTitle,

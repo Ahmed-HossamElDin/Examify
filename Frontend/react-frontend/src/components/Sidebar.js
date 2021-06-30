@@ -409,7 +409,7 @@ class Sidebar extends React.Component {
                 </ListItem>
                 <ListItem className={classes.collapseItem}>
                   <NavLink
-                    to="#"
+                    to="/profile"
                     className={
                       classes.itemLink + " " + classes.userCollapseLinks
                     }
@@ -423,6 +423,7 @@ class Sidebar extends React.Component {
                       }
                       disableTypography={true}
                       className={collapseItemText}
+                      
                     />
                   </NavLink>
                 </ListItem>
