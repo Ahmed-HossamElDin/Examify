@@ -149,11 +149,11 @@ export default class ViewAllowed extends Component {
     };
     let rows = this.state.attendance;
     for (let i = 0; i < rows.length; i++) {
-      if (rows[i.enter_time !== null] && rows[i].submit_time === null) {
+      if (rows[i].enter_time !== null && rows[i].submit_time === null) {
         rows[i].enter_time = new Date(rows[i].enter_time.toString());
-      } else if (rows[i.enter_time === null] && rows[i].submit_time !== null) {
+      } else if (rows[i].enter_time === null && rows[i].submit_time !== null) {
         rows[i].submit_time = new Date(rows[i].submit_time.toString());
-      } else if (rows[i.enter_time !== null] && rows[i].submit_time !== null) {
+      } else if (rows[i].enter_time !== null && rows[i].submit_time !== null) {
         rows[i].enter_time = new Date(rows[i].enter_time.toString());
         rows[i].submit_time = new Date(rows[i].submit_time.toString());
       }
