@@ -13,6 +13,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 export default class loginForm extends Component {
   componentDidMount() {
+    localStorage.removeItem("ExamifyRememberMe");
     this.setState({ goToDashboard: false }, () => {
       if (
         localStorage.getItem("ExamifyToken") !== "" &&
@@ -112,13 +113,9 @@ export default class loginForm extends Component {
       localStorage.getItem("ExamifyRememberMe") === "false" ||
       localStorage.getItem("ExamifyRememberMe") === null
     ) {
-      window.addEventListener("onbeforeunload", (e) => {
-        localStorage.removeItem("ExamifyUserType");
-        localStorage.removeItem("ExamifyUsername");
-        localStorage.removeItem("ExamifyToken");
-        localStorage.removeItem("ExamfiyTimeLeft");
-        localStorage.removeItem("ExamifyRememberMe");
-      });
+      window.onbeforeunload = function() {
+        localStorage.clear();
+      };
     }
   };
   updateusername = (query) => {
@@ -138,6 +135,8 @@ export default class loginForm extends Component {
     }));
   };
   handleRememberMe = () => {
+    window.sessionStorage.setItem("key", "value");
+
     var toggle = localStorage.getItem("ExamifyRememberMe");
     if (localStorage.getItem("ExamifyRememberMe") === null) {
       localStorage.setItem("ExamifyRememberMe", true);
