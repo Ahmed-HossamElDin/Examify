@@ -42,10 +42,10 @@ export default class SuperviseStudent extends Component {
             >
               <iframe
                 src="https://streamable.com/e/f0qajc?autoplay=1&nocontrols=1"
-                frameborder="0"
+                frameBorder="0"
                 width="100%"
                 height="100%"
-                allowfullscreen
+                allowFullScreen
                 allow="autoplay"
                 style={{
                   width: "100%",
@@ -85,12 +85,6 @@ export default class SuperviseStudent extends Component {
               </Typography>
             </Toolbar>
           </AppBar>
-          {/*<CardMedia
-              component="img"
-              alt={this.props.student_name}
-              image="https://i.postimg.cc/RVHCzC1N/image.png"
-              title={this.props.student_name}
-            />{" "}*/}
 
           <div
             style={{
@@ -102,11 +96,11 @@ export default class SuperviseStudent extends Component {
           >
             <iframe
               src="https://streamable.com/e/f0qajc?autoplay=1&nocontrols=1"
-              frameborder="0"
+              frameBorder="0"
               width="100%"
               height="100%"
-              allowfullscreen
               allow="autoplay"
+              allowFullScreen
               style={{
                 width: "100%",
                 height: "100%",
