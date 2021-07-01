@@ -101,7 +101,7 @@ export default class SuperviseStudent extends Component {
             }}
           >
             <iframe
-              src="https://www.youtube.com/embed/jbUI2d6RwE8?autoplay=1&nocontrols=1"
+              src="https://streamable.com/e/f0qajc?autoplay=1&nocontrols=1"
               frameborder="0"
               width="100%"
               height="100%"
