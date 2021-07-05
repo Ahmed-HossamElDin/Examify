@@ -42,11 +42,20 @@ export default class CreateQuestion extends Component {
   };
   constructor(props) {
     super(props);
-    this.state = {
-      ...this.state,
-      exam_id: props.exam_id,
-      token: props.token,
-    };
+    if (this.props.counter) {
+      this.state = {
+        ...this.state,
+        exam_id: props.exam_id,
+        token: props.token,
+        counter: this.props.counter,
+      };
+    } else {
+      this.state = {
+        ...this.state,
+        exam_id: props.exam_id,
+        token: props.token,
+      };
+    }
   }
 
   render() {
@@ -158,9 +167,7 @@ export default class CreateQuestion extends Component {
           Object.keys(this.state)
             .filter((key) => key.includes("option"))
             .forEach((key) => {
-              console.log("outside if");
               if (this.state[key].text !== "") {
-                console.log("inside if");
                 axios
                   .post(
                     `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/question/${this.state.question_id}/answer/`,

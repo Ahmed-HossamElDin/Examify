@@ -12,9 +12,7 @@ import { Alert } from "@material-ui/lab";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CreateQuestion from "./CreateQuestion";
-import AddIcon from "@material-ui/icons/Add";
 var deleted = false;
-var addNewQuestionvar = false;
 export default class Question extends Component {
   state = {
     exam_id: "",
@@ -248,15 +246,12 @@ export default class Question extends Component {
       deleted = this.props.deleteQuestion(this.state.question_id);
       this.forceUpdate();
     };
-    const addNewQuestion = () => {
-      addNewQuestionvar = true;
-      this.forceUpdate();
-    };
+
     let answered =
       this.state.option1.is_correct ||
       this.state.option2.is_correct ||
-      this.state.option4.is_correct ||
-      this.state.option3.is_correct;
+      this.state.option3.is_correct ||
+      this.state.option4.is_correct;
     return (
       <div>
         <br />
@@ -414,23 +409,6 @@ export default class Question extends Component {
               >
                 Delete
               </Button>{" "}
-              <Button
-                size="small"
-                variant="contained"
-                color="primary"
-                startIcon={<AddIcon />}
-                onClick={addNewQuestion}
-              >
-                Add a new Question
-              </Button>
-              {addNewQuestionvar === true ? (
-                <CreateQuestion
-                  exam_id={this.props.exam_id}
-                  token={this.props.token}
-                />
-              ) : (
-                <div></div>
-              )}
             </div>
           </CardContent>
         </Card>

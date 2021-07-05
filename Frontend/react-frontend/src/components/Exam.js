@@ -18,12 +18,15 @@ import EditIcon from "@material-ui/icons/Edit";
 import CreateQuestion from "./CreateQuestion";
 import AddStudent from "./AddStudent";
 import EditSupervisors from "./EditSupervisors";
+import AddIcon from "@material-ui/icons/Add";
+
 var loading = false;
 var counter = 0;
 var updated = false;
 var clicked = false;
 var editAllowedStudents = false;
 var editSupervisors = false;
+var addNewQuestionvar = false;
 export default class Exam extends Component {
   constructor(props) {
     super(props);
@@ -36,10 +39,19 @@ export default class Exam extends Component {
     };
   }
   componentDidMount() {
-    clicked = false;
+    loading = false;
     counter = 0;
-    editSupervisors = false;
+    updated = false;
+    clicked = false;
     editAllowedStudents = false;
+    editSupervisors = false;
+    addNewQuestionvar = false;
+    this.setState({
+      questions: [],
+    });
+  }
+  componentDidUpdate() {
+    counter = 0;
   }
   state = {
     date: new Date().toISOString().slice(0, 10),
@@ -54,6 +66,7 @@ export default class Exam extends Component {
     AddSupervisors: false,
     loading: false,
     questions: [],
+    addNewQuestionvar: false,
   };
   render() {
     const handleDurationChange = (e) => {
@@ -67,23 +80,27 @@ export default class Exam extends Component {
       });
     };
     const handleDateChange = (date) => {
-      this.setState({
-        ...this.state,
-        date: date,
-        date_time:
-          date.toISOString().substr(0, 11) +
-          this.state.date_time.toString().substring(11),
-      });
+      try {
+        this.setState({
+          ...this.state,
+          date: date,
+          date_time:
+            date.toISOString().substr(0, 11) +
+            this.state.date_time.toString().substring(11),
+        });
+      } catch {}
     };
     const handleTimeChange = (time) => {
-      time = new Date(time);
-      this.setState({
-        ...this.state,
-        time: time,
-        date_time: this.state.date_time
-          .substring(0, 11)
-          .concat(time.toISOString().split("T")[1]),
-      });
+      try {
+        time = new Date(time);
+        this.setState({
+          ...this.state,
+          time: time,
+          date_time: this.state.date_time
+            .substring(0, 11)
+            .concat(time.toISOString().split("T")[1]),
+        });
+      } catch {}
     };
     const deleteQuestion = (question_id) => {
       var deleted = false;
@@ -91,7 +108,9 @@ export default class Exam extends Component {
         .delete(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam.id}/question/${question_id}/`,
           {
-            headers: { Authorization: "Token " + this.props.token },
+            headers: {
+              Authorization: "Token " + this.props.token,
+            },
           }
         )
         .then((deleted = true));
@@ -103,7 +122,9 @@ export default class Exam extends Component {
         .get(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam.id}/`,
           {
-            headers: { Authorization: "Token " + this.props.token },
+            headers: {
+              Authorization: "Token " + this.props.token,
+            },
           }
         )
         .then((res) => {
@@ -113,7 +134,6 @@ export default class Exam extends Component {
         });
       clicked = true;
     };
-
     const updateExam = () => {
       axios
         .patch(
@@ -125,7 +145,9 @@ export default class Exam extends Component {
             duration: this.state.exam_duration,
           },
           {
-            headers: { Authorization: "Token " + this.props.token },
+            headers: {
+              Authorization: "Token " + this.props.token,
+            },
           }
         )
         .then((updated = true), this.forceUpdate());
@@ -138,6 +160,9 @@ export default class Exam extends Component {
     const ShowEditSupervisor = () => {
       editSupervisors = true;
       this.forceUpdate();
+    };
+    const addNewQuestion = () => {
+      this.setState({ addNewQuestionvar: true });
     };
     return (
       <div style={{ textAlign: "center" }}>
@@ -274,6 +299,30 @@ export default class Exam extends Component {
               token={this.props.token}
             />
           </div>
+        ) : (
+          <div></div>
+        )}
+        {clicked && (
+          <div>
+            <br />
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              startIcon={<AddIcon />}
+              onClick={addNewQuestion}
+            >
+              Add a new Question
+            </Button>
+          </div>
+        )}
+        {this.state.addNewQuestionvar === true ? (
+          <CreateQuestion
+            counter={counter + 1}
+            token={this.props.token}
+            exam_id={this.props.exam.id}
+            callBacl={getQuestions}
+          />
         ) : (
           <div></div>
         )}

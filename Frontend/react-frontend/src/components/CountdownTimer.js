@@ -40,10 +40,10 @@ export default class CountdownTimer extends Component {
           <div style={{ width: "20%", marginLeft: "40%" }}>
             <Alert severity="info">
               {" "}
-              <TimerIcon /> Time Left: {Math.floor(
-                this.state.counter / 60
-              )}{" "}
-              minute
+              <TimerIcon /> Time Left:{" "}
+              {this.state.counter / 60 > 1
+                ? parseInt(this.state.counter) + " " + "minute"
+                : this.state.counter + " second"}{" "}
             </Alert>
           </div>
         ) : (
@@ -52,7 +52,7 @@ export default class CountdownTimer extends Component {
               {" "}
               <TimerOffIcon /> Exam Ended, Good Luck!
             </Alert>{" "}
-            {/*window.location.reload()*/}
+            {window.location.reload()}
           </div>
         )}
       </div>

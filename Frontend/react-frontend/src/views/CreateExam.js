@@ -96,46 +96,50 @@ export default class CreateExam extends Component {
 
   render() {
     const handleDateChange = (date) => {
-      dateError = validateDate(date);
-      if (
-        this.state.date_time.includes("Z") &&
-        this.state.date_time.includes("T")
-      ) {
-        this.setState({
-          ...this.state,
-          date: date,
-          date_time:
-            date.toISOString().substr(0, 11) +
-            this.state.date_time.substring(11),
-        });
-      } else {
-        this.setState({
-          ...this.state,
-          date: date,
-          date_time: date.toISOString().substr(0, 11),
-        });
-      }
+      try {
+        dateError = validateDate(date);
+        if (
+          this.state.date_time.includes("Z") &&
+          this.state.date_time.includes("T")
+        ) {
+          this.setState({
+            ...this.state,
+            date: date,
+            date_time:
+              date.toISOString().substr(0, 11) +
+              this.state.date_time.substring(11),
+          });
+        } else {
+          this.setState({
+            ...this.state,
+            date: date,
+            date_time: date.toISOString().substr(0, 11),
+          });
+        }
+      } catch {}
     };
     const handleTimeChange = (time) => {
-      timeError = validateTime(time);
-      time = new Date(time);
-      if (this.state.date_time.includes("Z")) {
-        this.setState({
-          ...this.state,
-          time: time,
-          date_time: this.state.date_time
-            .substring(0, 11)
-            .concat(time.toISOString().split("T")[1]),
-        });
-      } else {
-        this.setState({
-          ...this.state,
-          time: time,
-          date_time: this.state.date_time.concat(
-            time.toISOString().split("T")[1]
-          ),
-        });
-      }
+      try {
+        timeError = validateTime(time);
+        time = new Date(time);
+        if (this.state.date_time.includes("Z")) {
+          this.setState({
+            ...this.state,
+            time: time,
+            date_time: this.state.date_time
+              .substring(0, 11)
+              .concat(time.toISOString().split("T")[1]),
+          });
+        } else {
+          this.setState({
+            ...this.state,
+            time: time,
+            date_time: this.state.date_time.concat(
+              time.toISOString().split("T")[1]
+            ),
+          });
+        }
+      } catch {}
     };
     const handleAddStudent = () => {
       this.setState({

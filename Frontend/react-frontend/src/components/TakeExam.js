@@ -13,11 +13,9 @@ var counter = 0;
 var Answer = {};
 var submitted = false;
 var success = false;
-var timer = "";
 export default class TakeExam extends Component {
   componentDidMount() {
     this.setState({ ...this.state, error: "", time_left: 0 });
-    localStorage.setItem("ExamfiyTimeLeft", "");
   }
   state = {
     exam_name: "",
@@ -74,7 +72,7 @@ export default class TakeExam extends Component {
     });
   };
   getTimeLeft = (e) => {
-    var time = 0;
+    var show = e.target.checked;
     axios
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/time-left/`,
@@ -83,28 +81,17 @@ export default class TakeExam extends Component {
         }
       )
       .then((res) => {
-        time =
-          parseInt(res.data.time_left.split(":")[0]) * 60 * 60 +
-          parseInt(res.data.time_left.split(":")[1]) * 60;
-        localStorage.setItem("ExamfiyTimeLeft", time.toString());
-        timer = time;
-        console.log("timeeer", timer);
+        this.setState({
+          checked: show,
+          time_left:
+            parseInt(res.data.time_left.split(":")[0]) * 60 * 60 +
+            parseInt(res.data.time_left.split(":")[1]) * 60,
+        });
       })
       .catch((err) => {});
-
-    this.handleTimerChange(e);
   };
   handleAnswer = (idQ, idA) => {
     Object.assign(Answer, { [idQ]: idA });
-  };
-  handleTimerChange = (e) => {
-    this.setState(
-      {
-        checked: e.target.checked,
-        time_left: localStorage.getItem("ExamfiyTimeLeft"),
-      },
-      console.log(this.state)
-    );
   };
   render() {
     let examStartTime = new Date(this.props.exam_startdate);
@@ -192,7 +179,6 @@ export default class TakeExam extends Component {
             {this.state.checked ? (
               this.state.time_left !== 0 && this.state.time_left !== "" ? (
                 <div style={{ position: "sticky", top: 0 }}>
-                  {console.log(this.state.time_left, "SSSSSSSSSSSSS")}
                   <CountdownTimer duration={parseInt(this.state.time_left)} />
                 </div>
               ) : (

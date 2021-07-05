@@ -82,7 +82,7 @@ export default class loginForm extends Component {
           this.setState({
             loading: false,
             user: {
-              error: "You must log in first.",
+              error: "Error logging in, please try again.",
             },
           });
         }
