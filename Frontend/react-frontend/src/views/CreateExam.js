@@ -71,6 +71,11 @@ function validateTime(time) {
 }
 export default class CreateExam extends Component {
   componentDidMount() {
+    loading = false;
+    dateError = false;
+    timeError = false;
+    timeToday = false;
+    timeIf = false;
     this.setState({
       date_time: this.state.date
         .concat("T")
@@ -139,7 +144,10 @@ export default class CreateExam extends Component {
             ),
           });
         }
-      } catch {}
+      } catch {
+        timeError = true;
+        this.forceUpdate();
+      }
     };
     const handleAddStudent = () => {
       this.setState({
