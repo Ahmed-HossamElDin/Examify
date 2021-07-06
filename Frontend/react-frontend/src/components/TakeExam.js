@@ -32,6 +32,15 @@ export default class TakeExam extends Component {
   };
 
   handleStartExam = () => {
+    var x = navigator.getUserMedia(
+      { audio: true, video: true },
+      function(stream) {
+        stream.getTracks().forEach((x) => x.stop());
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
     this.setState({ ...this.state, loading: true, start: true }, () => {
       axios
         .get(
