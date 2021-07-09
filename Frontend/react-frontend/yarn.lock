@@ -1631,6 +1631,22 @@
     "prop-types" "^15.7.2"
     "react-is" "^16.8.0 || ^17.0.0"
 
+"@monaco-editor/loader@^1.1.1":
+  "integrity" "sha512-mkT4r4xDjIyOG9o9M6rJDSzEIeonwF80sYErxEvAAL4LncFVdcbNli8Qv6NDqF6nyv6sunuKkDzo4iFjxPL+uQ=="
+  "resolved" "https://registry.npmjs.org/@monaco-editor/loader/-/loader-1.1.1.tgz"
+  "version" "1.1.1"
+  dependencies:
+    "state-local" "^1.0.6"
+
+"@monaco-editor/react@^4.2.1":
+  "integrity" "sha512-yN8qVY0PyFIbqPjfrZ5TbR/wrcfeiwoys8+0QkmyfiOzG74vXxSBOPIUxk7Ly+qCj7qWHPq1uDJskzFGaIqaPA=="
+  "resolved" "https://registry.npmjs.org/@monaco-editor/react/-/react-4.2.1.tgz"
+  "version" "4.2.1"
+  dependencies:
+    "@monaco-editor/loader" "^1.1.1"
+    "prop-types" "^15.7.2"
+    "state-local" "^1.0.7"
+
 "@nodelib/fs.scandir@2.1.4":
   "integrity" "sha512-33g3pMJk3bg5nXbL/+CY6I2eJDzZAni49PfJnL5fghPTggPvBd/pFNSgJsdAgWptuFu7qq/ERvOYFlhvsLTCKA=="
   "resolved" "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.4.tgz"
@@ -8410,6 +8426,11 @@
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   "version" "1.0.4"
 
+"monaco-editor@>= 0.21.0 < 1", "monaco-editor@>= 0.25.0 < 1":
+  "integrity" "sha512-5iylzSJevCnzJn9UVsW8yOZ3yHjmAs4TfvH3zsbftKiFKmHG0xirGN6DK9Kk04VSWxYCZZAIafYJoNJJMAU1KA=="
+  "resolved" "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.25.2.tgz"
+  "version" "0.25.2"
+
 "move-concurrently@^1.0.1":
   "integrity" "sha1-viwAX9oy4LKa8fBdfEszIUxwH5I="
   "resolved" "https://registry.npmjs.org/move-concurrently/-/move-concurrently-1.0.1.tgz"
@@ -10277,7 +10298,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@^17.0.2":
+"react-dom@^16.8.0 || ^17.0.0", "react-dom@^17.0.2":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -10482,7 +10503,7 @@
     "object-assign" "^4.1.1"
     "prop-types" "^15.6.2"
 
-"react@^16.8.3 || ^17.0.0-0", "react@^17.0.2":
+"react@^16.8.0 || ^17.0.0", "react@^17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -11636,6 +11657,11 @@
   "integrity" "sha512-GrdeshiRmS1YLMYgzF16olf2jJ/IzxXY9lhKOskuVziubpTYcYqyOwYeJKzQkwy7uN0fYSsbsC4RQaXf9LCrYA=="
   "resolved" "https://registry.npmjs.org/stackframe/-/stackframe-1.2.0.tgz"
   "version" "1.2.0"
+
+"state-local@^1.0.6", "state-local@^1.0.7":
+  "integrity" "sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w=="
+  "resolved" "https://registry.npmjs.org/state-local/-/state-local-1.0.7.tgz"
+  "version" "1.0.7"
 
 "static-extend@^0.1.1":
   "integrity" "sha1-YICcOcv/VTNyJv1eC1IPNB8ftcY="
