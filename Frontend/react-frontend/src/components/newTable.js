@@ -104,7 +104,7 @@ export default function ReactTables(props) {
                 );
               }}
               color="info"
-              className="like"
+              className="edit"
             >
               <Favorite />
             </Button>{" "}
@@ -183,7 +183,7 @@ export default function ReactTables(props) {
                   accessor: "exam_startdate",
                 },
                 {
-                  Header: "Duration",
+                  Header: "Duration (Hour)",
                   accessor: "exam_duration",
                 },
                 {
