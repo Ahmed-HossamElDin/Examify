@@ -42,7 +42,7 @@ export default class CountdownTimer extends Component {
               {" "}
               <TimerIcon /> Time Left:{" "}
               {this.state.counter / 60 > 1
-                ? parseInt(this.state.counter) + " " + "minute"
+                ? Math.floor(parseInt(this.state.counter) / 60) + " " + "minute"
                 : this.state.counter + " second"}{" "}
             </Alert>
           </div>
