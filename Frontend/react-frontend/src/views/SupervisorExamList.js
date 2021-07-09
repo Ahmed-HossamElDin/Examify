@@ -30,9 +30,11 @@ export default class SupervisorExamList extends Component {
         this.setState({ ...this.state, exams: res.data });
       });
   }
+
   goBack = () => {
     this.setState({ ...this.state, clicked: false });
   };
+
   formatDate = (exam_starttime) => {
     let examStartTime = new Date(exam_starttime);
     var date =
@@ -44,6 +46,7 @@ export default class SupervisorExamList extends Component {
 
     return date;
   };
+
   formatTime = (exam_starttime) => {
     let examStartTime = new Date(exam_starttime);
     var time =
@@ -55,6 +58,7 @@ export default class SupervisorExamList extends Component {
         .padStart(2, "0");
     return time;
   };
+  
   render() {
     return !this.state.clicked ? (
       this.state.exams.length > 0 ? (

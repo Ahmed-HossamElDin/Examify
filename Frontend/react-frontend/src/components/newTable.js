@@ -20,6 +20,8 @@ import ReactTable from "../components/ReactTable/ReactTable.js";
 
 
 import { cardTitle } from "../assets/jss/material-dashboard-pro-react.js";
+
+import "../css/table.scss"
   
 
 const styles = {
@@ -31,6 +33,30 @@ const styles = {
 };
 
 const useStyles = makeStyles(styles);
+
+var formatDate = (exam_starttime) => {
+  let examStartTime = new Date(exam_starttime);
+  var date =
+    examStartTime.getFullYear() +
+    "-" +
+    (examStartTime.getMonth() + 1) +
+    "-" +
+    examStartTime.getDate();
+
+  return date;
+};
+
+var formatTime = (exam_starttime) => {
+  let examStartTime = new Date(exam_starttime);
+  var time =
+    examStartTime.getHours() +
+    ":" +
+    examStartTime
+      .getMinutes()
+      .toString()
+      .padStart(2, "0");
+  return time;
+};
 
 export default function ReactTables(props) {
 
@@ -53,8 +79,8 @@ export default function ReactTables(props) {
       return {
         id: key,
         exam_name: prop[1]["exam_name"],
-        exam_startdate: prop["exam_startdate"],
-        exam_duration: prop["exam_duration"],
+        exam_startdate: formatDate(new Date(prop[1]["exam_startdate"]).toString())+ " @ " + formatTime(new Date(prop[1]["exam_startdate"]).toString()),
+        exam_duration: prop[1]["exam_duration"],
         actions: (
           // we've added some custom button actions
           <div className="actions-right">
@@ -143,7 +169,7 @@ export default function ReactTables(props) {
             <CardIcon color="primary">
               <Assignment />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>React Table</h4>
+            <h4 className={classes.cardIconTitle}>Exams</h4>
           </CardHeader>
           <CardBody>
             <ReactTable
@@ -153,12 +179,12 @@ export default function ReactTables(props) {
                   accessor: "exam_name",
                 },
                 {
-                  Header: "Duration",
-                  accessor: "exam_duration",
-                },
-                {
                   Header: "Start date & time",
                   accessor: "exam_startdate",
+                },
+                {
+                  Header: "Duration",
+                  accessor: "exam_duration",
                 },
                 {
                   Header: "Actions",
