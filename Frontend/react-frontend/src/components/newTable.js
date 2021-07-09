@@ -32,37 +32,27 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-var testdata;
+export default function ReactTables(props) {
 
-export default function ReactTables() {
-
-  const [Token, setToken] = useState(localStorage.getItem("ExamifyToken"));
-
-    axios.get(
-            `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/`,
-            {
-              headers: { Authorization: "Token " + Token },
-            }
-          )
-          .then((res) => {
-           testdata = res.data;
-           console.log("here i am")
-           console.log(testdata)
-          });
-
-  const [Exams, setExams] = useState(testdata);
-  console.log("here is exams")
+  const [Exams, setExams] = useState(props.exams);
+  console.log(props)
+  console.log("exams are :")
   console.log(Exams)
-  console.log("here is testdata")
-  console.log(testdata)
 
-    
+  var alteredExams = [];
+  
+  for (var index in Exams){
+    console.log(Exams[index][1]["exam_name"])
+  }
+  
+  console.log("Exams after edit");
+  console.log(alteredExams);
 
   const [data, setData] = React.useState(
     Exams.map((prop, key) => {
       return {
         id: key,
-        exam_name: prop["exam_name"],
+        exam_name: prop[1]["exam_name"],
         exam_startdate: prop["exam_startdate"],
         exam_duration: prop["exam_duration"],
         actions: (

@@ -6,10 +6,8 @@ import "../css/main.css";
 import "../css/util.css";
 import axios from "axios";
 import SimpleBar from "simplebar-react";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import "simplebar/dist/simplebar.min.css";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+
 
 export default class ResetPassword extends Component {
   componentDidMount() {

@@ -57,6 +57,8 @@ export default class ListExams extends Component {
     token: "",
   };
   render() {
+    const data = Object.entries(this.state.exams);
+    console.log(typeof(data))
     let rows = this.state.exams;
     for (let i = 0; i < rows.length; i++) {
       rows[i].exam_startdate = new Date(rows[i].exam_startdate.toString());
@@ -71,7 +73,7 @@ export default class ListExams extends Component {
             <Card>
               <ViewAllowed token={this.state.token} />{" "}
             </Card>
-            {/* <NewTable></NewTable> */}
+            <NewTable exams={data}></NewTable>
           </div>
         ) : (
           <div>
