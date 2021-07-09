@@ -67,8 +67,8 @@ export default class ListExams extends Component {
     return (
       <div style={{ marginLeft: 150, marginRight: 20 }}>
         {rows.length > 0 ? (
-          <div style={{ height: 630, width: 830 }}>
-            <DataGrid rows={rows} columns={columns} pageSize={10} />
+          <div >
+            {/* <DataGrid rows={rows} columns={columns} pageSize={10} /> */}
             {/* {console.log(rows, "rows")} */}
             <Card>
               <ViewAllowed token={this.state.token} />{" "}

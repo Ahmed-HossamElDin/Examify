@@ -5,9 +5,11 @@ import axios from 'axios';
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import Assignment from "@material-ui/icons/Assignment";
-import Dvr from "@material-ui/icons/Dvr";
+import Dvr from "@material-ui/icons/Edit";
 import Favorite from "@material-ui/icons/Favorite";
 import Close from "@material-ui/icons/Close";
+import Visibility from "@material-ui/icons/Visibility";
+import GetApp from "@material-ui/icons/GetApp"
 // core components
 import GridContainer from "../components/Grid/GridContainer.js";
 import GridItem from "../components/Grid/GridItem.js";
@@ -86,6 +88,7 @@ export default function ReactTables(props) {
           <div className="actions-right">
             {/* use this button to add a like kind of action */}
             <Button
+              title="View"
               justIcon
               round
               simple
@@ -104,12 +107,37 @@ export default function ReactTables(props) {
                 );
               }}
               color="info"
-              className="edit"
+              className="view"
             >
-              <Favorite />
+              <Visibility />
+            </Button>{" "}
+            <Button
+              title="Download marks"
+              justIcon
+              round
+              simple
+              onClick={() => {
+                let obj = data.find((o) => o.id === key);
+                alert(
+                  "You've clicked LIKE button on \n{ \nName: " +
+                    obj.name +
+                    ", \nposition: " +
+                    obj.position +
+                    ", \noffice: " +
+                    obj.office +
+                    ", \nage: " +
+                    obj.age +
+                    "\n}."
+                );
+              }}
+              color="success"
+              className="view"
+            >
+              <GetApp />
             </Button>{" "}
             {/* use this button to add a edit kind of action */}
             <Button
+              title="Edit"
               justIcon
               round
               simple
@@ -134,6 +162,7 @@ export default function ReactTables(props) {
             </Button>{" "}
             {/* use this button to remove the data row */}
             <Button
+              title="Delete"
               justIcon
               round
               simple
