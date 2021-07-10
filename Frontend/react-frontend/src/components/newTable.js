@@ -21,6 +21,7 @@ import CardHeader from "../components/Card/CardHeader.js";
 import ReactTable from "../components/ReactTable/ReactTable.js";
 
 import ViewExamInfo from "./ViewExamInfo.js";
+import Exam from "./Exam";
 
 
 import { cardTitle } from "../assets/jss/material-dashboard-pro-react.js";
@@ -68,6 +69,7 @@ var formatTime = (exam_starttime) => {
 var exportex = []
 
 var examId = null;
+var currentEx = null;
 
 export default function ReactTables(props) {
   
@@ -76,15 +78,16 @@ export default function ReactTables(props) {
   const [focusedExamId, setFocusedExamId] = useState(null);
   const [Token, setToken] = useState(localStorage.getItem("ExamifyToken"));
   const [Marks,setMarks] = useState([]);
+  const [currentExam, setCurrentExam] = useState(null);
 
   const goBack = () => {
     setBranch(0);
   };
 
-  const handleGetMarks = () => {
+  const handleGetMarks = (id) => {
     axios
       .get(
-        `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${examId}/marks/`,
+        `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${id}/marks/`,
         {
           headers: { Authorization: "Token " + Token },
         }
@@ -97,6 +100,31 @@ export default function ReactTables(props) {
           console.log(finalMarks);
         });
       });
+    }
+
+    const handleGetExam = (id) => {
+      axios
+        .get(
+          `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${id}/`,
+          {
+            headers: { Authorization: "Token " + Token },
+          }
+        )
+        .then((res) => {
+          setCurrentExam(res.data)
+          currentEx = res.data;
+        });
+    }
+
+    const deleteExam = (id) => {
+      axios
+        .delete(
+          `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${id}/`,
+          {
+            headers: { Authorization: "Token " + Token },
+          }
+        )
+        .then(console.log("deleted"));
     }
 
   const fileType =
@@ -121,15 +149,14 @@ export default function ReactTables(props) {
         actions: (
           <div className="actions-right">
             <Button
-              title="View"
+              title="View info"
               justIcon
               round
               simple
               onClick={() => {
                 let obj = data.find((o) => o.id === key);
-                setBranch(1);
                 setFocusedExamId(prop[1]["id"]);
-                console.log(focusedExamId);
+                setBranch(1);
               }}
               color="info"
               className="view"
@@ -144,8 +171,8 @@ export default function ReactTables(props) {
               onClick={() => {
                 let obj = data.find((o) => o.id === key);
                 setFocusedExamId(prop[1]["id"]);
-                handleGetMarks();
                 examId = prop[1]["id"];
+                handleGetMarks(examId);
                 var downloadName = examId + "_Marks";
                 exportToCSV(exportex, downloadName);
 
@@ -163,8 +190,11 @@ export default function ReactTables(props) {
               simple
               onClick={() => {
                 let obj = data.find((o) => o.id === key);
-                setBranch(2);
                 setFocusedExamId(prop[1]["id"]);
+                examId = prop[1]["id"];
+                handleGetExam(examId);
+                setBranch(2);
+
               }}
               color="warning"
               className="edit"
@@ -180,8 +210,9 @@ export default function ReactTables(props) {
                 var newData = data;
                 newData.find((o, i) => {
                   if (o.id === key) {
-                    // here you should add some custom code so you can delete the data
-                    // from this component and from your server as well
+                    setFocusedExamId(prop[1]["id"]);
+                    examId = prop[1]["id"];
+                    deleteExam(examId);
                     newData.splice(i, 1);
                     return true;
                   }
@@ -242,7 +273,7 @@ export default function ReactTables(props) {
     ):Branch === 1? (
       <ViewExamInfo token={Token} id={focusedExamId} goBack={goBack}/>
     ):(
-      <div>2</div>
+      <Exam exam={currentEx} token={Token} />
     )
   );
 }
