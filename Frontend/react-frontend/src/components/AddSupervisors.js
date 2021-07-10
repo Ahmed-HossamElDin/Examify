@@ -30,6 +30,7 @@ export default class AddSupervisors extends Component {
       ...this.state,
       exam_id: props.exam_id,
       token: props.token,
+      upload: 0,
     };
   }
   render() {
