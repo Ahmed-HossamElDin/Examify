@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { DataGrid } from "@material-ui/data-grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import ViewAllowed from "../components/ViewAllowed";
+import ViewAllowed from "../components/ViewExamInfo";
 import Card from "@material-ui/core/Card";
 
 const columns = [

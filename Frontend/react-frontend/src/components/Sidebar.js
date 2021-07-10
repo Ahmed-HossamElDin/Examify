@@ -307,6 +307,7 @@ class Sidebar extends React.Component {
       localStorage.removeItem("ExamfiyTimeLeft");
       localStorage.removeItem("ExamifyRememberMe");
       this.setState({ ...this.state, redirect: true });
+      window.location.replace("/");
     };
     const {
       classes,
@@ -491,7 +492,7 @@ class Sidebar extends React.Component {
       });
     return (
       <div ref={this.mainPanel}>
-        {this.state.redirect && <Redirect to="/login" />}
+        {this.state.redirect && <Redirect to="/" />}
         <Hidden mdUp implementation="css">
           <Drawer
             variant="temporary"

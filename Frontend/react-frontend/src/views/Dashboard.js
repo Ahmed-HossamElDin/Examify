@@ -182,7 +182,7 @@ export default function Dashboard(props) {
       ) : (
         <div>
           <LinearProgress />
-          <Redirect to="/login" />
+          <Redirect to="/" />
         </div>
       )}
     </div>

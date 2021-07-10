@@ -20,6 +20,8 @@ import CardIcon from "../components/Card/CardIcon.js";
 import CardHeader from "../components/Card/CardHeader.js";
 import ReactTable from "../components/ReactTable/ReactTable.js";
 
+import ViewExamInfo from "./ViewExamInfo.js";
+
 
 import { cardTitle } from "../assets/jss/material-dashboard-pro-react.js";
 
@@ -60,21 +62,15 @@ var formatTime = (exam_starttime) => {
   return time;
 };
 
+
+
 export default function ReactTables(props) {
 
   const [Exams, setExams] = useState(props.exams);
-  console.log(props)
-  console.log("exams are :")
-  console.log(Exams)
+  const [Branch, setBranch] = useState(0);
+  const [focusedExamId, setFocusedExamId] = useState(null);
+  const [Token, setToken] = useState(localStorage.getItem("ExamifyToken"));
 
-  var alteredExams = [];
-  
-  for (var index in Exams){
-    console.log(Exams[index][1]["exam_name"])
-  }
-  
-  console.log("Exams after edit");
-  console.log(alteredExams);
 
   const [data, setData] = React.useState(
     Exams.map((prop, key) => {
@@ -94,17 +90,9 @@ export default function ReactTables(props) {
               simple
               onClick={() => {
                 let obj = data.find((o) => o.id === key);
-                alert(
-                  "You've clicked LIKE button on \n{ \nName: " +
-                    obj.name +
-                    ", \nposition: " +
-                    obj.position +
-                    ", \noffice: " +
-                    obj.office +
-                    ", \nage: " +
-                    obj.age +
-                    "\n}."
-                );
+                setBranch(1);
+                setFocusedExamId(prop[1]["id"]);
+                
               }}
               color="info"
               className="view"
@@ -189,9 +177,11 @@ export default function ReactTables(props) {
       };
     })
   );
+
   const classes = useStyles();
   return (
-    <GridContainer>
+    Branch === 0 ? (
+      <GridContainer>
       <GridItem xs={12}>
         <Card>
           <CardHeader color="primary" icon>
@@ -226,5 +216,10 @@ export default function ReactTables(props) {
         </Card>
       </GridItem>
     </GridContainer>
+
+    ):(
+      <ViewExamInfo token={Token} id={focusedExamId}/>
+    )
+    
   );
 }

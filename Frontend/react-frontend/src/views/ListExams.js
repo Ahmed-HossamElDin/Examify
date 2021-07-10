@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { DataGrid } from "@material-ui/data-grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import NewTable from "../components/newTable";
 import ViewAllowed from "../components/ViewAllowed";
 import Card from "@material-ui/core/Card";
-import NewTable from "../components/newTable";
 
 const columns = [
   {
@@ -58,7 +57,6 @@ export default class ListExams extends Component {
   };
   render() {
     const data = Object.entries(this.state.exams);
-    console.log(typeof(data))
     let rows = this.state.exams;
     for (let i = 0; i < rows.length; i++) {
       rows[i].exam_startdate = new Date(rows[i].exam_startdate.toString());
@@ -68,11 +66,6 @@ export default class ListExams extends Component {
       <div style={{ marginLeft: 150, marginRight: 20 }}>
         {rows.length > 0 ? (
           <div >
-            {/* <DataGrid rows={rows} columns={columns} pageSize={10} /> */}
-            {/* {console.log(rows, "rows")} */}
-            <Card>
-              <ViewAllowed token={this.state.token} />{" "}
-            </Card>
             <NewTable exams={data}></NewTable>
           </div>
         ) : (
