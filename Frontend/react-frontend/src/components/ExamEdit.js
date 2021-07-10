@@ -27,7 +27,7 @@ var clicked = false;
 var editAllowedStudents = false;
 var editSupervisors = false;
 var addNewQuestionvar = false;
-export default class Exam extends Component {
+export default class ExamEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -165,7 +165,184 @@ export default class Exam extends Component {
       this.setState({ addNewQuestionvar: true });
     };
     return (
+      
       <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: "center" }}>
+        
+        {updated && (
+          <Alert severity="success">Exam updated successfully!</Alert>
+        )}
+        <TextField
+          size="small"
+          required
+          id="ExamName"
+          label="Exam name"
+          value={this.state.exam_name}
+          error={this.state.exam_name ? false : true}
+          onChange={handleExamNameChange}
+        />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <br />{" "}
+          <KeyboardDatePicker
+            required
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="Pick the date"
+            KeyboardButtonProps={{
+              "aria-label": "change date",
+            }}
+            value={this.state.date_time}
+            onChange={handleDateChange}
+          />{" "}
+          <KeyboardTimePicker
+            margin="normal"
+            id="time-picker"
+            label="Pick the time"
+            value={this.state.date_time}
+            required
+            KeyboardButtonProps={{
+              "aria-label": "change time",
+            }}
+            onChange={handleTimeChange}
+          />
+        </MuiPickersUtilsProvider>{" "}
+        <br />
+        <TextField
+          required
+          id="standard-required"
+          label="Duration in hours"
+          error={isNaN(this.state.exam_duration)}
+          value={this.state.exam_duration}
+          onChange={handleDurationChange}
+        />
+        <br /> <br />
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={
+            loading ? (
+              <CircularProgress size={20} color="secondary" />
+            ) : this.state.created ? (
+              <DoneIcon />
+            ) : (
+              <SaveIcon />
+            )
+          }
+          disabled={
+            loading ||
+            this.state.disable ||
+            isNaN(this.state.exam_duration) ||
+            this.state.exam_duration === 0 ||
+            this.state.exam_name === "exam_name" ||
+            this.state.exam_name === "" ||
+            this.state.exam_duration === ""
+          }
+          onClick={updateExam}
+        >
+          {loading
+            ? "Updating exam..."
+            : this.state.created
+            ? "Updated successfully"
+            : "Update Exam"}
+        </Button>{" "}
+        <Button
+          startIcon={<VisibilityIcon />}
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={getQuestions}
+        >
+          Show Questions
+        </Button>{" "}
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<EditIcon />}
+          onClick={ShowAddStudent}
+        >
+          Edit allowed students
+        </Button>{" "}
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<EditIcon />}
+          onClick={ShowEditSupervisor}
+        >
+          Edit supervisors
+        </Button>
+        {this.state.questions.length > 0 ? (
+          this.state.questions.map((question) => {
+            counter = counter + 1;
+            console.log(question, "THE QUESTION");
+            return (
+              <Question
+                key={counter}
+                question={question}
+                counter={counter}
+                token={this.props.token}
+                deleteQuestion={deleteQuestion}
+                exam_id={this.props.exam.id}
+              />
+            );
+          })
+        ) : clicked === true ? (
+          <div>
+            <br />
+            <Alert severity="info">
+              This Exam Doesn't have any questions!{" "}
+            </Alert>
+            <CreateQuestion
+              exam_id={this.props.exam.id}
+              token={this.props.token}
+            />
+          </div>
+        ) : (
+          <div></div>
+        )}
+        {clicked && (
+          <div>
+            <br />
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              startIcon={<AddIcon />}
+              onClick={addNewQuestion}
+            >
+              Add a new Question
+            </Button>
+          </div>
+        )}
+        {this.state.addNewQuestionvar === true ? (
+          <CreateQuestion
+            counter={counter + 1}
+            token={this.props.token}
+            exam_id={this.props.exam.id}
+            callBacl={getQuestions}
+          />
+        ) : (
+          <div></div>
+        )}
+        {editAllowedStudents && (
+          <AddStudent
+            edit={true}
+            exam_id={this.props.exam.id}
+            token={this.props.token}
+          />
+        )}{" "}
+        {editSupervisors && (
+          <EditSupervisors
+            exam_id={this.props.exam.id}
+            token={this.props.token}
+          />
+        )}
+      </div>
         {updated && (
           <Alert severity="success">Exam updated successfully!</Alert>
         )}

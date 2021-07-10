@@ -21,7 +21,7 @@ import CardHeader from "../components/Card/CardHeader.js";
 import ReactTable from "../components/ReactTable/ReactTable.js";
 
 import ViewExamInfo from "./ViewExamInfo.js";
-import Exam from "./Exam";
+import ExamEdit from "./ExamEdit";
 
 
 import { cardTitle } from "../assets/jss/material-dashboard-pro-react.js";
@@ -113,6 +113,7 @@ export default function ReactTables(props) {
         .then((res) => {
           setCurrentExam(res.data)
           currentEx = res.data;
+          console.log(res.data["exam"])
         });
     }
 
@@ -273,7 +274,7 @@ export default function ReactTables(props) {
     ):Branch === 1? (
       <ViewExamInfo token={Token} id={focusedExamId} goBack={goBack}/>
     ):(
-      <Exam exam={currentEx} token={Token} />
+      <ExamEdit exam={currentEx} token={Token} />
     )
   );
 }
