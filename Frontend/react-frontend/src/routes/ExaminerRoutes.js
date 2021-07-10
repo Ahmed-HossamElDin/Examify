@@ -2,12 +2,12 @@ import Placeholder from "../views/placeholder.js";
 import CreateExam from "../views/CreateExam.js";
 import EditExam from "../views/EditExam.js";
 import ListExams from "../views/ListExams.js";
-
+import ViewListOfExams from "../views/ViewListOfExams.js";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import AddCircleOutlineSharpIcon from "@material-ui/icons/AddCircleOutlineSharp";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import ViewHeadlineOutlinedIcon from "@material-ui/icons/ViewHeadlineOutlined";
-
+import VisibilityIcon from "@material-ui/icons/Visibility";
 var ExaminerRoutes = [
   {
     path: "/home",
@@ -39,6 +39,14 @@ var ExaminerRoutes = [
     rtlName: "عرض امتحان",
     icon: ViewHeadlineOutlinedIcon,
     component: ListExams,
+    layout: "/dashboard",
+  },
+  {
+    path: "/view-student-exam",
+    name: "View Student exams",
+    rtlName: "عرض امتحان",
+    icon: VisibilityIcon,
+    component: ViewListOfExams,
     layout: "/dashboard",
   },
 ];
