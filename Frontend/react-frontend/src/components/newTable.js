@@ -26,6 +26,9 @@ import ViewExamInfo from "./ViewExamInfo.js";
 import { cardTitle } from "../assets/jss/material-dashboard-pro-react.js";
 
 import "../css/table.scss"
+
+import * as FileSaver from "file-saver";
+import * as XLSX from "xlsx";
   
 
 const styles = {
@@ -62,7 +65,9 @@ var formatTime = (exam_starttime) => {
   return time;
 };
 
+var exportex = []
 
+var examId = null;
 
 export default function ReactTables(props) {
   
@@ -70,9 +75,40 @@ export default function ReactTables(props) {
   const [Branch, setBranch] = useState(0);
   const [focusedExamId, setFocusedExamId] = useState(null);
   const [Token, setToken] = useState(localStorage.getItem("ExamifyToken"));
+  const [Marks,setMarks] = useState([]);
 
   const goBack = () => {
     setBranch(0);
+  };
+
+  const handleGetMarks = () => {
+    axios
+      .get(
+        `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${examId}/marks/`,
+        {
+          headers: { Authorization: "Token " + Token },
+        }
+      )
+      .then((res) => {
+        setMarks(res.data);
+        var finalMarks = Marks.map((key) => {
+          delete key.id;
+          exportex.push(key);
+          console.log(finalMarks);
+        });
+      });
+    }
+
+  const fileType =
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+  const fileExtension = ".xlsx";
+
+    const exportToCSV = (apiData, fileName) => {
+      const ws = XLSX.utils.json_to_sheet(apiData);
+      const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+      const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+      const data = new Blob([excelBuffer], { type: fileType });
+      FileSaver.saveAs(data, fileName + fileExtension);
   };
 
   const [data, setData] = React.useState(
@@ -83,7 +119,6 @@ export default function ReactTables(props) {
         exam_startdate: formatDate(new Date(prop[1]["exam_startdate"]).toString())+ " @ " + formatTime(new Date(prop[1]["exam_startdate"]).toString()),
         exam_duration: prop[1]["exam_duration"],
         actions: (
-          // we've 
           <div className="actions-right">
             <Button
               title="View"
@@ -94,6 +129,7 @@ export default function ReactTables(props) {
                 let obj = data.find((o) => o.id === key);
                 setBranch(1);
                 setFocusedExamId(prop[1]["id"]);
+                console.log(focusedExamId);
               }}
               color="info"
               className="view"
@@ -107,6 +143,12 @@ export default function ReactTables(props) {
               simple
               onClick={() => {
                 let obj = data.find((o) => o.id === key);
+                setFocusedExamId(prop[1]["id"]);
+                handleGetMarks();
+                examId = prop[1]["id"];
+                var downloadName = examId + "_Marks";
+                exportToCSV(exportex, downloadName);
+
               }}
               color="success"
               className="view"

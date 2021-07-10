@@ -46,6 +46,7 @@ export default class ListExams extends Component {
       .then((res) => {
         this.setState({ exams: res.data });
       });
+      
   }
   constructor(props) {
     super(props);
