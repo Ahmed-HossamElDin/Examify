@@ -87,9 +87,9 @@
             "text": "Proctors are given access to the system to allow them to supervise students from anywhere."
         },
         {
-            "icon": "fa fa-comments",
-            "title": "Examinee chat",
-            "text": "Examiners and proctors can easily communicate with examinees to alert them of any malicious actions."
+            "icon": "fa fa-chart-pie",
+            "title": "Exam stats",
+            "text": "Examiners can get insights on their exams."
         }
         
     ]

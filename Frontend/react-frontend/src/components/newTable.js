@@ -68,9 +68,11 @@ var formatTime = (exam_starttime) => {
   return time;
 };
 
-var exportex = []
+var exportex = [];
 
 var examId = null;
+
+var examMarks = [];
 
 export default function ReactTables(props) {
   
@@ -94,11 +96,12 @@ export default function ReactTables(props) {
         }
       )
       .then((res) => {
-        setMarks(res.data);
-        var finalMarks = Marks.map((key) => {
+        //setMarks(res.data);
+        examMarks = res.data;
+        exportex = [];
+        var finalMarks = examMarks.map((key) => {
           delete key.id;
           exportex.push(key);
-          //console.log(finalMarks);
         });
       });
     }
@@ -274,7 +277,7 @@ export default function ReactTables(props) {
 
     ):Branch === 1? (
       <ViewExamInfo token={Token} id={focusedExamId} goBack={goBack}/>
-    ):currentExam != null?(
+    ):(Branch === 2) && (currentExam != null)?(
       <ExamEdit exam={currentExam} token={Token} goBack={goBack}/>
     ):(
       <div>

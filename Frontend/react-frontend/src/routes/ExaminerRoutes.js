@@ -26,14 +26,6 @@ var ExaminerRoutes = [
     layout: "/dashboard",
   },
   {
-    path: "/edit-exam",
-    name: "Edit an exam",
-    rtlName: "عدل امتحان",
-    icon: EditOutlinedIcon,
-    component: EditExam,
-    layout: "/dashboard",
-  },
-  {
     path: "/view-exam",
     name: "View exams",
     rtlName: "عرض امتحان",
