@@ -307,7 +307,7 @@ class Sidebar extends React.Component {
       localStorage.removeItem("ExamfiyTimeLeft");
       localStorage.removeItem("ExamifyRememberMe");
       this.setState({ ...this.state, redirect: true });
-      window.location.replace("/");
+      window.location.replace("/login");
     };
     const {
       classes,
