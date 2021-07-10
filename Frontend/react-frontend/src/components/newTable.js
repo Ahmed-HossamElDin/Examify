@@ -19,8 +19,10 @@ import CardBody from "../components/Card/CardBody.js";
 import CardIcon from "../components/Card/CardIcon.js";
 import CardHeader from "../components/Card/CardHeader.js";
 import ReactTable from "../components/ReactTable/ReactTable.js";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import ViewExamInfo from "./ViewExamInfo.js";
+
 import ExamEdit from "./ExamEdit";
 
 
@@ -69,7 +71,6 @@ var formatTime = (exam_starttime) => {
 var exportex = []
 
 var examId = null;
-var currentEx = null;
 
 export default function ReactTables(props) {
   
@@ -97,7 +98,7 @@ export default function ReactTables(props) {
         var finalMarks = Marks.map((key) => {
           delete key.id;
           exportex.push(key);
-          console.log(finalMarks);
+          //console.log(finalMarks);
         });
       });
     }
@@ -112,8 +113,6 @@ export default function ReactTables(props) {
         )
         .then((res) => {
           setCurrentExam(res.data)
-          currentEx = res.data;
-          console.log(res.data["exam"])
         });
     }
 
@@ -125,7 +124,9 @@ export default function ReactTables(props) {
             headers: { Authorization: "Token " + Token },
           }
         )
-        .then(console.log("deleted"));
+        .then(() => {
+          // console.log("deleted")
+        });
     }
 
   const fileType =
@@ -273,8 +274,12 @@ export default function ReactTables(props) {
 
     ):Branch === 1? (
       <ViewExamInfo token={Token} id={focusedExamId} goBack={goBack}/>
+    ):currentExam != null?(
+      <ExamEdit exam={currentExam} token={Token} goBack={goBack}/>
     ):(
-      <ExamEdit exam={currentEx} token={Token} />
+      <div>
+        <LinearProgress color="secondary" />
+      </div>
     )
   );
 }
