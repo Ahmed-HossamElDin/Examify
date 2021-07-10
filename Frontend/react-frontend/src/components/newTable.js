@@ -65,12 +65,15 @@ var formatTime = (exam_starttime) => {
 
 
 export default function ReactTables(props) {
-
+  
   const [Exams, setExams] = useState(props.exams);
   const [Branch, setBranch] = useState(0);
   const [focusedExamId, setFocusedExamId] = useState(null);
   const [Token, setToken] = useState(localStorage.getItem("ExamifyToken"));
 
+  const goBack = () => {
+    setBranch(0);
+  };
 
   const [data, setData] = React.useState(
     Exams.map((prop, key) => {
@@ -80,9 +83,8 @@ export default function ReactTables(props) {
         exam_startdate: formatDate(new Date(prop[1]["exam_startdate"]).toString())+ " @ " + formatTime(new Date(prop[1]["exam_startdate"]).toString()),
         exam_duration: prop[1]["exam_duration"],
         actions: (
-          // we've added some custom button actions
+          // we've 
           <div className="actions-right">
-            {/* use this button to add a like kind of action */}
             <Button
               title="View"
               justIcon
@@ -92,7 +94,6 @@ export default function ReactTables(props) {
                 let obj = data.find((o) => o.id === key);
                 setBranch(1);
                 setFocusedExamId(prop[1]["id"]);
-                
               }}
               color="info"
               className="view"
@@ -106,24 +107,13 @@ export default function ReactTables(props) {
               simple
               onClick={() => {
                 let obj = data.find((o) => o.id === key);
-                alert(
-                  "You've clicked LIKE button on \n{ \nName: " +
-                    obj.name +
-                    ", \nposition: " +
-                    obj.position +
-                    ", \noffice: " +
-                    obj.office +
-                    ", \nage: " +
-                    obj.age +
-                    "\n}."
-                );
               }}
               color="success"
               className="view"
             >
               <GetApp />
             </Button>{" "}
-            {/* use this button to add a edit kind of action */}
+
             <Button
               title="Edit"
               justIcon
@@ -131,24 +121,14 @@ export default function ReactTables(props) {
               simple
               onClick={() => {
                 let obj = data.find((o) => o.id === key);
-                alert(
-                  "You've clicked EDIT button on \n{ \nName: " +
-                    obj.name +
-                    ", \nposition: " +
-                    obj.position +
-                    ", \noffice: " +
-                    obj.office +
-                    ", \nage: " +
-                    obj.age +
-                    "\n}."
-                );
+                setBranch(2);
+                setFocusedExamId(prop[1]["id"]);
               }}
               color="warning"
               className="edit"
             >
               <Dvr />
             </Button>{" "}
-            {/* use this button to remove the data row */}
             <Button
               title="Delete"
               justIcon
@@ -217,9 +197,10 @@ export default function ReactTables(props) {
       </GridItem>
     </GridContainer>
 
+    ):Branch === 1? (
+      <ViewExamInfo token={Token} id={focusedExamId} goBack={goBack}/>
     ):(
-      <ViewExamInfo token={Token} id={focusedExamId}/>
+      <div>2</div>
     )
-    
   );
 }

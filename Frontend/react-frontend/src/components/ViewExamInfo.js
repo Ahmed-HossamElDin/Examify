@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import VisibilityIcon from "@material-ui/icons/Visibility";
+
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
 import { DataGrid } from "@material-ui/data-grid";
 import Alert from "@material-ui/lab/Alert";
-import { ExportToExcel } from "./Download";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
 var finalMarks = [];
 var exportex = [];
 const columns = [
@@ -156,6 +156,17 @@ export default class ViewExamInfo extends Component {
     }
     return (
       <div>
+        <Button
+          style={{ float: "left"}}
+          variant="outlined"
+          size="small"
+          onClick={this.props.goBack}
+          startIcon={<ArrowBackIcon />}
+        >
+          Back
+        </Button>
+        
+
         <CardContent>
           <br />
           {this.state.clicked === false ? (
@@ -246,6 +257,7 @@ export default class ViewExamInfo extends Component {
             <div></div>
           )}
         </CardContent>
+        
       </div>
     );
   }
