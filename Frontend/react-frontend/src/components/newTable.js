@@ -85,7 +85,7 @@ export default function ReactTables(props) {
     setBranch(0);
   };
 
-  const handleGetMarks = (id, name) => {
+  const handleDownload = (id, name) => {
     axios
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${id}/marks/`,
@@ -183,7 +183,7 @@ export default function ReactTables(props) {
                 setFocusedExamId(prop[1]["id"]);
                 examName = prop[1]["exam_name"];
                 examId = prop[1]["id"]
-                handleGetMarks(examId, examName);
+                handleDownload(examId, examName);
                 
               }}
               color="success"
@@ -213,7 +213,11 @@ export default function ReactTables(props) {
               justIcon
               round
               simple
-              onClick={() => {}}
+              onClick={() => {
+                let obj = data.find((o) => o.id === key);
+                setFocusedExamId(prop[1]["id"]);
+                setBranch(3);
+              }}
               color="primary"
               className="view"
             >
@@ -290,7 +294,9 @@ export default function ReactTables(props) {
     <ViewExamInfo token={Token} id={focusedExamId} goBack={goBack} />
   ) : Branch === 2 && currentExam != null ? (
     <ExamEdit exam={currentExam} token={Token} goBack={goBack} />
-  ) : (
+  ) : Branch === 3 && focusedExamId != null ? (
+    <div>Statistics of exam of id : {focusedExamId}</div>
+  ):(
     <div>
       <LinearProgress color="secondary" />
     </div>
