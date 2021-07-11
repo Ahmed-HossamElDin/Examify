@@ -68,6 +68,7 @@ var formatTime = (exam_starttime) => {
 
 var exportex = [];
 
+var examName = null;
 var examId = null;
 
 var examMarks = [];
@@ -84,7 +85,7 @@ export default function ReactTables(props) {
     setBranch(0);
   };
 
-  const handleGetMarks = (id) => {
+  const handleGetMarks = (id, name) => {
     axios
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${id}/marks/`,
@@ -95,12 +96,16 @@ export default function ReactTables(props) {
       .then((res) => {
         //setMarks(res.data);
         examMarks = res.data;
+        console.log(examMarks);
         exportex = [];
         var finalMarks = examMarks.map((key) => {
           delete key.id;
           exportex.push(key);
         });
+        var downloadName = name + "_Marks";
+        exportToCSV(exportex, downloadName);
       });
+      
   };
 
   const handleGetExam = (id) => {
@@ -176,10 +181,10 @@ export default function ReactTables(props) {
               onClick={() => {
                 let obj = data.find((o) => o.id === key);
                 setFocusedExamId(prop[1]["id"]);
-                examId = prop[1]["exam_name"];
-                handleGetMarks(examId);
-                var downloadName = examId + "_Marks";
-                exportToCSV(exportex, downloadName);
+                examName = prop[1]["exam_name"];
+                examId = prop[1]["id"]
+                handleGetMarks(examId, examName);
+                
               }}
               color="success"
               className="view"
