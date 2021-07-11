@@ -5,41 +5,6 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 
-var questions = [
-  {
-    student_name: "student 1",
-    student: 41,
-    exam: 13,
-    exam_name: "Movies",
-    question: 18,
-    question_text: "how old are you now wrong new?",
-    answer: 12,
-    answer_text: "Joe Fox",
-    is_correct: true,
-  },
-  {
-    student_name: "student 1",
-    student: 41,
-    exam: 13,
-    exam_name: "Movies",
-    question: 19,
-    question_text: "how old are you now wrong new?",
-    answer: 17,
-    answer_text: "Sansa Stark",
-    is_correct: true,
-  },
-  {
-    student_name: "student 1",
-    student: 41,
-    exam: 13,
-    exam_name: "Movies",
-    question: 20,
-    question_text: "how old are you now wrong new?",
-    answer: 20,
-    answer_text: "Chuck Noland",
-    is_correct: true,
-  },
-];
 export default class ViewStudentAnswers extends Component {
   state = { questions: [] };
   componentDidMount() {

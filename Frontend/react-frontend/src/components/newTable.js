@@ -31,6 +31,7 @@ import "../css/table.scss";
 
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
+import ViewStatistics from "./ViewStatistics.js";
 
 const styles = {
   cardIconTitle: {
@@ -105,7 +106,6 @@ export default function ReactTables(props) {
         var downloadName = name + "_Marks";
         exportToCSV(exportex, downloadName);
       });
-      
   };
 
   const handleGetExam = (id) => {
@@ -182,9 +182,8 @@ export default function ReactTables(props) {
                 let obj = data.find((o) => o.id === key);
                 setFocusedExamId(prop[1]["id"]);
                 examName = prop[1]["exam_name"];
-                examId = prop[1]["id"]
+                examId = prop[1]["id"];
                 handleDownload(examId, examName);
-                
               }}
               color="success"
               className="view"
@@ -295,9 +294,8 @@ export default function ReactTables(props) {
   ) : Branch === 2 && currentExam != null ? (
     <ExamEdit exam={currentExam} token={Token} goBack={goBack} />
   ) : Branch === 3 && focusedExamId != null ? (
-    <div>Statistics of exam of id : {focusedExamId}</div>
-    //badel el div da bel component ele enta 3ayzo
-  ):(
+    <ViewStatistics token={Token} id={focusedExamId} goBack={goBack} />
+  ) : (
     <div>
       <LinearProgress color="secondary" />
     </div>
