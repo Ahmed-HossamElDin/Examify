@@ -48,22 +48,23 @@ export default class ViewStatistics extends Component {
       <LinearProgress />
     ) : (
       <div>
-        {console.log(this.state.question_stats, "sdsds")}
         <div>
-          <Button
-            style={{
-              float: "left",
-              marginLeft: 20,
-              marginTop: 20,
-              marginBottom: 20,
-            }}
-            variant="outlined"
-            size="small"
-            onClick={this.props.goBack}
-            startIcon={<ArrowBackIcon />}
-          >
-            Back
-          </Button>
+          {this.props.goBack && (
+            <Button
+              style={{
+                float: "left",
+                marginLeft: 20,
+                marginTop: 20,
+                marginBottom: 20,
+              }}
+              variant="outlined"
+              size="small"
+              onClick={this.props.goBack}
+              startIcon={<ArrowBackIcon />}
+            >
+              Back
+            </Button>
+          )}
         </div>{" "}
         <div
           style={{
