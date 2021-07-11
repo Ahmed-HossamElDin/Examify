@@ -105,7 +105,7 @@ export default class ViewStatistics extends Component {
                 style={{
                   float: "left",
                   direction: "flex",
-                  marginRight: 5,
+                  marginRight: 2,
                   marginTop: 5,
                   borderStyle: "solid",
                   borderRadius: 15,
