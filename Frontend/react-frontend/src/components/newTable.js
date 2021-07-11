@@ -256,7 +256,7 @@ export default function ReactTables(props) {
   return Branch === 0 ? (
     <GridContainer>
       <GridItem xs={12}>
-        <Card>
+        <Card style={{ marginTop: -10, marginLeft: -50 }}>
           <CardHeader color="primary" icon>
             <CardIcon color="primary">
               <Assignment />
