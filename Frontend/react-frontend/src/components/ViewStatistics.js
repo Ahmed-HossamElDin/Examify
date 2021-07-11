@@ -18,8 +18,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Timeline from "@material-ui/icons/Timeline";
 
 // core components
-import Heading from "../components/Heading/Heading.js";
-import GridContainer from "../components/Grid/GridContainer.js";
 import GridItem from "../components/Grid/GridItem.js";
 
 import CardHeader from "../components/Card/CardHeader.js";
