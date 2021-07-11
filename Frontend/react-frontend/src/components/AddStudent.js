@@ -10,26 +10,12 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { ExcelRenderer } from "react-excel-renderer";
 import Tooltip from "@material-ui/core/Tooltip";
 import HelpOutlineOutlinedIcon from "@material-ui/icons/HelpOutlineOutlined";
+import EditStudent from "./EditStudent";
+
 var success = false;
 var help =
   "Correct format is : student1,student2,student3 or student1 student2 student3 or by sperating them by new lines";
 export default class AddStudents extends Component {
-  componentDidMount() {
-    if (this.props.edit) {
-      axios
-        .get(
-          `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/allowed-students/`,
-          {
-            headers: { Authorization: "Token " + this.props.token },
-          }
-        )
-        .then((res) => {
-          this.setState({
-            allowedStudents: res.data.student.sort(),
-          });
-        });
-    }
-  }
   state = {
     allowedStudents: [],
     loading: false,
@@ -127,6 +113,7 @@ export default class AddStudents extends Component {
         .then((res) => {
           success = true;
           this.setState({ ...this.state, loading: false });
+          if (this.props.callBack !== null) this.props.callBack();
         })
         .catch(() => {
           this.setState({
@@ -172,7 +159,15 @@ export default class AddStudents extends Component {
 
     return (
       <div>
-        <br />
+        {this.props.edit && (
+          <div>
+            <EditStudent
+              token={this.state.token}
+              exam_id={this.state.exam_id}
+            />{" "}
+          </div>
+        )}
+        <br /> <br />
         <h3
           style={{ fontSize: "20px", fontFamily: "Century Gothic,Lucida Sans" }}
         >
