@@ -164,8 +164,87 @@ export default class ViewStatistics extends Component {
                               100 +
                             "%"
                           }
-                        />
+                        />{" "}
+                        <ProgressBar
+                          striped
+                          style={{
+                            backgroundColor: "#CCCC00",
+                          }}
+                          now={
+                            (this.state.question_stats[key].unanswered_count /
+                              (this.state.question_stats[key].correct_count +
+                                this.state.question_stats[key]
+                                  .unanswered_count +
+                                this.state.question_stats[key].wrong_count)) *
+                            100
+                          }
+                          label={
+                            (this.state.question_stats[key].wrong_count /
+                              (this.state.question_stats[key].correct_count +
+                                this.state.question_stats[key]
+                                  .unanswered_count +
+                                this.state.question_stats[key].wrong_count)) *
+                              100 +
+                            "%"
+                          }
+                        />{" "}
                       </ProgressBar>{" "}
+                      <Card>
+                        {" "}
+                        <div
+                          style={{
+                            float: "right",
+                            marginRight: "22%",
+                          }}
+                        >
+                          Correct answer
+                        </div>
+                        <ProgressBar style={{ width: 50 }}>
+                          <ProgressBar
+                            striped
+                            style={{
+                              backgroundColor: (0, 128, 255),
+                            }}
+                            now={100}
+                          />
+                        </ProgressBar>{" "}
+                        <div
+                          style={{
+                            float: "right",
+                            marginRight: "18%",
+                            textAlign: "center",
+                          }}
+                        >
+                          Incorrect answer
+                        </div>
+                        <ProgressBar style={{ width: 50 }}>
+                          <ProgressBar
+                            striped
+                            style={{
+                              backgroundColor: "#CC0000",
+                            }}
+                            now={100}
+                          />{" "}
+                        </ProgressBar>{" "}
+                        <div
+                          style={{
+                            float: "right",
+                            marginRight: "30%",
+                            textAlign: "center",
+                          }}
+                        >
+                          Unanswered
+                        </div>
+                        <ProgressBar style={{ width: 50 }}>
+                          <ProgressBar
+                            striped
+                            style={{
+                              backgroundColor: "#CCCC00",
+                            }}
+                            now={100}
+                          />{" "}
+                        </ProgressBar>{" "}
+                      </Card>
                     </Card.Body>
                   </Card>
                 </div>
