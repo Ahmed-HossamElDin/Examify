@@ -70,7 +70,9 @@ export default class ViewExamInfo extends Component {
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/attendance/`,
         {
-          headers: { Authorization: "Token " + this.props.token },
+          headers: {
+            Authorization: "Token " + this.props.token,
+          },
         }
       )
       .then((res) => {
@@ -82,7 +84,9 @@ export default class ViewExamInfo extends Component {
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/allowed-students/`,
         {
-          headers: { Authorization: "Token " + this.props.token },
+          headers: {
+            Authorization: "Token " + this.props.token,
+          },
         }
       )
       .then((res) => {
@@ -94,7 +98,9 @@ export default class ViewExamInfo extends Component {
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/supervisors/`,
         {
-          headers: { Authorization: "Token " + this.props.token },
+          headers: {
+            Authorization: "Token " + this.props.token,
+          },
         }
       )
       .then((res) => {
@@ -108,7 +114,9 @@ export default class ViewExamInfo extends Component {
         .get(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/marks/`,
           {
-            headers: { Authorization: "Token " + this.props.token },
+            headers: {
+              Authorization: "Token " + this.props.token,
+            },
           }
         )
         .then((res) => {
@@ -127,7 +135,9 @@ export default class ViewExamInfo extends Component {
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/violations/`,
         {
-          headers: { Authorization: "Token " + this.props.token },
+          headers: {
+            Authorization: "Token " + this.props.token,
+          },
         }
       )
       .then((res) => {
@@ -151,7 +161,11 @@ export default class ViewExamInfo extends Component {
     marks: [],
     clicked: false,
     loading: false,
-    violations: {},
+    violations: {
+      id: 0,
+      exam_name: "",
+      violations: [],
+    },
   };
   render() {
     let rows = this.state.attendance;
@@ -284,7 +298,7 @@ export default class ViewExamInfo extends Component {
                   </Alert>
                 </div>
               )}
-              {Object.keys(this.state.violations).length > 0 &&
+              {this.state.violations.violations.length > 0 &&
               this.state.loading !== true ? (
                 <div
                   style={{
@@ -293,6 +307,7 @@ export default class ViewExamInfo extends Component {
                     width: 700,
                   }}
                 >
+                  {console.log(this.state.violations)}
                   <div style={{ marginTop: 20, marginBottom: 20 }}>
                     Reported Violations
                     <hr />
