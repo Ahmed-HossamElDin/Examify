@@ -126,6 +126,15 @@ export default class ViewStatistics extends Component {
                         <br />
                         {"Incorrect Answers count: " +
                           this.state.question_stats[key].wrong_count +
+                          " student(s)"}
+                        <br />
+                        {"Unanswered count: " +
+                          parseInt(
+                            this.state.exam_statistics
+                              .num_of_students_submited_the_exam -
+                              this.state.question_stats[key].wrong_count +
+                              this.state.question_stats[key].correct_count
+                          ) +
                           " student(s)"}{" "}
                       </Card.Text>
                       <ProgressBar>
@@ -134,18 +143,14 @@ export default class ViewStatistics extends Component {
                           style={{ backgroundColor: (0, 128, 255) }}
                           now={
                             (this.state.question_stats[key].correct_count /
-                              (this.state.question_stats[key].correct_count +
-                                this.state.question_stats[key]
-                                  .unanswered_count +
-                                this.state.question_stats[key].wrong_count)) *
+                              this.state.exam_statistics
+                                .num_of_students_submited_the_exam) *
                             100
                           }
                           label={
                             (this.state.question_stats[key].correct_count /
-                              (this.state.question_stats[key].correct_count +
-                                this.state.question_stats[key]
-                                  .unanswered_count +
-                                this.state.question_stats[key].wrong_count)) *
+                              this.state.exam_statistics
+                                .num_of_students_submited_the_exam) *
                               100 +
                             "%"
                           }
@@ -157,18 +162,14 @@ export default class ViewStatistics extends Component {
                           }}
                           now={
                             (this.state.question_stats[key].wrong_count /
-                              (this.state.question_stats[key].correct_count +
-                                this.state.question_stats[key]
-                                  .unanswered_count +
-                                this.state.question_stats[key].wrong_count)) *
+                              this.state.exam_statistics
+                                .num_of_students_submited_the_exam) *
                             100
                           }
                           label={
                             (this.state.question_stats[key].wrong_count /
-                              (this.state.question_stats[key].correct_count +
-                                this.state.question_stats[key]
-                                  .unanswered_count +
-                                this.state.question_stats[key].wrong_count)) *
+                              this.state.exam_statistics
+                                .num_of_students_submited_the_exam) *
                               100 +
                             "%"
                           }
@@ -179,19 +180,18 @@ export default class ViewStatistics extends Component {
                             backgroundColor: "#CCCC00",
                           }}
                           now={
-                            (this.state.question_stats[key].unanswered_count /
-                              (this.state.question_stats[key].correct_count +
-                                this.state.question_stats[key]
-                                  .unanswered_count +
-                                this.state.question_stats[key].wrong_count)) *
+                            ((this.state.exam_statistics
+                              .num_of_students_submited_the_exam -
+                              this.state.question_stats[key].wrong_count +
+                              this.state.question_stats[key].correct_count) /
+                              this.state.exam_statistics
+                                .num_of_students_submited_the_exam) *
                             100
                           }
                           label={
                             (this.state.question_stats[key].wrong_count /
-                              (this.state.question_stats[key].correct_count +
-                                this.state.question_stats[key]
-                                  .unanswered_count +
-                                this.state.question_stats[key].wrong_count)) *
+                              this.state.exam_statistics
+                                .num_of_students_submited_the_exam) *
                               100 +
                             "%"
                           }

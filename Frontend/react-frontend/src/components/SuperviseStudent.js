@@ -48,7 +48,7 @@ export default class SuperviseStudent extends Component {
       console.log("entered");
       axios
         .post(
-          `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/supervise/student/${this.props.info.student_id}`,
+          `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/supervise/student/${this.props.info.student_id}/`,
           {
             violation: this.state.violation_description,
           },

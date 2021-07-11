@@ -131,13 +131,12 @@ export default class AddSupervisors extends Component {
         if (err) {
           console.log(err);
         } else {
-          console.log(resp.rows);
           resp.rows.map((supervisor) => result.push(supervisor[0]));
           this.setState(
             {
               allowedSupervisors: result,
             },
-            console.log(this.state)
+            console.log(result)
           );
         }
       });

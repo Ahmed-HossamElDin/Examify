@@ -58,7 +58,7 @@ export default class SupervisorExamList extends Component {
         .padStart(2, "0");
     return time;
   };
-  
+
   render() {
     return !this.state.clicked ? (
       this.state.exams.length > 0 ? (
@@ -101,11 +101,7 @@ export default class SupervisorExamList extends Component {
                     <td>{this.formatDate(key.exam_startdate)}</td>
                     <td>{this.formatTime(key.exam_startdate)}</td>
                     <td>{key.exam_duration}</td>
-                    <td>
-                      {key.is_started === "The Exam is Closed"
-                        ? "Exam ended"
-                        : "Exam didn't start yet"}
-                    </td>
+                    <td>{key.is_started}</td>
                   </tr>
                 );
               })}
