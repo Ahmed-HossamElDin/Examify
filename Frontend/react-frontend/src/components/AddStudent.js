@@ -33,6 +33,7 @@ export default class AddStudents extends Component {
       exam_id: props.exam_id,
       token: props.token,
     };
+    success = false;
   }
   render() {
     const handleAddStudents = (e) => {
