@@ -135,12 +135,16 @@ export default class ViewStatistics extends Component {
                           now={
                             (this.state.question_stats[key].correct_count /
                               (this.state.question_stats[key].correct_count +
+                                this.state.question_stats[key]
+                                  .unanswered_count +
                                 this.state.question_stats[key].wrong_count)) *
                             100
                           }
                           label={
                             (this.state.question_stats[key].correct_count /
                               (this.state.question_stats[key].correct_count +
+                                this.state.question_stats[key]
+                                  .unanswered_count +
                                 this.state.question_stats[key].wrong_count)) *
                               100 +
                             "%"
@@ -154,12 +158,16 @@ export default class ViewStatistics extends Component {
                           now={
                             (this.state.question_stats[key].wrong_count /
                               (this.state.question_stats[key].correct_count +
+                                this.state.question_stats[key]
+                                  .unanswered_count +
                                 this.state.question_stats[key].wrong_count)) *
                             100
                           }
                           label={
                             (this.state.question_stats[key].wrong_count /
                               (this.state.question_stats[key].correct_count +
+                                this.state.question_stats[key]
+                                  .unanswered_count +
                                 this.state.question_stats[key].wrong_count)) *
                               100 +
                             "%"
