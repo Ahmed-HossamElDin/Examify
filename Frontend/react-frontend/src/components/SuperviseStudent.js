@@ -110,8 +110,9 @@ export default class SuperviseStudent extends Component {
               variant="contained"
               color="secondary"
               onClick={handleShowModalMessage}
+              startIcon={<ReportIcon />}
             >
-              <ReportIcon /> Report Violation
+              Report Violation
             </Button>
           </CardContent>
         </Card>
