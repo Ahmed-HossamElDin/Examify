@@ -5,16 +5,14 @@ import Switch from "@material-ui/core/Switch";
 import Button from "@material-ui/core/Button";
 import CountdownTimer from "./CountdownTimer";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import StudentExam from "./StudentExam";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { Alert } from "@material-ui/lab";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import SuperviseStudent from "./SuperviseStudent";
-var timer = "";
+
 export default class SuperviseExam extends Component {
   componentDidMount() {
     this.setState({ ...this.state, error: "", time_left: 0 });
-    localStorage.setItem("ExamfiyTimeLeft", "");
   }
   state = {
     exam_name: "",
@@ -59,7 +57,7 @@ export default class SuperviseExam extends Component {
   };
 
   getTimeLeft = (e) => {
-    var time = 0;
+    var show = e.target.checked;
     axios
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/time-left/`,
@@ -70,16 +68,15 @@ export default class SuperviseExam extends Component {
         }
       )
       .then((res) => {
-        time =
-          parseInt(res.data.time_left.split(":")[0]) * 60 * 60 +
-          parseInt(res.data.time_left.split(":")[1]) * 60;
-        localStorage.setItem("ExamfiyTimeLeft", time.toString());
-        timer = time;
-        console.log("timeeer", timer);
+        console.log(res);
+        this.setState({
+          checked: show,
+          time_left:
+            parseInt(res.data.time_left.split(":")[0]) * 60 * 60 +
+            parseInt(res.data.time_left.split(":")[1]) * 60,
+        });
       })
       .catch((err) => {});
-
-    this.handleTimerChange(e);
   };
 
   handleTimerChange = (e) => {
@@ -198,6 +195,8 @@ export default class SuperviseExam extends Component {
                     <SuperviseStudent
                       key={this.state.students[key].student_id}
                       info={this.state.students[key]}
+                      exam_id={this.props.exam_id}
+                      token={this.props.token}
                     />
                   );
                 })}
