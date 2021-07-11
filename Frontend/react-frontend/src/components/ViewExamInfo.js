@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import { DataGrid } from "@material-ui/data-grid";
 import Alert from "@material-ui/lab/Alert";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { LinearProgress } from "@material-ui/core";
 
 var finalMarks = [];
 var exportex = [];
@@ -64,10 +65,7 @@ const marks = [
   },
 ];
 
-
-
 export default class ViewExamInfo extends Component {
-
   handleGetAttendance() {
     axios
       .get(
@@ -80,7 +78,7 @@ export default class ViewExamInfo extends Component {
         this.setState({ attendance: res.data });
       });
   }
-  handleViewStudent(){
+  handleViewStudent() {
     axios
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/allowed-students/`,
@@ -92,7 +90,7 @@ export default class ViewExamInfo extends Component {
         this.setState({ students: res.data.student.sort() });
       });
   }
-  handleViewSupervisors(){
+  handleViewSupervisors() {
     axios
       .get(
         `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/supervisors/`,
@@ -105,27 +103,28 @@ export default class ViewExamInfo extends Component {
       });
   }
 
-  handleGetMarks(){
-    axios
-      .get(
-        `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/marks/`,
-        {
-          headers: { Authorization: "Token " + this.props.token },
-        }
-      )
-      .then((res) => {
-        this.setState({ marks: res.data });
+  handleGetMarks() {
+    this.setState({ loading: true }, () =>
+      axios
+        .get(
+          `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/marks/`,
+          {
+            headers: { Authorization: "Token " + this.props.token },
+          }
+        )
+        .then((res) => {
+          this.setState({ marks: res.data, loading: false });
 
-        finalMarks = res.data;
-        finalMarks = finalMarks.map((key) => {
-          delete key.id;
-          exportex.push(key);
-        });
-      });
-    }
-  
+          finalMarks = res.data;
+          finalMarks = finalMarks.map((key) => {
+            delete key.id;
+            exportex.push(key);
+          });
+        })
+    );
+  }
 
-  componentDidMount(){
+  componentDidMount() {
     this.handleViewStudent();
     this.handleViewSupervisors();
     this.handleGetAttendance();
@@ -140,9 +139,9 @@ export default class ViewExamInfo extends Component {
     supervisors: [],
     marks: [],
     clicked: false,
+    loading: false,
   };
   render() {
-
     let rows = this.state.attendance;
     for (let i = 0; i < rows.length; i++) {
       if (rows[i].enter_time !== null && rows[i].submit_time === null) {
@@ -157,7 +156,7 @@ export default class ViewExamInfo extends Component {
     return (
       <div>
         <Button
-          style={{ float: "left"}}
+          style={{ float: "left" }}
           variant="outlined"
           size="small"
           onClick={this.props.goBack}
@@ -165,30 +164,31 @@ export default class ViewExamInfo extends Component {
         >
           Back
         </Button>
-        
 
         <CardContent>
           <br />
+          {this.state.loading === true ? <LinearProgress /> : <div></div>}
           {this.state.clicked === false ? (
             <div>
               {" "}
               {this.state.students.length > 0 ? (
                 <div>
-                  <Alert severity="info">
-                    Allowed Students: {this.state.students.length} <hr />
-                    <TextField
-                      id="outlined-multiline-static"
-                      label="Allowed Students"
-                      multiline
-                      rowsMax={this.state.students.length}
-                      variant="outlined"
-                      fullWidth
-                      size="medium"
-                      value={this.state.students.join(", ")}
-                    />{" "}
-                  </Alert>
+                  {/*  <Alert severity="info"> </Alert>*/}
+                  Allowed Students: {this.state.students.length} <hr />
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Allowed Students"
+                    multiline
+                    rowsMax={this.state.students.length}
+                    variant="outlined"
+                    fullWidth
+                    size="medium"
+                    value={this.state.students.join(", ")}
+                  />{" "}
                   <br />
                 </div>
+              ) : this.state.loading ? (
+                <div></div>
               ) : (
                 <div>
                   {" "}
@@ -200,6 +200,7 @@ export default class ViewExamInfo extends Component {
               {this.state.attendance.length > 0 ? (
                 <div>
                   {" "}
+                  <br />
                   Attendance Sheet <hr />
                   <div style={{ height: 300, width: 735 }}>
                     {" "}
@@ -208,42 +209,32 @@ export default class ViewExamInfo extends Component {
                       columns={columns}
                       pageSize={10}
                     />
-                    <hr /> <br />
                   </div>{" "}
                 </div>
+              ) : this.state.loading ? (
+                <div></div>
               ) : (
                 <div>
                   {" "}
                   <Alert severity="info">This Exam Doesn't come yet! </Alert>
                 </div>
               )}{" "}
-              {this.state.supervisors.length > 0 ? (
-                <div style={{ height: 500, width: 700 }}>
-                  {console.log(this.state.supervisors)}
-                  <DataGrid
-                    rows={this.state.supervisors}
-                    columns={supervisors}
-                    pageSize={10}
-                  />
-                  <br />
-                </div>
-              ) : (
-                <div>
-                  {" "}
-                  <Alert severity="info">
-                    This Exam Doesn't have any supervisors!{" "}
-                  </Alert>
-                </div>
-              )}{" "}
               {this.state.marks.length > 0 ? (
-                <div style={{ height: 300, width: 400 }}>
-                  <DataGrid
-                    rows={this.state.marks}
-                    columns={marks}
-                    pageSize={10}
-                  />
-                  <br />
+                <div>
+                  <div style={{ marginTop: 20, marginBottom: 20 }}>
+                    Students Marks <hr />
+                  </div>{" "}
+                  <div style={{ height: 300, width: 735 }}>
+                    <DataGrid
+                      rows={this.state.marks}
+                      columns={marks}
+                      pageSize={10}
+                    />
+                    <br />
+                  </div>
                 </div>
+              ) : this.state.loading ? (
+                <div></div>
               ) : (
                 <div>
                   {" "}
@@ -252,12 +243,35 @@ export default class ViewExamInfo extends Component {
                   </Alert>
                 </div>
               )}
+              {this.state.supervisors.length > 0 ? (
+                <div style={{ height: 500, width: 700 }}>
+                  <div style={{ marginTop: 20, marginBottom: 20 }}>
+                    Assigned Supervisors
+                    <hr />
+                  </div>
+                  <div style={{ height: 300, width: 735 }}>
+                    <DataGrid
+                      rows={this.state.supervisors}
+                      columns={supervisors}
+                      pageSize={10}
+                    />
+                  </div>
+                </div>
+              ) : this.state.loading ? (
+                <div></div>
+              ) : (
+                <div>
+                  {" "}
+                  <Alert severity="info">
+                    This Exam Doesn't have any supervisors!{" "}
+                  </Alert>
+                </div>
+              )}{" "}
             </div>
           ) : (
             <div></div>
           )}
         </CardContent>
-        
       </div>
     );
   }

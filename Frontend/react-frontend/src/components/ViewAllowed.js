@@ -236,7 +236,6 @@ export default class ViewAllowed extends Component {
               )}{" "}
               {this.state.supervisors.length > 0 ? (
                 <div style={{ height: 500, width: 700 }}>
-                  {console.log(this.state.supervisors)}
                   <DataGrid
                     rows={this.state.supervisors}
                     columns={supervisors}
