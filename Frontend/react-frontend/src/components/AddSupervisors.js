@@ -231,7 +231,7 @@ export default class AddSupervisors extends Component {
               onChange={fileHandler.bind(this)}
               accept=".xlsx, .xls, .csv"
             />{" "}
-            <label htmlFor="contained-button-file">
+            <label style={{ marginLeft: 470 }} htmlFor="contained-button-file">
               <Button
                 variant="contained"
                 color="default"
@@ -244,6 +244,7 @@ export default class AddSupervisors extends Component {
             <Button
               variant="contained"
               color="primary"
+              style={{ float: "left", marginLeft: 5 }}
               startIcon={
                 this.state.loading ? (
                   <CircularProgress size={20} color="secondary" />

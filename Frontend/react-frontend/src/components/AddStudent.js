@@ -248,7 +248,7 @@ export default class AddStudents extends Component {
               onChange={fileHandler.bind(this)}
               accept=".xlsx, .xls, .csv"
             />{" "}
-            <label htmlFor="contained-button-file">
+            <label style={{ marginLeft: 470 }} htmlFor="contained-button-file">
               <Button
                 variant="contained"
                 color="default"
@@ -258,9 +258,11 @@ export default class AddStudents extends Component {
                 Choose an excel file
               </Button>
             </label>
+            {"   "}
             <Button
               variant="contained"
               color="primary"
+              style={{ float: "left", marginLeft: 5 }}
               startIcon={
                 this.state.loading ? (
                   <CircularProgress size={20} color="secondary" />
@@ -275,6 +277,7 @@ export default class AddStudents extends Component {
                 ? "Uploading and Adding students..."
                 : "  Upload and add students"}
             </Button>{" "}
+            <br />
           </div>
         ) : (
           <div></div>
