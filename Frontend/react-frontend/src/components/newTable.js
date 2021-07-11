@@ -20,7 +20,7 @@ import CardIcon from "../components/Card/CardIcon.js";
 import CardHeader from "../components/Card/CardHeader.js";
 import ReactTable from "../components/ReactTable/ReactTable.js";
 import LinearProgress from "@material-ui/core/LinearProgress";
-
+import EqualizerIcon from "@material-ui/icons/Equalizer";
 import ViewExamInfo from "./ViewExamInfo.js";
 
 import ExamEdit from "./ExamEdit";
@@ -203,6 +203,17 @@ export default function ReactTables(props) {
             >
               <Dvr />
             </Button>{" "}
+            <Button
+              title="View Statistics"
+              justIcon
+              round
+              simple
+              onClick={() => {}}
+              color="primary"
+              className="view"
+            >
+              <EqualizerIcon />{" "}
+            </Button>
             <Button
               title="Delete"
               justIcon
