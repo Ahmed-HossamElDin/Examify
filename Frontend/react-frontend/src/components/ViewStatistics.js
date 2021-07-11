@@ -203,7 +203,7 @@ class ViewStatistics extends Component {
             </GridItem>
           </div>
           <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', margin:'20px'}}>
-            <h1>Inddividual questions statistics</h1>
+            <h1>Individual questions statistics</h1>
           </div>
         </div>
         <div>
