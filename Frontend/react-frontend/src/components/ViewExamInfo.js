@@ -7,7 +7,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import Alert from "@material-ui/lab/Alert";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { LinearProgress } from "@material-ui/core";
-
+import Table from "react-bootstrap/Table";
 var finalMarks = [];
 var exportex = [];
 const columns = [
@@ -122,11 +122,23 @@ export default class ViewExamInfo extends Component {
         })
     );
   }
-
+  handleGetViolation = () => {
+    axios
+      .get(
+        `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.state.id}/violations/`,
+        {
+          headers: { Authorization: "Token " + this.props.token },
+        }
+      )
+      .then((res) => {
+        this.setState({ violations: res.data });
+      });
+  };
   componentDidMount() {
     this.handleViewStudent();
     this.handleViewSupervisors();
     this.handleGetAttendance();
+    this.handleGetViolation();
     this.handleGetMarks();
   }
   state = {
@@ -139,6 +151,7 @@ export default class ViewExamInfo extends Component {
     marks: [],
     clicked: false,
     loading: false,
+    violations: {},
   };
   render() {
     let rows = this.state.attendance;
@@ -172,6 +185,7 @@ export default class ViewExamInfo extends Component {
               {" "}
               {this.state.students.length > 0 ? (
                 <div>
+                  <br />
                   {/*  <Alert severity="info"> </Alert>*/}
                   Allowed Students: {this.state.students.length} <hr />
                   <TextField
@@ -191,6 +205,7 @@ export default class ViewExamInfo extends Component {
               ) : (
                 <div>
                   {" "}
+                  <br />
                   <Alert severity="info">
                     This Exam Doesn't have any students!{" "}
                   </Alert>
@@ -215,6 +230,7 @@ export default class ViewExamInfo extends Component {
               ) : (
                 <div>
                   {" "}
+                  <br />
                   <Alert severity="info">This Exam Doesn't come yet! </Alert>
                 </div>
               )}{" "}
@@ -237,11 +253,12 @@ export default class ViewExamInfo extends Component {
               ) : (
                 <div>
                   {" "}
+                  <br />
                   <Alert severity="info">
                     This Exam Doesn't have any marks!{" "}
                   </Alert>
                 </div>
-              )}
+              )}{" "}
               {this.state.supervisors.length > 0 ? (
                 <div style={{ height: 500, width: 700 }}>
                   <div style={{ marginTop: 20, marginBottom: 20 }}>
@@ -261,11 +278,62 @@ export default class ViewExamInfo extends Component {
               ) : (
                 <div>
                   {" "}
+                  <br />
                   <Alert severity="info">
                     This Exam Doesn't have any supervisors!{" "}
                   </Alert>
                 </div>
-              )}{" "}
+              )}
+              {Object.keys(this.state.violations).length > 0 &&
+              this.state.loading !== true ? (
+                <div
+                  style={{
+                    marginTop: -130,
+                    height: 500,
+                    width: 700,
+                  }}
+                >
+                  <div style={{ marginTop: 20, marginBottom: 20 }}>
+                    Reported Violations
+                    <hr />
+                  </div>
+                  <div style={{ height: 300, width: 735 }}>
+                    {" "}
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Student Name</th>
+                          <th>Violation</th>
+                          <th>Supervisor</th>
+                          <th>Time of violation</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.state.violations.violations.map((key) => {
+                          return (
+                            <tr key={key.id}>
+                              <td>{key.student}</td>
+                              <td>{key.violation}</td>
+                              <td>{key.supervisor}</td>
+                              <td>{key.time.substr(0, 19)}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </Table>
+                  </div>
+                </div>
+              ) : this.state.loading ? (
+                <div></div>
+              ) : (
+                <div>
+                  {" "}
+                  <br />
+                  <Alert severity="info">
+                    This Exam Doesn't have any violations!{" "}
+                  </Alert>
+                </div>
+              )}
             </div>
           ) : (
             <div></div>
