@@ -16,6 +16,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import TextField from "@material-ui/core/TextField";
 import CancelIcon from "@material-ui/icons/Cancel";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -198,12 +199,9 @@ export default class SuperviseStudent extends Component {
                 >
                   <h1>
                     Report {this.props.info.student_name}'s Violation{" "}
-                    <Button>
-                      <CancelIcon
-                        style={{ cursor: "hand" }}
-                        onClick={handleCloseModal}
-                      />
-                    </Button>
+                    <IconButton style={{ float: "right" }}>
+                      <CancelIcon onClick={handleCloseModal} />
+                    </IconButton>
                     <hr style={{ width: "100%" }} />
                   </h1>
                   <TextField
