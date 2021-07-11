@@ -49,7 +49,7 @@ export default class SuperviseStudent extends Component {
         .post(
           `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.exam_id}/supervise/student/${this.props.info.student_id}`,
           {
-            violation_description: this.state.violation_description,
+            violation: this.state.violation_description,
           },
           {
             headers: {
