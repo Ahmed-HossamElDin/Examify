@@ -42,7 +42,7 @@ export default class EditStudent extends Component {
         <h3
           style={{ fontSize: "20px", fontFamily: "Century Gothic,Lucida Sans" }}
         >
-          Edit Allowed Students
+          Edit Allowed Students{" "}
         </h3>
         <br />{" "}
         {this.state.allowedStudents.length !== 0 ? (

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import SupervisorChip from "./SupervisorChip";
 import AddSupervisors from "./AddSupervisors";
+import RefreshIcon from "@material-ui/icons/Refresh";
+
 export default class EditSupervisors extends Component {
   state = { supervisors: {} };
   componentDidMount() {
@@ -38,7 +40,11 @@ export default class EditSupervisors extends Component {
         <h3
           style={{ fontSize: "20px", fontFamily: "Century Gothic,Lucida Sans" }}
         >
-          Edit Allowed Supervisors
+          Edit Allowed Supervisors{" "}
+          <RefreshIcon
+            style={{ fontSize: "18px" }}
+            onClick={refreshComponent}
+          />
         </h3>
         <br />
         {this.state.supervisors.length !== 0 ? (
