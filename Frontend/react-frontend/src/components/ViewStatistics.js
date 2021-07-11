@@ -79,22 +79,22 @@ export default class ViewStatistics extends Component {
               Average:{" "}
               {this.state.exam_statistics.avg !== null
                 ? " " + this.state.exam_statistics.avg + " "
-                : "0"}{" "}
+                : " 0"}{" "}
               Max Mark:
               {this.state.exam_statistics.max !== null
                 ? " " + this.state.exam_statistics.max + " "
-                : "0"}{" "}
+                : " 0"}{" "}
               Min Mark:
               {this.state.exam_statistics.min !== null
                 ? " " + this.state.exam_statistics.min + " "
-                : "0"}{" "}
+                : " 0"}{" "}
               Number of Submits:{" "}
               {this.state.exam_statistics.num_of_students_submited_the_exam !==
               null
                 ? " " +
                   this.state.exam_statistics.num_of_students_submited_the_exam +
                   " "
-                : "0"}
+                : " 0"}
             </p>
           </Jumbotron>
         </div>{" "}
