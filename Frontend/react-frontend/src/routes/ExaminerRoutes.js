@@ -35,7 +35,7 @@ var ExaminerRoutes = [
   },
   {
     path: "/view-student-exam",
-    name: "View Student exams",
+    name: "View Students exams",
     rtlName: "عرض امتحان",
     icon: VisibilityIcon,
     component: ViewListOfExams,
