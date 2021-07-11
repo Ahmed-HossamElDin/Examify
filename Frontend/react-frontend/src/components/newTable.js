@@ -296,6 +296,7 @@ export default function ReactTables(props) {
     <ExamEdit exam={currentExam} token={Token} goBack={goBack} />
   ) : Branch === 3 && focusedExamId != null ? (
     <div>Statistics of exam of id : {focusedExamId}</div>
+    //badel el div da bel component ele enta 3ayzo
   ):(
     <div>
       <LinearProgress color="secondary" />
