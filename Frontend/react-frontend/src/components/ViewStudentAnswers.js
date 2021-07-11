@@ -58,26 +58,30 @@ export default class ViewStudentAnswers extends Component {
             Back
           </Button>
           <br />
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Question</th>
-                <th>Student's answer</th>
-                <th>Answer is correct</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.questions.map((key) => {
-                return (
-                  <tr>
-                    <td>{key.question_text}</td>
-                    <td>{key.answer_text}</td>
-                    <td>{key.is_correct.toString()}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
+          {this.state.questions.length > 0 ? (
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>Student's answer</th>
+                  <th>Answer is correct</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.questions.map((key) => {
+                  return (
+                    <tr>
+                      <td>{key.question_text}</td>
+                      <td>{key.answer_text}</td>
+                      <td>{key.is_correct.toString()}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          ) : (
+            <h1 style={{ textAlign: "center" }}>No Answered questions!</h1>
+          )}
         </div>
       </div>
     );

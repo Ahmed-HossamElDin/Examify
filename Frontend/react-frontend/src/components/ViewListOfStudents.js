@@ -53,7 +53,7 @@ export default class ViewListOfStudents extends Component {
           Back
         </Button>{" "}
         <br />
-        {this.state.attendance.length !== 0 ? (
+        {this.state.attendance.length > 0 ? (
           <Table striped bordered hover>
             <thead>
               <tr>
