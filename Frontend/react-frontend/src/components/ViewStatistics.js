@@ -12,7 +12,7 @@ import ChartistGraph from "react-chartist";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 
 // @material-ui/icons
 import Timeline from "@material-ui/icons/Timeline";
@@ -42,13 +42,12 @@ const pieChart = {
 };
 
 class ViewStatistics extends Component {
-
   state = {
     exam_stats: [],
     loading: false,
     exam_statistics: [],
     question_stats: {},
-    marks: []
+    marks: [],
   };
   componentDidMount() {
     this.setState(
@@ -66,37 +65,39 @@ class ViewStatistics extends Component {
             }
           )
           .then((res) => {
-            this.setState({
-              exam_stats: res.data[0],
-              exam_statistics: res.data[0].exam_statistics,
-              question_stats: res.data[1],
-              loading: false,
-            }, () =>
-              axios
-                .get(
-                  `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.id}/marks/`,
-                  {
-                    headers: {
-                      Authorization: "Token " + this.props.token,
-                    },
-                  }
-                ).then((res) => {
-                  var tempMarks = [];
-                  for (var mark in this.state.marks) {
-                    tempMarks.push(mark.mark)
-                  }
-                  this.setState({
-                    marks: res.data
+            this.setState(
+              {
+                exam_stats: res.data[0],
+                exam_statistics: res.data[0].exam_statistics,
+                question_stats: res.data[1],
+                loading: false,
+              },
+              () =>
+                axios
+                  .get(
+                    `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.id}/marks/`,
+                    {
+                      headers: {
+                        Authorization: "Token " + this.props.token,
+                      },
+                    }
+                  )
+                  .then((res) => {
+                    var tempMarks = [];
+                    for (var mark in this.state.marks) {
+                      tempMarks.push(mark.mark);
+                    }
+                    this.setState({
+                      marks: res.data,
+                    });
                   })
-                }
-              )
             );
           })
           .catch(() => {
             this.setState({
               loading: false,
             });
-          })
+          });
         axios
           .get(
             `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.id}/marks/`,
@@ -105,13 +106,13 @@ class ViewStatistics extends Component {
                 Authorization: "Token " + this.props.token,
               },
             }
-          ).then((res) => {
+          )
+          .then((res) => {
             this.setState({
-              Marks: res.data
-            })
-          })
+              Marks: res.data,
+            });
+          });
       }
-
     );
   }
   render() {
@@ -148,30 +149,41 @@ class ViewStatistics extends Component {
             <p>
               Total Mark: {this.state.exam_stats.total_mark} <br />
               Average:{" "}
-              {this.state.exam_statistics.avg !== null
+              {this.state.exam_statistics.avg !== null &&
+              this.state.exam_statistics.avg !== undefined
                 ? " " + this.state.exam_statistics.avg + " "
                 : " 0"}{" "}
               Max Mark:
-              {this.state.exam_statistics.max !== null
+              {this.state.exam_statistics.max !== null &&
+              this.state.exam_statistics.max !== undefined
                 ? " " + this.state.exam_statistics.max + " "
                 : " 0"}{" "}
               Min Mark:
-              {this.state.exam_statistics.min !== null
+              {this.state.exam_statistics.min !== null &&
+              this.state.exam_statistics.min !== undefined
                 ? " " + this.state.exam_statistics.min + " "
                 : " 0"}{" "}
               Number of Submits:{" "}
               {this.state.exam_statistics.num_of_students_submited_the_exam !==
-                null
+                null &&
+              this.state.exam_statistics.num_of_students_submited_the_exam !==
+                undefined
                 ? " " +
-                this.state.exam_statistics.num_of_students_submited_the_exam +
-                " "
+                  this.state.exam_statistics.num_of_students_submited_the_exam +
+                  " "
                 : " 0"}
             </p>
           </Jumbotron>
         </div>{" "}
         <div>
-          <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-              <GridItem xs={12} sm={12} md={5}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <GridItem xs={12} sm={12} md={5}>
               <Card>
                 <CardHeader color="danger" icon>
                   <CardIcon color="danger">
@@ -188,19 +200,22 @@ class ViewStatistics extends Component {
                 </CardBody>
                 <CardFooter stats className={useStyles.cardFooter}>
                   <i className={"fas fa-circle " + useStyles.info} /> A{` `}
-                  <i className={"fas fa-circle " + useStyles.warning} /> B
-                  {` `}
-                  <i className={"fas fa-circle " + useStyles.danger} /> C
-                  {` `}
-                  <i className={"fas fa-circle " + useStyles.danger} /> D
-                  {` `}
-                  <i className={"fas fa-circle " + useStyles.danger} /> F
-                  {` `}
+                  <i className={"fas fa-circle " + useStyles.warning} /> B{` `}
+                  <i className={"fas fa-circle " + useStyles.danger} /> C{` `}
+                  <i className={"fas fa-circle " + useStyles.danger} /> D{` `}
+                  <i className={"fas fa-circle " + useStyles.danger} /> F{` `}
                 </CardFooter>
               </Card>
             </GridItem>
           </div>
-          <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', margin:'20px'}}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "20px",
+            }}
+          >
             <h1>Individual questions statistics</h1>
           </div>
         </div>
@@ -254,8 +269,8 @@ class ViewStatistics extends Component {
                           parseInt(
                             this.state.exam_statistics
                               .num_of_students_submited_the_exam -
-                            this.state.question_stats[key].wrong_count +
-                            this.state.question_stats[key].correct_count
+                              this.state.question_stats[key].wrong_count +
+                              this.state.question_stats[key].correct_count
                           ) +
                           " student(s)"}{" "}
                       </Card.Text>
@@ -273,7 +288,7 @@ class ViewStatistics extends Component {
                             (this.state.question_stats[key].correct_count /
                               this.state.exam_statistics
                                 .num_of_students_submited_the_exam) *
-                            100 +
+                              100 +
                             "%"
                           }
                         />
@@ -292,7 +307,7 @@ class ViewStatistics extends Component {
                             (this.state.question_stats[key].wrong_count /
                               this.state.exam_statistics
                                 .num_of_students_submited_the_exam) *
-                            100 +
+                              100 +
                             "%"
                           }
                         />{" "}
@@ -314,7 +329,7 @@ class ViewStatistics extends Component {
                             (this.state.question_stats[key].wrong_count /
                               this.state.exam_statistics
                                 .num_of_students_submited_the_exam) *
-                            100 +
+                              100 +
                             "%"
                           }
                         />{" "}
@@ -387,5 +402,4 @@ class ViewStatistics extends Component {
   }
 }
 
-
-export default withStyles(useStyles)(ViewStatistics)
+export default withStyles(useStyles)(ViewStatistics);

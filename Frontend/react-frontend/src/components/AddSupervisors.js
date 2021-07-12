@@ -32,6 +32,7 @@ export default class AddSupervisors extends Component {
       token: props.token,
       upload: 0,
     };
+    success = false;
   }
   render() {
     const handleAddSupervisors = (e) => {
