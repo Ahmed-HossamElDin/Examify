@@ -120,20 +120,6 @@ class ViewStatistics extends Component {
               loading: false,
             });
           });
-        axios
-          .get(
-            `https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/exam/${this.props.id}/marks/`,
-            {
-              headers: {
-                Authorization: "Token " + this.props.token,
-              },
-            }
-          )
-          .then((res) => {
-            this.setState({
-              Marks: res.data,
-            });
-          });
       }
     );
   }
@@ -205,6 +191,7 @@ class ViewStatistics extends Component {
               alignItems: "center",
             }}
           >
+            
             {(this.state.marks.length > 0) && (
               <GridItem xs={12} sm={12} md={5}>
                 <Card>
