@@ -36,8 +36,6 @@ const pieChart = {
   },
 };
 
-//this.state.exam_stats.total_mark
-
 function getGrades(gradeData, totalMark) {
   var ACount = 0;
   var BCount = 0;
@@ -54,11 +52,28 @@ function getGrades(gradeData, totalMark) {
       CCount++;
     } else if (grade >= 0.6 * totalMark) {
       DCount++;
-    } else FCount++;
+    } else {
+      FCount++;
+    }
+  }
+
+  var ALabel = ((ACount / gradeData.length) * 100).toString() + "%";
+  var BLabel = ((BCount / gradeData.length) * 100).toString() + "%";
+  var CLabel = ((CCount / gradeData.length) * 100).toString() + "%";
+  var DLabel = ((DCount / gradeData.length) * 100).toString() + "%";
+  var FLabel = ((FCount / gradeData.length) * 100).toString() + "%";
+
+  var gradeLabels = [ALabel, BLabel, CLabel, DLabel, FLabel];
+
+  for(var item in gradeLabels){
+    console.log(item);
+    if (gradeLabels[item] === "0%"){
+      gradeLabels[item] = " ";
+    }
   }
 
   return {
-    labels: [],
+    labels: gradeLabels,
     series: [ACount, BCount, CCount, DCount, FCount],
   };
 }
@@ -115,9 +130,13 @@ class ViewStatistics extends Component {
                     });
                     if(this.state.marks.length > 0)
                     {
+                      pieChart.data = getGrades(this.state.marks, this.state.exam_stats.total_mark)
+                      console.log(pieChart.data);
+
                       this.setState({
                         marksExist: true
                       });
+                      
                     }
                   })
             );
@@ -207,7 +226,7 @@ class ViewStatistics extends Component {
                       <Timeline />
                     </CardIcon>
                     <h4 className={useStyles.cardIconTitle}>
-                      Marks percentages
+                      Grades percentages
                     </h4>
                   </CardHeader>
                   <CardBody>
