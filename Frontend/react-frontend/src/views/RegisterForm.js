@@ -90,7 +90,10 @@ class Register extends Component {
             this.setState({ goToLogin: true, loading: false });
           })
           .catch((error) => {
-            this.setState({ loading: false, error: "Error creating account" });
+            this.setState({
+              loading: false,
+              error: "username already exists",
+            });
           });
       }
     });
