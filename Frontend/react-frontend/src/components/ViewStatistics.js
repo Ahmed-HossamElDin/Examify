@@ -226,7 +226,7 @@ class ViewStatistics extends Component {
                       <Timeline />
                     </CardIcon>
                     <h4 className={useStyles.cardIconTitle}>
-                      Marks percentages
+                      Grades percentages
                     </h4>
                   </CardHeader>
                   <CardBody>
