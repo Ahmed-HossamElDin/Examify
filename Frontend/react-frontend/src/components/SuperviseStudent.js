@@ -85,7 +85,7 @@ export default class SuperviseStudent extends Component {
             >
               {" "}
               <iframe
-                src="https://streamable.com/e/f0qajc?autoplay=1&nocontrols=1&muted=1"
+                src="https://streamable.com/e/egxype?autoplay=1&nocontrols=1&muted=1"
                 frameBorder="0"
                 width="100%"
                 height="100%"
@@ -147,7 +147,7 @@ export default class SuperviseStudent extends Component {
             }}
           >
             <iframe
-              src="https://streamable.com/e/f0qajc?autoplay=1"
+              src="https://streamable.com/e/egxype?autoplay=1"
               frameBorder="0"
               width="100%"
               height="100%"
