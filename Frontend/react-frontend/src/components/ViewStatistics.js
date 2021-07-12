@@ -7,19 +7,14 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import Card from "react-bootstrap/Card";
 
-// react plugin for creating charts
 import ChartistGraph from "react-chartist";
 
-// @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
 
-// @material-ui/icons
 import Timeline from "@material-ui/icons/Timeline";
 
-// core components
 import GridItem from "../components/Grid/GridItem.js";
-
 import CardHeader from "../components/Card/CardHeader.js";
 import CardIcon from "../components/Card/CardIcon.js";
 import CardBody from "../components/Card/CardBody.js";
@@ -68,7 +63,10 @@ function getGrades(gradeData, totalMark) {
       FCount++;
   }
 
-  return [ACount, BCount, CCount, DCount, FCount];
+  return {
+    labels: []
+    series: [ACount, BCount, CCount, DCount, FCount],
+  }
 }
 
 class ViewStatistics extends Component {
