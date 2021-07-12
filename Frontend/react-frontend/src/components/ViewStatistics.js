@@ -39,34 +39,28 @@ const pieChart = {
 //this.state.exam_stats.total_mark
 
 function getGrades(gradeData, totalMark) {
-
   var ACount = 0;
   var BCount = 0;
   var CCount = 0;
   var DCount = 0;
   var FCount = 0;
 
-  for (var grade in gradeData){
-  if (grade >= 0.9 * totalMark) {
+  for (var grade in gradeData) {
+    if (grade >= 0.9 * totalMark) {
       ACount++;
-  }
-  else if (grade >= 0.8 * totalMark) {
+    } else if (grade >= 0.8 * totalMark) {
       BCount++;
-  }
-  else if (grade >= 0.7 * totalMark) {
+    } else if (grade >= 0.7 * totalMark) {
       CCount++;
-  }
-  else if (grade >= 0.6 * totalMark) {
+    } else if (grade >= 0.6 * totalMark) {
       DCount++;
-  }
-  else
-      FCount++;
+    } else FCount++;
   }
 
   return {
     labels: [],
     series: [ACount, BCount, CCount, DCount, FCount],
-  }
+  };
 }
 
 class ViewStatistics extends Component {
@@ -214,29 +208,51 @@ class ViewStatistics extends Component {
             {console.log(this.state.marks)}
             {this.state.marks.length > 0 && (
               <GridItem xs={12} sm={12} md={5}>
-              <Card>
-                <CardHeader color="danger" icon>
-                  <CardIcon color="danger">
-                    <Timeline />
-                  </CardIcon>
-                  <h4 className={useStyles.cardIconTitle}>Marks percentages</h4>
-                </CardHeader>
-                <CardBody>
-                  <ChartistGraph
-                    data={pieChart.data}
-                    type="Pie"
-                    options={pieChart.options}
-                  />
-                </CardBody>
-                <CardFooter stats className={useStyles.cardFooter}>
-                  <i className={"fas fa-circle "} style={{color: '#00bcd4'}}/>A{` `}
-                  <i className={"fas fa-circle " } style={{color: '#f05b4f'}}/>B{` `}
-                  <i className={"fas fa-circle "} style={{color: '#f4c63d'}}/>C{` `}
-                  <i className={"fas fa-circle "} style={{color: '#d17905'}}/>D{` `}
-                  <i className={"fas fa-circle "} style={{color: '#453d3f'}}/>F{` `}
-                </CardFooter>
-              </Card>
-            </GridItem>
+                <Card>
+                  <CardHeader color="danger" icon>
+                    <CardIcon color="danger">
+                      <Timeline />
+                    </CardIcon>
+                    <h4 className={useStyles.cardIconTitle}>
+                      Marks percentages
+                    </h4>
+                  </CardHeader>
+                  <CardBody>
+                    <ChartistGraph
+                      data={pieChart.data}
+                      type="Pie"
+                      options={pieChart.options}
+                    />
+                  </CardBody>
+                  <CardFooter stats className={useStyles.cardFooter}>
+                    <i
+                      className={"fas fa-circle "}
+                      style={{ color: "#00bcd4" }}
+                    />
+                    A{` `}
+                    <i
+                      className={"fas fa-circle "}
+                      style={{ color: "#f05b4f" }}
+                    />
+                    B{` `}
+                    <i
+                      className={"fas fa-circle "}
+                      style={{ color: "#f4c63d" }}
+                    />
+                    C{` `}
+                    <i
+                      className={"fas fa-circle "}
+                      style={{ color: "#d17905" }}
+                    />
+                    D{` `}
+                    <i
+                      className={"fas fa-circle "}
+                      style={{ color: "#453d3f" }}
+                    />
+                    F{` `}
+                  </CardFooter>
+                </Card>
+              </GridItem>
             )}
           </div>
           <div
