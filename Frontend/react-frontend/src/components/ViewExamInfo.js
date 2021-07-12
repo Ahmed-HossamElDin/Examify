@@ -90,7 +90,9 @@ export default class ViewExamInfo extends Component {
         }
       )
       .then((res) => {
-        this.setState({ students: res.data.student.sort() });
+        var student = [];
+        res.data.student.map((key) => student.push(key.student_name));
+        this.setState({ students: student });
       });
   }
   handleViewSupervisors() {
