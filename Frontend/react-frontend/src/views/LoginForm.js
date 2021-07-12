@@ -186,6 +186,7 @@ export default class loginForm extends Component {
                           style={{
                             textAlign: "center",
                             fontSize: 14,
+                            color: "red",
                           }}
                         >
                           {this.state.user.error}
