@@ -33,8 +33,8 @@ const useStyles = makeStyles(styles);
 
 const pieChart = {
   data: {
-    labels: ["20%", "30%", "20%", "10%", "20%"],
-    series: [20, 30, 20, 10, 20],
+    labels: ["35%", "25%", "20%", "15%", "5%"],
+    series: [35, 25, 20, 15, 5],
   },
   options: {
     height: "300px",
@@ -199,11 +199,11 @@ class ViewStatistics extends Component {
                   />
                 </CardBody>
                 <CardFooter stats className={useStyles.cardFooter}>
-                  <i className={"fas fa-circle " + useStyles.info} /> A{` `}
-                  <i className={"fas fa-circle " + useStyles.warning} /> B{` `}
-                  <i className={"fas fa-circle " + useStyles.danger} /> C{` `}
-                  <i className={"fas fa-circle " + useStyles.danger} /> D{` `}
-                  <i className={"fas fa-circle " + useStyles.danger} /> F{` `}
+                  <i className={"fas fa-circle "} style={{color: '#00bcd4'}}/>A{` `}
+                  <i className={"fas fa-circle " } style={{color: '#f05b4f'}}/>B{` `}
+                  <i className={"fas fa-circle "} style={{color: '#f4c63d'}}/>C{` `}
+                  <i className={"fas fa-circle "} style={{color: '#d17905'}}/>D{` `}
+                  <i className={"fas fa-circle "} style={{color: '#453d3f'}}/>F{` `}
                 </CardFooter>
               </Card>
             </GridItem>
