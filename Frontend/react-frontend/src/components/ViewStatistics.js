@@ -70,6 +70,7 @@ class ViewStatistics extends Component {
     exam_statistics: [],
     question_stats: {},
     marks: [],
+    marksExist: false,
   };
   componentDidMount() {
     this.setState(
@@ -112,6 +113,12 @@ class ViewStatistics extends Component {
                     this.setState({
                       marks: res.data,
                     });
+                    if(this.state.marks.length > 0)
+                    {
+                      this.setState({
+                        marksExist: true
+                      });
+                    }
                   })
             );
           })
@@ -192,7 +199,7 @@ class ViewStatistics extends Component {
             }}
           >
             
-            {(this.state.marks.length > 0) && (
+            { this.state.marksExist && (
               <GridItem xs={12} sm={12} md={5}>
                 <Card>
                   <CardHeader color="danger" icon>
