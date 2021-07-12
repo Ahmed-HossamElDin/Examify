@@ -64,7 +64,7 @@ function getGrades(gradeData, totalMark) {
   }
 
   return {
-    labels: []
+    labels: [],
     series: [ACount, BCount, CCount, DCount, FCount],
   }
 }
