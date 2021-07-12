@@ -19,11 +19,9 @@ export default class ExaminerHomePage extends Component {
             }
           )
           .then((res) => {
-            console.log(res);
             if (res.data !== "") {
               this.setState({ exam_id: res.data.id, loading: false });
             } else {
-              console.log(res);
               this.setState({ loading: false });
             }
           })

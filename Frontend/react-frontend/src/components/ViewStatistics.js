@@ -205,7 +205,7 @@ class ViewStatistics extends Component {
               alignItems: "center",
             }}
           >
-            {this.state.marks.length > 0 && (
+            {(this.state.marks.length > 0) && (
               <GridItem xs={12} sm={12} md={5}>
                 <Card>
                   <CardHeader color="danger" icon>
@@ -266,7 +266,13 @@ class ViewStatistics extends Component {
           </div>
         </div>
         <div>
-        <h1>Individual questions statistics</h1>
+        <div style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+          <h1>Individual questions statistics</h1>
+        </div>
           {Object.keys(this.state.question_stats).map((key) => {
             return (
             <div
