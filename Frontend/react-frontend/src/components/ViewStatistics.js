@@ -389,7 +389,7 @@ class ViewStatistics extends Component {
                           marginRight: "22%",
                         }}
                       >
-                        Correct answer
+                        Correct answers
                       </div>
                       <ProgressBar style={{ width: 50 }}>
                         <ProgressBar
@@ -407,7 +407,7 @@ class ViewStatistics extends Component {
                           textAlign: "center",
                         }}
                       >
-                        Incorrect answer
+                        Incorrect answers
                       </div>
                       <ProgressBar style={{ width: 50 }}>
                         <ProgressBar
