@@ -263,13 +263,15 @@ class ViewStatistics extends Component {
               margin: "20px",
             }}
           >
-            <h1>Individual questions statistics</h1>
+            
           </div>
         </div>
         <div>
           {Object.keys(this.state.question_stats).map((key) => {
             return (
-              <div
+              <div>
+                <h1>Individual questions statistics</h1>
+                <div
                 style={{
                   float: "left",
                   direction: "flex",
@@ -441,6 +443,8 @@ class ViewStatistics extends Component {
                   </Card>
                 </div>
               </div>
+              </div>
+              
             );
           })}{" "}
         </div>
