@@ -75,13 +75,37 @@ class Register extends Component {
       }
     );
   };
-
+  isUpper = (str) => {
+    return !/[a-z]/.test(str) && /[A-Z]/.test(str);
+  };
   handleSubmit(event) {
     event.preventDefault();
     this.setState({ submitted: true, loading: true }, () => {
       const { user } = this.state;
+      if (user.password1 === user.password2) {
+        if (user.password1.toString().length < 8) {
+          this.setState({
+            error: "Passwords must be atleast 8 characters!",
+            loading: false,
+          });
+        } else {
+          var hasUpperCase = false;
+          for (var i = 0; i < user.password1.toString().length; i++) {
+            hasUpperCase = this.isUpper(user.password1.toString().charAt(i));
+          }
+          if (hasUpperCase == false) {
+            this.setState({
+              error: "Passwords must contain an upper case letter!",
+              loading: false,
+            });
+          }
+        }
+      }
       if (user.user_type == "") {
-        this.setState({ error: "User type is required", loading: false });
+        this.setState({
+          error: "User type is required",
+          loading: false,
+        });
       } else if (user.password1 !== user.password2) {
         this.setState({
           error: "Passwords don't match!",
@@ -104,6 +128,7 @@ class Register extends Component {
               this.setState({
                 goToLogin: true,
                 loading: false,
+                error: "",
               });
             })
             .catch((error) => {
