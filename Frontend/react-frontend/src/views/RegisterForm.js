@@ -79,21 +79,27 @@ class Register extends Component {
     return !/[a-z]/.test(str) && /[A-Z]/.test(str);
   };
   handleSubmit(event) {
+    var sendrequest = true;
     event.preventDefault();
     this.setState({ submitted: true, loading: true }, () => {
       const { user } = this.state;
       if (user.password1 === user.password2) {
         if (user.password1.toString().length < 8) {
+          sendrequest = false;
           this.setState({
             error: "Passwords must be atleast 8 characters!",
             loading: false,
           });
         } else {
           var hasUpperCase = false;
+          var num = 0;
           for (var i = 0; i < user.password1.toString().length; i++) {
             hasUpperCase = this.isUpper(user.password1.toString().charAt(i));
+            if (hasUpperCase === true) num += 1;
           }
-          if (hasUpperCase == false) {
+          sendrequest = false;
+          if (hasUpperCase == false && num === 0) {
+            sendrequest = false;
             this.setState({
               error: "Passwords must contain an upper case letter!",
               loading: false,
@@ -101,52 +107,54 @@ class Register extends Component {
           }
         }
       }
-      if (user.user_type == "") {
-        this.setState({
-          error: "User type is required",
-          loading: false,
-        });
-      } else if (user.password1 !== user.password2) {
-        this.setState({
-          error: "Passwords don't match!",
-          loading: false,
-        });
-      } else {
-        if (
-          user.username &&
-          user.password1 &&
-          user.password2 &&
-          user.email &&
-          user.user_type
-        ) {
-          axios
-            .post(
-              "https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/registration/",
-              this.state.user
-            )
-            .then((response) => {
-              this.setState({
-                goToLogin: true,
-                loading: false,
-                error: "",
-              });
-            })
-            .catch((error) => {
-              var error_str = "";
-              Object.keys(error.response.data).map((key) => {
-                error_str += error.response.data[key][0];
-                console.log(error.response.data[key][0], error_str);
-              });
-              this.setState({
-                loading: false,
-                error: error_str,
-              });
-            });
-        } else {
+      if (sendrequest === true) {
+        if (user.user_type == "") {
           this.setState({
-            error: "All fields are required",
+            error: "User type is required",
             loading: false,
           });
+        } else if (user.password1 !== user.password2) {
+          this.setState({
+            error: "Passwords don't match!",
+            loading: false,
+          });
+        } else {
+          if (
+            user.username &&
+            user.password1 &&
+            user.password2 &&
+            user.email &&
+            user.user_type
+          ) {
+            axios
+              .post(
+                "https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/registration/",
+                this.state.user
+              )
+              .then((response) => {
+                this.setState({
+                  goToLogin: true,
+                  loading: false,
+                  error: "",
+                });
+              })
+              .catch((error) => {
+                var error_str = "";
+                Object.keys(error.response.data).map((key) => {
+                  error_str += error.response.data[key][0];
+                  console.log(error.response.data[key][0], error_str);
+                });
+                this.setState({
+                  loading: false,
+                  error: error_str,
+                });
+              });
+          } else {
+            this.setState({
+              error: "All fields are required",
+              loading: false,
+            });
+          }
         }
       }
     });
