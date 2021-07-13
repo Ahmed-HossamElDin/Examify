@@ -44,13 +44,13 @@ function getGrades(gradeData, totalMark) {
   var FCount = 0;
 
   for (var grade in gradeData) {
-    if (grade >= 0.9 * totalMark) {
+    if (grade.mark >= (0.9 * totalMark)) {
       ACount++;
-    } else if (grade >= 0.8 * totalMark) {
+    } else if (gradeData[grade].mark >= (0.8 * totalMark)) {
       BCount++;
-    } else if (grade >= 0.7 * totalMark) {
+    } else if (gradeData[grade].mark >= (0.7 * totalMark)) {
       CCount++;
-    } else if (grade >= 0.6 * totalMark) {
+    } else if (gradeData[grade].mark >= (0.5 * totalMark)) {
       DCount++;
     } else {
       FCount++;
@@ -66,7 +66,6 @@ function getGrades(gradeData, totalMark) {
   var gradeLabels = [ALabel, BLabel, CLabel, DLabel, FLabel];
 
   for(var item in gradeLabels){
-    console.log(item);
     if (gradeLabels[item] === "0%"){
       gradeLabels[item] = " ";
     }
@@ -131,7 +130,6 @@ class ViewStatistics extends Component {
                     if(this.state.marks.length > 0)
                     {
                       pieChart.data = getGrades(this.state.marks, this.state.exam_stats.total_mark)
-                      console.log(pieChart.data);
 
                       this.setState({
                         marksExist: true
