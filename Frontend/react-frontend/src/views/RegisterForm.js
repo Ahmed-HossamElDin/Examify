@@ -132,9 +132,14 @@ class Register extends Component {
               });
             })
             .catch((error) => {
+              var error_str = "";
+              Object.keys(error.response.data).map((key) => {
+                error_str += error.response.data[key][0];
+                console.log(error.response.data[key][0], error_str);
+              });
               this.setState({
                 loading: false,
-                error: "username already exists",
+                error: error_str,
               });
             });
         } else {
