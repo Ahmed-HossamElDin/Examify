@@ -44,7 +44,6 @@ function getGrades(gradeData, totalMark) {
   var FCount = 0;
 
   for (var grade in gradeData) {
-    console.log(gradeData[grade].mark);
     if (grade.mark >= (0.9 * totalMark)) {
       ACount++;
     } else if (gradeData[grade].mark >= (0.8 * totalMark)) {
@@ -131,7 +130,6 @@ class ViewStatistics extends Component {
                     if(this.state.marks.length > 0)
                     {
                       pieChart.data = getGrades(this.state.marks, this.state.exam_stats.total_mark)
-                      console.log(pieChart.data);
 
                       this.setState({
                         marksExist: true
