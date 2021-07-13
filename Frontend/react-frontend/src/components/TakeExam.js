@@ -79,7 +79,7 @@ export default class TakeExam extends Component {
           this.setState({ ...this.state, submit: false });
         });
     });
-    window.location.replace("/");
+    window.location.replace("/dashboard");
   };
   getTimeLeft = (e) => {
     var show = e.target.checked;
