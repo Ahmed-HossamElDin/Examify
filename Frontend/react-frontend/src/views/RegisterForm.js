@@ -97,7 +97,6 @@ class Register extends Component {
             hasUpperCase = this.isUpper(user.password1.toString().charAt(i));
             if (hasUpperCase === true) num += 1;
           }
-          sendrequest = false;
           if (hasUpperCase == false && num === 0) {
             sendrequest = false;
             this.setState({
