@@ -316,7 +316,7 @@ class ViewStatistics extends Component {
                   </Card.Header>
                   <Card.Body>
                     <Card.Title>
-                      {"Correct Answer: " +
+                      {"Question Answer: " +
                         this.state.question_stats[key].correct_answer +
                         " "}
                     </Card.Title>
