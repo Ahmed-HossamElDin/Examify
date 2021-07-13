@@ -66,6 +66,10 @@ export default class ViewListOfExams extends Component {
     this.setState({ ...this.state, clicked: false });
   };
   render() {
+    const data = Object.values(this.state.exams);
+    data.sort(function(a,b){
+      return new Date(b.exam_startdate) - new Date(a.exam_startdate);
+    });
     return this.state.loading ? (
       <LinearProgress />
     ) : !this.state.clicked ? (
@@ -81,7 +85,7 @@ export default class ViewListOfExams extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.exams.map((key) => {
+            {data.map((key) => {
               return (
                 <tr key={key.id}>
                   <td>

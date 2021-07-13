@@ -56,6 +56,10 @@ export default class StudentExamList extends Component {
     return time;
   };
   render() {
+    const data = Object.values(this.state.exams);
+    data.sort(function(a,b){
+      return new Date(b.exam_startdate) - new Date(a.exam_startdate);
+    });
     return !this.state.clicked ? (
       this.state.exams.length > 0 ? (
         <div style={{ marginTop: 20, marginLeft: 20, marginRight: 20 }}>
@@ -71,7 +75,7 @@ export default class StudentExamList extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.exams.map((key) => {
+              {data.map((key) => {
                 return (
                   <tr key={key.exam_id}>
                     <td
