@@ -198,6 +198,7 @@ export default class loginForm extends Component {
                         <input
                           className="input100"
                           type="text"
+                          required
                           id="username"
                           placeholder="Username"
                           onChange={(e) => this.updateusername(e.target.value)}

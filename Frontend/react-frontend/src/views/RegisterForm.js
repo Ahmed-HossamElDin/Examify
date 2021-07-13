@@ -37,7 +37,7 @@ class Register extends Component {
         password1: "",
         password2: "",
         email: "",
-        user_type: "1",
+        user_type: "",
       },
       submitted: false,
       goToDashboard: false,
@@ -80,21 +80,44 @@ class Register extends Component {
     event.preventDefault();
     this.setState({ submitted: true, loading: true }, () => {
       const { user } = this.state;
-      if (user.username && user.password1 && user.password2 && user.email) {
-        axios
-          .post(
-            "https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/registration/",
-            this.state.user
-          )
-          .then((response) => {
-            this.setState({ goToLogin: true, loading: false });
-          })
-          .catch((error) => {
-            this.setState({
-              loading: false,
-              error: "username already exists",
+      if (user.user_type == "") {
+        this.setState({ error: "User type is required", loading: false });
+      } else if (user.password1 !== user.password2) {
+        this.setState({
+          error: "Passwords don't match!",
+          loading: false,
+        });
+      } else {
+        if (
+          user.username &&
+          user.password1 &&
+          user.password2 &&
+          user.email &&
+          user.user_type
+        ) {
+          axios
+            .post(
+              "https://examify-cors-proxy.herokuapp.com/http://ec2-18-191-113-113.us-east-2.compute.amazonaws.com:8000/dj-rest-auth/registration/",
+              this.state.user
+            )
+            .then((response) => {
+              this.setState({
+                goToLogin: true,
+                loading: false,
+              });
+            })
+            .catch((error) => {
+              this.setState({
+                loading: false,
+                error: "username already exists",
+              });
             });
+        } else {
+          this.setState({
+            error: "All fields are required",
+            loading: false,
           });
+        }
       }
     });
   }
@@ -140,6 +163,7 @@ class Register extends Component {
                     >
                       <input
                         className="input100"
+                        required
                         type="text"
                         id="username"
                         name="username"
@@ -159,6 +183,7 @@ class Register extends Component {
                       <input
                         className="input100"
                         type="password"
+                        required
                         id="password1"
                         name="password1"
                         placeholder="Password"
@@ -176,6 +201,7 @@ class Register extends Component {
                     >
                       <input
                         className="input100"
+                        required
                         type="password"
                         id="password2"
                         name="password2"
@@ -194,6 +220,7 @@ class Register extends Component {
                     >
                       <input
                         className="input100"
+                        required
                         type="text"
                         id="email"
                         name="email"
@@ -228,6 +255,7 @@ class Register extends Component {
                           value="1"
                           control={<Radio color="primary" />}
                           label="Student"
+                          required
                         />
                         <FormControlLabel
                           className="form"
