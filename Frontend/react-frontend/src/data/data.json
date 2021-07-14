@@ -6,24 +6,24 @@
 
     },
     "About": {
-        "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "paragraph": "The project 'Examify' deals with the automation of the examination process. It helps examiners, supervisors and students do their parts during the exams easier.",
         "Why": [
-            "Lorem ipsum dolor",
-            "Tempor incididunt",
-            "Lorem ipsum dolor",
-            "Incididunt ut labore"
+            "Streamlined exam process",
+            "Automatic question grading",
+            "Analysis of exam results",
+            "Ease of obtaining grades"
         ],
         "Why2": [
-            "Aliquip ex ea commodo",
-            "Lorem ipsum dolor",
-            "Exercitation ullamco",
-            "Lorem ipsum dolor"
+            "Take exams anywhere",
+            "Student monitoring",
+            "Accessible supervision",
+            "Violation report"
         ]
     },
     
     "Testimonials": [{
             "img": "img/testimonials/01.jpg",
-            "text": "\"لم اكن اؤمن بالاكتحانات الغير ورقية و لكن بعد تجربة هذا المنج غيرت رأيي\"",
+            "text": "\"لم اكن اؤمن بالامتحانات الغير ورقية و لكن بعد تجربة هذا المنج غيرت رأيي\"",
             "name": "John Doe"
         },
         {
