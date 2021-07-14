@@ -50,7 +50,7 @@ function getGrades(gradeData, totalMark) {
       BCount++;
     } else if (gradeData[grade].mark >= 0.7 * totalMark) {
       CCount++;
-    } else if (gradeData[grade].mark >= 0.5 * totalMark) {
+    } else if (gradeData[grade].mark >= 0.6 * totalMark) {
       DCount++;
     } else {
       FCount++;
