@@ -294,6 +294,7 @@ class ViewStatistics extends Component {
                   marginTop: 5,
                   borderStyle: "solid",
                   borderRadius: 15,
+                  maxWidth: 300,
                 }}
                 key={key}
               >
