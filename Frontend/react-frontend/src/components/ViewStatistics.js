@@ -44,7 +44,7 @@ function getGrades(gradeData, totalMark) {
   var FCount = 0;
 
   for (var grade in gradeData) {
-    if (grade.mark >= 0.9 * totalMark) {
+    if (gradeData[grade].mark >= 0.9 * totalMark) {
       ACount++;
     } else if (gradeData[grade].mark >= 0.8 * totalMark) {
       BCount++;
