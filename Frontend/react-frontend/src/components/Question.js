@@ -50,6 +50,7 @@ export default class Question extends Component {
     };
   }
   componentDidMount() {
+    deleted = false;
     this.setState({
       option1: {
         ...this.state.option1,

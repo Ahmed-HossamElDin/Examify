@@ -51,6 +51,7 @@ export default class ExamEdit extends Component {
     this.setState({
       questions: [],
     });
+    this.forceUpdate();
   }
   componentDidUpdate() {
     counter = 0;
@@ -180,7 +181,11 @@ export default class ExamEdit extends Component {
           </Button>
           <div style={{ textAlign: "center" }}>
             {updated && (
-              <Alert severity="success">Exam updated successfully!</Alert>
+              <div>
+                {" "}
+                <br /> <br />
+                <Alert severity="success">Exam updated successfully!</Alert>
+              </div>
             )}
             <TextField
               size="small"
