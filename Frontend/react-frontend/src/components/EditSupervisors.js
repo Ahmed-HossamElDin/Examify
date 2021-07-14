@@ -40,6 +40,7 @@ export default class EditSupervisors extends Component {
         <h3
           style={{ fontSize: "20px", fontFamily: "Century Gothic,Lucida Sans" }}
         >
+          <br />
           Edit Allowed Supervisors{" "}
           <RefreshIcon
             style={{ fontSize: "18px" }}

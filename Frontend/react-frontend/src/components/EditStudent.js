@@ -48,7 +48,7 @@ export default class EditStudent extends Component {
         {this.state.allowedStudents.length !== 0 ? (
           <div>
             {this.state.allowedStudents.map((key) => (
-              <div style={{ marginLeft: "30%" }}>
+              <div style={{ marginLeft: "auto" }}>
                 <StudentChip
                   token={this.props.token}
                   exam_id={this.props.exam_id}

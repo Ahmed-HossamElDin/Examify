@@ -168,10 +168,12 @@ export default class AddStudents extends Component {
             />{" "}
           </div>
         )}
-        <br /> <br />
+        <br /> <br /> <br />
         <h3
           style={{ fontSize: "20px", fontFamily: "Century Gothic,Lucida Sans" }}
         >
+          {" "}
+          <br />
           Add Allowed Students
         </h3>
         <ButtonGroup disableElevation variant="contained" color="primary">
