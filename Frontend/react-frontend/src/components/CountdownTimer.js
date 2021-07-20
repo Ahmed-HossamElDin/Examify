@@ -18,6 +18,9 @@ export default class CountdownTimer extends Component {
   componentDidMount() {
     if (this.state.counter === 0) {
       clearInterval(this.myInterval);
+      if (this.props.handleSubmit) {
+        this.props.handleSubmit();
+      }
     } else {
       const startCount = this.props.duration;
       this.setState({

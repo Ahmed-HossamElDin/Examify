@@ -189,7 +189,10 @@ export default class TakeExam extends Component {
             {this.state.checked ? (
               this.state.time_left !== 0 && this.state.time_left !== "" ? (
                 <div style={{ position: "sticky", top: 0 }}>
-                  <CountdownTimer duration={parseInt(this.state.time_left)} />
+                  <CountdownTimer
+                    duration={parseInt(this.state.time_left)}
+                    submit={this.handleSubmit}
+                  />
                 </div>
               ) : (
                 <div></div>
